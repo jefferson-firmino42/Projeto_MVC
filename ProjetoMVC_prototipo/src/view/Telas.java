@@ -47,6 +47,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
+import javax.swing.JRadioButton;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -306,6 +307,78 @@ public class Telas extends JFrame {
 		panel_1 = new JPanel();
 		tabbedPane_1.addTab("Curso", null, panel_1, null);
 		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Curso:");
+		lblNewLabel.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNewLabel.setBounds(48, 28, 96, 49);
+		panel_1.add(lblNewLabel);
+		
+		JComboBox cmbCurso = new JComboBox();
+		cmbCurso.setModel(new DefaultComboBoxModel(new String[] {"Análise e Desenvolvimento de Sistemas", "Comércio Exterior", "Logística"}));
+		cmbCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
+		cmbCurso.setBounds(148, 28, 493, 49);
+		panel_1.add(cmbCurso);
+		
+		JLabel lblCampus = new JLabel("Campus:");
+		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblCampus.setBounds(48, 87, 96, 49);
+		panel_1.add(lblCampus);
+		
+		JComboBox cmbCampus = new JComboBox();
+		cmbCampus.setModel(new DefaultComboBoxModel(new String[] {"Guarulhos", "São Caetano", "São Paulo"}));
+		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
+		cmbCampus.setBounds(148, 87, 493, 49);
+		panel_1.add(cmbCampus);
+		
+		JLabel lblPerodo = new JLabel("Período:");
+		lblPerodo.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblPerodo.setBounds(48, 157, 96, 49);
+		panel_1.add(lblPerodo);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Matutino");
+		rdbtnNewRadioButton.setFont(new Font("Poppins", Font.PLAIN, 20));
+		rdbtnNewRadioButton.setBounds(163, 171, 132, 21);
+		panel_1.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnVespertino = new JRadioButton("Vespertino");
+		rdbtnVespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
+		rdbtnVespertino.setBounds(315, 171, 166, 21);
+		panel_1.add(rdbtnVespertino);
+		
+		JRadioButton rdbtnNoturno = new JRadioButton("Noturno");
+		rdbtnNoturno.setFont(new Font("Poppins", Font.PLAIN, 20));
+		rdbtnNoturno.setBounds(483, 171, 166, 21);
+		panel_1.add(rdbtnNoturno);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
+		btnNewButton.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnNewButton.setBounds(10, 227, 132, 113);
+		panel_1.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
+		btnNewButton_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnNewButton_1.setBounds(163, 227, 132, 113);
+		panel_1.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
+		btnNewButton_2.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnNewButton_2.setBounds(320, 227, 132, 113);
+		panel_1.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
+		btnNewButton_3.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnNewButton_3.setBounds(472, 227, 132, 113);
+		panel_1.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("");
+		btnNewButton_4.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
+		btnNewButton_4.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnNewButton_4.setBounds(625, 227, 132, 113);
+		panel_1.add(btnNewButton_4);
 
 		panel_2 = new JPanel();
 		tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
