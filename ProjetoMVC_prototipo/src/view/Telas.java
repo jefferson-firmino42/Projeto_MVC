@@ -212,7 +212,7 @@ public class Telas extends JFrame {
 
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Poppins", Font.PLAIN, 15));
-		lblCpf.setBounds(484, 40, 28, 14);
+		lblCpf.setBounds(484, 40, 49, 14);
 		panel.add(lblCpf);
 
 		txtNascimento = new JFormattedTextField();
@@ -223,7 +223,7 @@ public class Telas extends JFrame {
 
 		txtCelular = new JFormattedTextField();
 		txtCelular.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtCelular.setBounds(543, 278, 91, 25);
+		txtCelular.setBounds(543, 278, 208, 25);
 		panel.add(txtCelular);
 
 		txtRgm = new JTextField();
@@ -247,7 +247,7 @@ public class Telas extends JFrame {
 		txtMunicipio = new JTextField();
 		txtMunicipio.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtMunicipio.setColumns(10);
-		txtMunicipio.setBounds(112, 275, 151, 32);
+		txtMunicipio.setBounds(112, 275, 166, 32);
 		panel.add(txtMunicipio);
 
 		txtNome = new JTextField();
@@ -269,7 +269,7 @@ public class Telas extends JFrame {
 		lblFoto = new JLabel("");
 		lblFoto.setBorder(new CompoundBorder());
 		lblFoto.setIcon(new ImageIcon(Telas.class.getResource("/images/285680_camera_icon.png")));
-		lblFoto.setBounds(594, 106, 128, 128);
+		lblFoto.setBounds(623, 104, 128, 128);
 		panel.add(lblFoto);
 
 		JButton btnFoto = new JButton("Selecionar foto");
@@ -282,101 +282,102 @@ public class Telas extends JFrame {
 						new FileNameExtensionFilter("Arquivo de imagens(*.PNG,*.JPEG,*.JPG)", "png", "jpeg", "jpg"));
 				int result = jfc.showOpenDialog(null);
 
-		        if (result == JFileChooser.APPROVE_OPTION) {
-		            File f = jfc.getSelectedFile();
-		            path = f.getAbsolutePath();
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File f = jfc.getSelectedFile();
+					path = f.getAbsolutePath();
 
-		            try {
-		                BufferedImage bi = ImageIO.read(f);
-		                Image foto = bi.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH);
+					try {
+						BufferedImage bi = ImageIO.read(f);
+						Image foto = bi.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH);
 
-		                ImageIcon imgIcon = new ImageIcon(foto);
-		                lblFoto.setIcon(imgIcon);
-		            } catch (IOException | IllegalArgumentException ex) {
-		                JOptionPane.showMessageDialog(null, "Erro ao carregar a imagem: " + ex.getMessage());
-		            }
-		        }
-		    }
+						ImageIcon imgIcon = new ImageIcon(foto);
+						lblFoto.setIcon(imgIcon);
+					} catch (IOException | IllegalArgumentException ex) {
+						JOptionPane.showMessageDialog(null, "Erro ao carregar a imagem: " + ex.getMessage());
+					}
+				}
+			}
 		});
-		btnFoto.setBounds(415, 160, 157, 32);
+		btnFoto.setBounds(428, 160, 157, 32);
 		panel.add(btnFoto);
 
 		txtCpf = new JTextField();
 		txtCpf.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtCpf.setBounds(522, 24, 206, 30);
+		txtCpf.setBounds(545, 25, 206, 30);
 		panel.add(txtCpf);
 		txtCpf.setColumns(10);
 
 		panel_1 = new JPanel();
 		tabbedPane_1.addTab("Curso", null, panel_1, null);
 		panel_1.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Curso:");
 		lblNewLabel.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblNewLabel.setBounds(48, 28, 96, 49);
 		panel_1.add(lblNewLabel);
-		
+
 		JComboBox cmbCurso = new JComboBox();
-		cmbCurso.setModel(new DefaultComboBoxModel(new String[] {"Análise e Desenvolvimento de Sistemas", "Comércio Exterior", "Logística"}));
+		cmbCurso.setModel(new DefaultComboBoxModel(
+				new String[] { "Análise e Desenvolvimento de Sistemas", "Comércio Exterior", "Logística" }));
 		cmbCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCurso.setBounds(148, 28, 493, 49);
 		panel_1.add(cmbCurso);
-		
+
 		JLabel lblCampus = new JLabel("Campus:");
 		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblCampus.setBounds(48, 87, 96, 49);
 		panel_1.add(lblCampus);
-		
+
 		JComboBox cmbCampus = new JComboBox();
-		cmbCampus.setModel(new DefaultComboBoxModel(new String[] {"Guarulhos", "São Caetano", "São Paulo"}));
+		cmbCampus.setModel(new DefaultComboBoxModel(new String[] { "Guarulhos", "São Caetano", "São Paulo" }));
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(148, 87, 493, 49);
 		panel_1.add(cmbCampus);
-		
+
 		JLabel lblPerodo = new JLabel("Período:");
 		lblPerodo.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblPerodo.setBounds(48, 157, 96, 49);
 		panel_1.add(lblPerodo);
-		
+
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Matutino");
 		rdbtnNewRadioButton.setFont(new Font("Poppins", Font.PLAIN, 20));
 		rdbtnNewRadioButton.setBounds(163, 171, 132, 21);
 		panel_1.add(rdbtnNewRadioButton);
-		
+
 		JRadioButton rdbtnVespertino = new JRadioButton("Vespertino");
 		rdbtnVespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
 		rdbtnVespertino.setBounds(315, 171, 166, 21);
 		panel_1.add(rdbtnVespertino);
-		
+
 		JRadioButton rdbtnNoturno = new JRadioButton("Noturno");
 		rdbtnNoturno.setFont(new Font("Poppins", Font.PLAIN, 20));
 		rdbtnNoturno.setBounds(483, 171, 166, 21);
 		panel_1.add(rdbtnNoturno);
-		
+
 		JButton btnSair = new JButton("");
 		btnSair.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
 		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSair.setBounds(10, 227, 132, 113);
 		panel_1.add(btnSair);
-		
+
 		JButton btnAlterar = new JButton("");
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar.setBounds(163, 227, 132, 113);
 		panel_1.add(btnAlterar);
-		
+
 		JButton btnConsultar = new JButton("");
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(320, 227, 132, 113);
 		panel_1.add(btnConsultar);
-		
+
 		JButton btnLimpar = new JButton("");
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar.setBounds(472, 227, 132, 113);
 		panel_1.add(btnLimpar);
-		
+
 		JButton btnSalvar = new JButton("");
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
@@ -454,13 +455,13 @@ public class Telas extends JFrame {
 		mntmSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean valid = false;
-				
+
 				try {
 					valid = getDados(false);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage());
 				}
-				
+
 				if (valid) {
 					aluno = new AlunoModel();
 					aluno.setRgm(txtRgm.getText());
@@ -472,12 +473,13 @@ public class Telas extends JFrame {
 					aluno.setUf((String) cbxUf.getSelectedItem());
 					aluno.setCelular(txtCelular.getText());
 					aluno.setNascimento(txtNascimento.getText());
-					
+
 					try {
-						FileInputStream is = new FileInputStream(new File(path));	
+						FileInputStream is = new FileInputStream(new File(path));
 						aluno.setFoto(path);
 					} catch (FileNotFoundException ex) {
-						Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);;
+						Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);
+						;
 					}
 				}
 				try {
@@ -512,30 +514,33 @@ public class Telas extends JFrame {
 	public boolean getDados(boolean att) throws Exception {
 		if (att) {
 			AlunoModel aluno = new AlunoModel();
-			if(!txtCpf.getText().matches("/^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$/") && !txtCpf.getText().isEmpty()) {
+			if (!txtCpf.getText().matches("[0-9]+") && !txtCpf.getText().isEmpty()) {
 				throw new Exception("CPF deve conter apenas números");
 			}
-			
-			if(!txtRgm.getText().isEmpty()) {
-				throw new Exception("RGM inválido");
+
+			if (!txtRgm.getText().isEmpty()) {
+			    char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
+			    if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
+			        throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
+			    }
 			}
-			
-			if(!txtEndereco.getText().isEmpty()) {
+
+			if (!txtEndereco.getText().isEmpty()) {
 				throw new Exception("Endereço inválido");
 			}
-			
-			if(!txtMunicipio.getText().isEmpty()) {
+
+			if (!txtMunicipio.getText().isEmpty()) {
 				throw new Exception("Município inválido");
 			}
-			
-			if(!cbxUf.getSelectedItem().equals("")) {
+
+			if (!cbxUf.getSelectedItem().equals("")) {
 				throw new Exception("Selecione um UF válido");
 			}
-			
-			if(!txtCelular.getText().matches("[0-9]+") && !txtCelular.getText().isEmpty()) {
+
+			if (!txtCelular.getText().matches("[0-9]+") && !txtCelular.getText().isEmpty()) {
 				throw new Exception("Município inválido");
 			}
-			
+
 			if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$") && !txtNome.getText().isEmpty()) {
 				throw new Exception("Nome deve ser inteiramente de caracteres");
 			}
@@ -544,6 +549,15 @@ public class Telas extends JFrame {
 					.matcher(txtEmail.getText().toString()).matches() && !txtEmail.getText().isEmpty()) {
 				throw new Exception("Insira um email valido");
 			}
+
+			try {
+				FileInputStream is = new FileInputStream(new File(path));
+				aluno.setFoto(path);
+			} catch (FileNotFoundException ex) {
+				Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);
+				throw new Exception("Selecione uma foto válida");
+			}
+
 			try {
 				if (!txtNascimento.getText().isEmpty())
 					getData();
@@ -555,6 +569,13 @@ public class Telas extends JFrame {
 		}
 
 		AlunoModel aluno = new AlunoModel();
+		
+		try {
+			getData();
+		} catch (Exception e) {
+			throw new Exception("Insira uma data válida no seguinte formado: 00/00/0000");
+		}
+		
 		if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$")) {
 			throw new Exception("Nome deve ser inteiramente de caracteres ");
 		}
@@ -563,11 +584,14 @@ public class Telas extends JFrame {
 				.matcher(txtEmail.getText().toString()).matches()) {
 			throw new Exception("Insira um email valido");
 		}
-		try {
-			getData();
-		} catch (Exception e) {
-			throw new Exception("Insira uma data válida no seguinte formado: 00/00/0000");
+		
+		if (!txtRgm.getText().isEmpty()) {
+		    char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
+		    if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
+		        throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
+		    }
 		}
+		
 		if (txtEndereco.getText().equals("")) {
 			throw new Exception("Insira um endereço");
 		}
@@ -575,7 +599,23 @@ public class Telas extends JFrame {
 		if (cbxUf.getSelectedItem().equals(" ")) {
 			throw new Exception("Selecione um UF válido");
 		}
-		return true;
 
+		if (path == null || path.isEmpty()) {
+			throw new Exception("Selecione uma foto");
+		}
+
+		if (txtMunicipio.getText().isEmpty()) {
+			throw new Exception("Insira um município");
+		}
+
+		if (txtCelular.getText().isEmpty() || !txtCelular.getText().matches("[0-9]+")) {
+			throw new Exception("Insira um número de celular válido");
+		}
+		
+		if (txtCpf.getText().isEmpty() || !txtCpf.getText().matches("[0-9]+")) {
+	        throw new Exception("Insira um CPF válido");
+	    }
+		
+		return true;
 	}
 }
