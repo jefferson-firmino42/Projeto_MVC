@@ -1,0 +1,49 @@
+CREATE DATABASE bancomvc;
+USE bancomvc;
+
+CREATE TABLE aluno (
+    rgm VARCHAR(9) PRIMARY KEY UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) UNIQUE,
+    email VARCHAR(100),
+    endereco VARCHAR(200),
+    municipio VARCHAR(100),
+    uf VARCHAR(2),
+    celular VARCHAR(20),
+    nascimento date,
+    imagem VARCHAR(100)
+);
+
+CREATE TABLE cursos (
+    rgm VARCHAR(9),
+    id_curso INT PRIMARY KEY AUTO_INCREMENT,
+    nome_curso VARCHAR(100) NOT NULL,
+    campus VARCHAR(100),
+    periodo VARCHAR(50),
+    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
+);
+
+CREATE TABLE disciplinas (
+    id_disciplina INT PRIMARY KEY AUTO_INCREMENT,
+    id_curso INT,
+    nome_disciplina VARCHAR(100) NOT NULL,
+    semestre VARCHAR(20),
+    notas DECIMAL(5,2),
+    faltas INT,
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE
+);
+
+CREATE TABLE boletim (
+    rgm VARCHAR(9),
+    id_disciplina INT,
+    id_curso INT,
+    nome VARCHAR(100) NOT NULL,
+    curso VARCHAR(100) NOT NULL,
+    notas DECIMAL(5,2),
+    faltas INT,
+    imagem VARCHAR(100),
+    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE,
+    FOREIGN KEY (id_disciplina) REFERENCES disciplinas(id_disciplina) ON DELETE CASCADE,
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE,
+    PRIMARY KEY (rgm, id_disciplina, id_curso)
+);
