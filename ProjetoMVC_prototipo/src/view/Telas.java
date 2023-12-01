@@ -377,7 +377,15 @@ public class Telas extends JFrame {
 		// Salvar
 		mntmSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean valid = false;
+				
 				try {
+					valid = getDados(false);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+				
+				if (valid) {
 					aluno = new AlunoModel();
 					aluno.setRgm(txtRgm.getText());
 					aluno.setNome(txtNome.getText());
@@ -395,7 +403,8 @@ public class Telas extends JFrame {
 					} catch (FileNotFoundException ex) {
 						Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);;
 					}
-
+				}
+				try {
 					DAO alunoDao = new DAO();
 					alunoDao.salvar(aluno);
 					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
@@ -427,13 +436,32 @@ public class Telas extends JFrame {
 	public boolean getDados(boolean att) throws Exception {
 		if (att) {
 			AlunoModel aluno = new AlunoModel();
-			try {
-				Integer.parseInt(txtCpf.getText().toString());
-			} catch (Exception err) {
-				throw new Exception("CPF deve ser um numero");
+			if(!txtCpf.getText().matches("/^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$/") && !txtCpf.getText().isEmpty()) {
+				throw new Exception("CPF deve conter apenas números");
 			}
+			
+			if(!txtRgm.getText().isEmpty()) {
+				throw new Exception("RGM inválido");
+			}
+			
+			if(!txtEndereco.getText().isEmpty()) {
+				throw new Exception("Endereço inválido");
+			}
+			
+			if(!txtMunicipio.getText().isEmpty()) {
+				throw new Exception("Município inválido");
+			}
+			
+			if(!cbxUf.getSelectedItem().equals("")) {
+				throw new Exception("Selecione um UF válido");
+			}
+			
+			if(!txtCelular.getText().matches("[0-9]+") && !txtCelular.getText().isEmpty()) {
+				throw new Exception("Município inválido");
+			}
+			
 			if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$") && !txtNome.getText().isEmpty()) {
-				throw new Exception("Nome deve ser inteiramente de caracteres ");
+				throw new Exception("Nome deve ser inteiramente de caracteres");
 			}
 
 			if (!Pattern.compile("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$")
@@ -444,18 +472,13 @@ public class Telas extends JFrame {
 				if (!txtNascimento.getText().isEmpty())
 					getData();
 			} catch (Exception e) {
-				throw new Exception("Insira uma data válida no seguinte formado: 00/00/0000");
+				throw new Exception("Insira uma data válida no seguinte formado: dd/mm/AAAA");
 			}
 
 			return true;
 		}
 
 		AlunoModel aluno = new AlunoModel();
-		try {
-			Integer.parseInt(txtRgm.getText().toString());
-		} catch (Exception err) {
-			throw new Exception("RA deve ser um numero");
-		}
 		if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$")) {
 			throw new Exception("Nome deve ser inteiramente de caracteres ");
 		}
@@ -473,8 +496,8 @@ public class Telas extends JFrame {
 			throw new Exception("Insira um endereço");
 		}
 
-		if (cbxUf.getSelectedItem().equals("Selecione o periodo")) {
-			throw new Exception("Selecione um periodo valido");
+		if (cbxUf.getSelectedItem().equals(" ")) {
+			throw new Exception("Selecione um UF válido");
 		}
 		return true;
 
