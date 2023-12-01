@@ -353,35 +353,35 @@ public class Telas extends JFrame {
 		rdbtnNoturno.setBounds(483, 171, 166, 21);
 		panel_1.add(rdbtnNoturno);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
-		btnNewButton.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnNewButton.setBounds(10, 227, 132, 113);
-		panel_1.add(btnNewButton);
+		JButton btnSair = new JButton("");
+		btnSair.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
+		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnSair.setBounds(10, 227, 132, 113);
+		panel_1.add(btnSair);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
-		btnNewButton_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnNewButton_1.setBounds(163, 227, 132, 113);
-		panel_1.add(btnNewButton_1);
+		JButton btnAlterar = new JButton("");
+		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
+		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnAlterar.setBounds(163, 227, 132, 113);
+		panel_1.add(btnAlterar);
 		
-		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
-		btnNewButton_2.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnNewButton_2.setBounds(320, 227, 132, 113);
-		panel_1.add(btnNewButton_2);
+		JButton btnConsultar = new JButton("");
+		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
+		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnConsultar.setBounds(320, 227, 132, 113);
+		panel_1.add(btnConsultar);
 		
-		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
-		btnNewButton_3.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnNewButton_3.setBounds(472, 227, 132, 113);
-		panel_1.add(btnNewButton_3);
+		JButton btnLimpar = new JButton("");
+		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
+		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnLimpar.setBounds(472, 227, 132, 113);
+		panel_1.add(btnLimpar);
 		
-		JButton btnNewButton_4 = new JButton("");
-		btnNewButton_4.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
-		btnNewButton_4.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnNewButton_4.setBounds(625, 227, 132, 113);
-		panel_1.add(btnNewButton_4);
+		JButton btnSalvar = new JButton("");
+		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
+		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnSalvar.setBounds(625, 227, 132, 113);
+		panel_1.add(btnSalvar);
 
 		panel_2 = new JPanel();
 		tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
