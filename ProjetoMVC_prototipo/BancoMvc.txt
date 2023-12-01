@@ -10,8 +10,8 @@ CREATE TABLE aluno (
     municipio VARCHAR(100),
     uf VARCHAR(2),
     celular VARCHAR(20),
-    nascimento date,
-    imagem VARCHAR(100)
+    nascimento VARCHAR(20),
+    foto LONGBLOB
 );
 
 CREATE TABLE cursos (

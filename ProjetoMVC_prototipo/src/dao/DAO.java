@@ -32,7 +32,7 @@ public class DAO {
 		
 		try {
 			String sql = "INSERT INTO aluno (rgm, nome, cpf, email, endereco, "
-					+ "municipio, uf, celular, nascimento, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "municipio, uf, celular, nascimento, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, alunoModel.getRgm());
@@ -43,12 +43,8 @@ public class DAO {
 			ps.setString(6, alunoModel.getMunicipio());
 			ps.setString(7, alunoModel.getUf());
 			ps.setString(8, alunoModel.getCelular());
-			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-			String nascimento = dateFormat.format(alunoModel.getNascimento());
-			ps.setString(9, nascimento);
-			
-			ps.setString(10, alunoModel.getImagem());
+			ps.setString(9, alunoModel.getNascimento());
+			ps.setString(10, alunoModel.getFoto());
 				
 			ps.executeUpdate();
 			

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class AlunoModel {
 	private String rgm;
 	private String nome;
@@ -11,8 +9,8 @@ public class AlunoModel {
 	private String municipio;
 	private String uf;
 	private String celular;
-	private Date nascimento;
-	private String imagem;
+	private String nascimento;
+	private String foto;
 	
 	public String getRgm() {
 		return rgm;
@@ -78,20 +76,38 @@ public class AlunoModel {
 		this.celular = celular;
 	}
 	
-	public String getImagem() {
-		return imagem;
+	public String getFoto() {
+		return foto;
 	}
 	
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
-	public Date getNascimento() {
+	public String getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(Date nascimento) {
+	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
 	}
+
+	public AlunoModel() {}
+
+	public AlunoModel(String rgm, String nome, String cpf, String email, String endereco, String municipio, String uf,
+			String celular, String nascimento, String foto) {
+		this.rgm = rgm;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.endereco = endereco;
+		this.municipio = municipio;
+		this.uf = uf;
+		this.celular = celular;
+		this.nascimento = nascimento;
+		this.foto = foto;
+	}
+	
+	
 	
 }

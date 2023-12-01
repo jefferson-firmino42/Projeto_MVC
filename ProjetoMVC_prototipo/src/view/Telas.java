@@ -4,9 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import dao.DAO;
 import model.AlunoModel;
+
+import java.util.Date;
 
 import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
@@ -20,18 +23,27 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
 import java.awt.ScrollPane;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
 public class Telas extends JFrame {
-
+	private AlunoModel aluno;
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMenuBar menuBar;
@@ -69,6 +81,7 @@ public class Telas extends JFrame {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JComboBox cbxUf;
+	private JLabel lblFoto;
 
 	/**
 	 * Launch the application.
@@ -90,8 +103,9 @@ public class Telas extends JFrame {
 	 * Create the frame.
 	 */
 	public Telas() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 710, 450);
+		setBounds(100, 100, 816, 490);
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -137,7 +151,7 @@ public class Telas extends JFrame {
 		contentPane.setLayout(null);
 		
 		tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(0, 0, 694, 389);
+		tabbedPane_1.setBounds(0, 0, 790, 418);
 		contentPane.add(tabbedPane_1);
 		
 		panel = new JPanel();
@@ -171,7 +185,7 @@ public class Telas extends JFrame {
 		
 		lblUf = new JLabel("UF");
 		lblUf.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblUf.setBounds(281, 280, 39, 14);
+		lblUf.setBounds(299, 283, 39, 14);
 		panel.add(lblUf);
 		
 		lblCelular = new JLabel("Celular");
@@ -186,16 +200,17 @@ public class Telas extends JFrame {
 		
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblCpf.setBounds(466, 42, 57, 14);
+		lblCpf.setBounds(466, 40, 57, 14);
 		panel.add(lblCpf);
 		
 		txtNascimento = new JFormattedTextField();
+		txtNascimento.setToolTipText("");
 		txtNascimento.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		txtNascimento.setBounds(210, 95, 151, 22);
 		panel.add(txtNascimento);
 		
 		JFormattedTextField txtCpf = new JFormattedTextField();
-		txtCpf.setBounds(574, 39, 105, 20);
+		txtCpf.setBounds(510, 34, 169, 20);
 		panel.add(txtCpf);
 		
 		txtCelular = new JFormattedTextField();
@@ -233,11 +248,29 @@ public class Telas extends JFrame {
 		panel.add(txtNome);
 		
 		cbxUf = new JComboBox();
-		cbxUf.setModel(new DefaultComboBoxModel(new String[] {" -", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
+		cbxUf.setModel(new DefaultComboBoxModel(new String[] {" ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
 		cbxUf.setToolTipText("AC\r\nAL\r\nAP\r\nAM\r\nBA\r\nCE\r\nDF\r\nES\r\nGO\r\nMA\r\nMT\r\nMS\r\nMG\r\nPA\r\nPB\r\nPR\r\nPE\r\nPI\r\nRJ\r\nRN\r\nRS\r\nRO\r\nRR\r\nSC\r\nSP\r\nSE\r\nTO\r\n");
 		cbxUf.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		cbxUf.setBounds(331, 280, 57, 22);
+		cbxUf.setBounds(348, 278, 57, 22);
 		panel.add(cbxUf);
+		
+		lblFoto = new JLabel("");
+		lblFoto.setBorder(new CompoundBorder());
+		lblFoto.setIcon(new ImageIcon(Telas.class.getResource("/images/285680_camera_icon.png")));
+		lblFoto.setBounds(594, 106, 128, 128);
+		panel.add(lblFoto);
+		
+		JButton btnFoto = new JButton("Selecionar foto");
+        btnFoto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (aluno == null) {
+                    aluno = new AlunoModel();
+                }
+                carregarFoto(aluno);
+            }
+        });
+		btnFoto.setBounds(427, 160, 145, 32);
+		panel.add(btnFoto);
 		
 		panel_1 = new JPanel();
 		tabbedPane_1.addTab("Curso", null, panel_1, null);
@@ -255,35 +288,66 @@ public class Telas extends JFrame {
 		//Salvar
 		mntmSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AlunoModel aluno = new AlunoModel();
-				aluno.setRgm(txtRgm.getText());
-				aluno.setNome(txtNome.getText());
-				aluno.setCpf(txtCpf.getText());
-				aluno.setEmail(txtEmail.getText());
-				aluno.setEndereco(txtEndereco.getText());
-				aluno.setMunicipio(txtMunicipio.getText());
-				aluno.setUf((String)cbxUf.getSelectedItem());
-				aluno.setCelular(txtCelular.getText());
-				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		        try {
-		            java.util.Date nascimento = dateFormat.parse(txtNascimento.getText());
-		            aluno.setNascimento(nascimento);
-		        } catch (ParseException ex) {
-		            ex.printStackTrace();
-		            JOptionPane.showMessageDialog(null, "Formato de data inválido!");
-		            return; 
-		        }
-				
 				try {
-					DAO alunoDao = new DAO();
-					alunoDao.salvar(aluno);
-					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
-				} catch(Exception ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage());
+		            aluno = new AlunoModel();
+		            aluno.setRgm(txtRgm.getText());
+		            aluno.setNome(txtNome.getText());
+		            aluno.setCpf(txtCpf.getText());
+		            aluno.setEmail(txtEmail.getText());
+		            aluno.setEndereco(txtEndereco.getText());
+		            aluno.setMunicipio(txtMunicipio.getText());
+		            aluno.setUf((String)cbxUf.getSelectedItem());
+		            aluno.setCelular(txtCelular.getText());
+		            aluno.setNascimento(txtNascimento.getText());
+		            
+		            
+		            DAO alunoDao = new DAO();
+		            alunoDao.salvar(aluno);
+		            JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(null, ex.getMessage());
+		            }			
 				}
-			}
 		});
 		mnAluno.add(mntmSalvar);
+	}
+	
+	
+	//Voids e classes para validar dados
+	public void getData() throws Exception {
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		format.setLenient(false);
+		String dataInput = txtNascimento.getText();
+		try {
+			Date data = format.parse(dataInput);
+			Date now = new Date();
+			if(data.after(now)) {
+				throw new Exception();
+			}
+			
+		} catch (Exception e) {
+			throw new Exception();
+		}
+	}
+	
+	private void carregarFoto(AlunoModel aluno) {
+		JFileChooser jfc = new JFileChooser();
+		jfc.setDialogTitle("Selecione um arquivo de imagem");
+		jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de imagens(*.PNG,*.JPEG,*.JPG)","png", "jpeg", "jpg"));
+		int resultado = jfc.showOpenDialog(this);
+		
+		if(resultado == JFileChooser.APPROVE_OPTION) {
+			try {
+				Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(lblFoto.getWidth(), 
+						lblFoto.getHeight(), Image.SCALE_SMOOTH);
+				lblFoto.setIcon(new ImageIcon(foto));
+				lblFoto.updateUI();
+				
+				
+				aluno.setFoto(jfc.getSelectedFile().getAbsolutePath());
+			} catch (IOException | IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(null, "Erro ao carregar a imagem: " + ex.getMessage());
+	        }
+		}
 	}
 }
