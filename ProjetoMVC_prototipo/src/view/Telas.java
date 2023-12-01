@@ -82,6 +82,8 @@ public class Telas extends JFrame {
 	private JPanel panel_3;
 	private JComboBox cbxUf;
 	private JLabel lblFoto;
+	private JTextField txtRgm_1;
+	private JTextField txtFaltas;
 
 	/**
 	 * Launch the application.
@@ -278,6 +280,65 @@ public class Telas extends JFrame {
 		
 		panel_2 = new JPanel();
 		tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JLabel lblRgm_1 = new JLabel("RGM");
+		lblRgm_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblRgm_1.setBounds(10, 32, 46, 14);
+		panel_2.add(lblRgm_1);
+		
+		txtRgm_1 = new JTextField();
+		txtRgm_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtRgm_1.setColumns(10);
+		txtRgm_1.setBounds(66, 27, 151, 22);
+		panel_2.add(txtRgm_1);
+		
+		JLabel lblConsultaNome = new JLabel("nome do usuário");
+		lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 11));
+		lblConsultaNome.setBounds(260, 27, 255, 22);
+		panel_2.add(lblConsultaNome);
+		
+		JLabel lblConsultaCurso = new JLabel("curso do usuário");
+		lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 11));
+		lblConsultaCurso.setBounds(10, 72, 255, 22);
+		panel_2.add(lblConsultaCurso);
+		
+		JLabel lblDisciplina_1 = new JLabel("Disciplina");
+		lblDisciplina_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblDisciplina_1.setBounds(10, 138, 83, 24);
+		panel_2.add(lblDisciplina_1);
+		
+		JLabel lblSemetre_1 = new JLabel("Semestre");
+		lblSemetre_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblSemetre_1.setBounds(10, 214, 83, 14);
+		panel_2.add(lblSemetre_1);
+		
+		JLabel lblNota_1 = new JLabel("Nota");
+		lblNota_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblNota_1.setBounds(197, 217, 46, 14);
+		panel_2.add(lblNota_1);
+		
+		JComboBox cbxOpcoesDisciplina = new JComboBox();
+		cbxOpcoesDisciplina.setBounds(103, 142, 30, 22);
+		panel_2.add(cbxOpcoesDisciplina);
+		
+		JComboBox cbxOpcoesSemestre = new JComboBox();
+		cbxOpcoesSemestre.setBounds(103, 213, 30, 22);
+		panel_2.add(cbxOpcoesSemestre);
+		
+		JComboBox cbxOpcoesNotas = new JComboBox();
+		cbxOpcoesNotas.setBounds(280, 213, 30, 22);
+		panel_2.add(cbxOpcoesNotas);
+		
+		JLabel lblFaltas = new JLabel("Faltas");
+		lblFaltas.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblFaltas.setBounds(394, 217, 46, 14);
+		panel_2.add(lblFaltas);
+		
+		txtFaltas = new JTextField();
+		txtFaltas.setBounds(458, 217, 86, 20);
+		panel_2.add(txtFaltas);
+		txtFaltas.setColumns(10);
 		
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
