@@ -94,6 +94,11 @@ public class Telas extends JFrame {
 	private JTextField txtRgm_1;
 	private JTextField txtFaltas;
 	private JTextField txtCpf;
+	private JRadioButton Matutino;
+	private JRadioButton Vespertino;
+	private JRadioButton Noturno;
+	private JComboBox<String> cmbCurso;
+	private JComboBox <String> cmbCampus;
 
 	/**
 	 * Launch the application.
@@ -316,12 +321,17 @@ public class Telas extends JFrame {
 		lblNewLabel.setBounds(48, 28, 96, 49);
 		panel_1.add(lblNewLabel);
 
-		JComboBox cmbCurso = new JComboBox();
-		cmbCurso.setModel(new DefaultComboBoxModel(
-				new String[] { "Análise e Desenvolvimento de Sistemas", "Comércio Exterior", "Logística" }));
+		cmbCurso = new JComboBox<>();
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+		model.addElement("Selecione um curso");
+		model.addElement("Análise e Desenvolvimento de Sistemas");
+		model.addElement("Logística");
+		model.addElement("Comércio Exterior");
 		cmbCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
-		cmbCurso.setBounds(148, 28, 493, 49);
+		cmbCurso.setBounds(148, 28, 493, 50);
 		panel_1.add(cmbCurso);
+		cmbCurso.setModel(model);
+		cmbCurso.setSelectedIndex(0);
 
 		JLabel lblCampus = new JLabel("Campus:");
 		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
@@ -329,32 +339,68 @@ public class Telas extends JFrame {
 		panel_1.add(lblCampus);
 
 		JComboBox cmbCampus = new JComboBox();
-		cmbCampus.setModel(new DefaultComboBoxModel(new String[] { "Guarulhos", "São Caetano", "São Paulo" }));
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(148, 87, 493, 49);
 		panel_1.add(cmbCampus);
+		
+		DefaultComboBoxModel<String> modelCampus = new DefaultComboBoxModel<>();
+		modelCampus.addElement("Selecione um câmpus");
+		modelCampus.addElement("Guarulhos");
+		modelCampus.addElement("São Paulo");
+		modelCampus.addElement("São Caetano");
+		cmbCampus.setModel(modelCampus);
+		cmbCampus.setSelectedIndex(0);
 
 		JLabel lblPerodo = new JLabel("Período:");
 		lblPerodo.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblPerodo.setBounds(48, 157, 96, 49);
 		panel_1.add(lblPerodo);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Matutino");
-		rdbtnNewRadioButton.setFont(new Font("Poppins", Font.PLAIN, 20));
-		rdbtnNewRadioButton.setBounds(163, 171, 132, 21);
-		panel_1.add(rdbtnNewRadioButton);
+		Matutino = new JRadioButton("Matutino");
+		Matutino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Matutino.isSelected()) {
+					Vespertino.setSelected(false);
+					Noturno.setSelected(false);
+				}
+			}
+		});
+		Matutino.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Matutino.setBounds(163, 171, 132, 21);
+		panel_1.add(Matutino);
 
-		JRadioButton rdbtnVespertino = new JRadioButton("Vespertino");
-		rdbtnVespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
-		rdbtnVespertino.setBounds(315, 171, 166, 21);
-		panel_1.add(rdbtnVespertino);
+		Vespertino = new JRadioButton("Vespertino");
+		Vespertino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Vespertino.isSelected()) {
+					Matutino.setSelected(false);
+					Noturno.setSelected(false);
+				}
+			}
+		});
+		Vespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Vespertino.setBounds(315, 171, 166, 21);
+		panel_1.add(Vespertino);
 
-		JRadioButton rdbtnNoturno = new JRadioButton("Noturno");
-		rdbtnNoturno.setFont(new Font("Poppins", Font.PLAIN, 20));
-		rdbtnNoturno.setBounds(483, 171, 166, 21);
-		panel_1.add(rdbtnNoturno);
+		Noturno = new JRadioButton("Noturno");
+		Noturno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Noturno.isSelected()) {
+					Matutino.setSelected(false);
+					Vespertino.setSelected(false);
+				}
+			}
+		});
+		Noturno.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Noturno.setBounds(483, 171, 166, 21);
+		panel_1.add(Noturno);
 
 		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnSair.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
 		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSair.setBounds(10, 227, 132, 113);
@@ -373,6 +419,15 @@ public class Telas extends JFrame {
 		panel_1.add(btnConsultar);
 
 		JButton btnLimpar = new JButton("");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbCurso.setSelectedIndex(0);
+				cmbCampus.setSelectedIndex(0);
+				Matutino.setSelected(false);
+				Vespertino.setSelected(false);
+				Noturno.setSelected(false);
+			}
+		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar.setBounds(472, 227, 132, 113);
