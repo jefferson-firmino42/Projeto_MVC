@@ -4,7 +4,7 @@ USE bancomvc;
 CREATE TABLE aluno (
     rgm VARCHAR(9) PRIMARY KEY UNIQUE,
     nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) UNIQUE NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
     email VARCHAR(100),
     endereco VARCHAR(200),
     municipio VARCHAR(100),
