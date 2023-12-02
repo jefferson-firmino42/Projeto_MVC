@@ -60,9 +60,9 @@ public class Telas extends JFrame {
 	private JMenu mnNewMenu;
 	private JMenu mnNewMenu_1;
 	private JMenuItem mntmSalvar;
-	private JMenuItem mntmNewMenuItem;
-	private JMenuItem mntmNewMenuItem_1;
-	private JMenuItem mntmNewMenuItem_2;
+	private JMenuItem mntmAlterar;
+	private JMenuItem mntmConsultar;
+	private JMenuItem mntmExcluir;
 	private JMenuItem mntmNewMenuItem_3;
 	private JMenuItem mntmNewMenuItem_4;
 	private JMenuItem mntmNewMenuItem_5;
@@ -98,7 +98,7 @@ public class Telas extends JFrame {
 	private JRadioButton Vespertino;
 	private JRadioButton Noturno;
 	private JComboBox<String> cmbCurso;
-	private JComboBox <String> cmbCampus;
+	private JComboBox<String> cmbCampus;
 
 	/**
 	 * Launch the application.
@@ -132,14 +132,11 @@ public class Telas extends JFrame {
 
 		mntmSalvar = new JMenuItem("Salvar");
 
-		mntmNewMenuItem = new JMenuItem("Alterar");
-		mnAluno.add(mntmNewMenuItem);
+		mntmAlterar = new JMenuItem("Alterar");
 
-		mntmNewMenuItem_1 = new JMenuItem("Consultar");
-		mnAluno.add(mntmNewMenuItem_1);
+		mntmConsultar = new JMenuItem("Consultar");
 
-		mntmNewMenuItem_2 = new JMenuItem("Excluir");
-		mnAluno.add(mntmNewMenuItem_2);
+		mntmExcluir = new JMenuItem("Excluir");
 
 		mnNewMenu = new JMenu("Notas e Faltas");
 		menuBar.add(mnNewMenu);
@@ -342,7 +339,7 @@ public class Telas extends JFrame {
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(148, 87, 493, 49);
 		panel_1.add(cmbCampus);
-		
+
 		DefaultComboBoxModel<String> modelCampus = new DefaultComboBoxModel<>();
 		modelCampus.addElement("Selecione um câmpus");
 		modelCampus.addElement("Guarulhos");
@@ -359,7 +356,7 @@ public class Telas extends JFrame {
 		Matutino = new JRadioButton("Matutino");
 		Matutino.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Matutino.isSelected()) {
+				if (Matutino.isSelected()) {
 					Vespertino.setSelected(false);
 					Noturno.setSelected(false);
 				}
@@ -372,7 +369,7 @@ public class Telas extends JFrame {
 		Vespertino = new JRadioButton("Vespertino");
 		Vespertino.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Vespertino.isSelected()) {
+				if (Vespertino.isSelected()) {
 					Matutino.setSelected(false);
 					Noturno.setSelected(false);
 				}
@@ -385,7 +382,7 @@ public class Telas extends JFrame {
 		Noturno = new JRadioButton("Noturno");
 		Noturno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Noturno.isSelected()) {
+				if (Noturno.isSelected()) {
 					Matutino.setSelected(false);
 					Vespertino.setSelected(false);
 				}
@@ -504,7 +501,7 @@ public class Telas extends JFrame {
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
 
-		// Comandos(salvar, consultar, excluir, listar)
+		// CRUD tela dados pessoais(salvar, consultar, excluir, listar)
 
 		// Salvar
 		mntmSalvar.addActionListener(new ActionListener() {
@@ -534,7 +531,6 @@ public class Telas extends JFrame {
 						aluno.setFoto(path);
 					} catch (FileNotFoundException ex) {
 						Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);
-						;
 					}
 				}
 				try {
@@ -547,6 +543,113 @@ public class Telas extends JFrame {
 			}
 		});
 		mnAluno.add(mntmSalvar);
+		
+		// Alterar
+		mntmAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean valid = false;
+
+				try {
+					valid = getDados(false);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(rootPane, "Preencha os dados do aluno.");
+					return;
+				}
+
+				if (valid) {
+					aluno = new AlunoModel();
+					aluno.setRgm(txtRgm.getText());
+					aluno.setNome(txtNome.getText());
+					aluno.setCpf(txtCpf.getText());
+					aluno.setEmail(txtEmail.getText());
+					aluno.setEndereco(txtEndereco.getText());
+					aluno.setMunicipio(txtMunicipio.getText());
+					aluno.setUf((String) cbxUf.getSelectedItem());
+					aluno.setCelular(txtCelular.getText());
+					aluno.setNascimento(txtNascimento.getText());
+
+					try {
+						FileInputStream is = new FileInputStream(new File(path));
+						aluno.setFoto(path);
+					} catch (FileNotFoundException ex) {
+						Logger.getLogger("Imagem não selecionada ou inválida").log(Level.SEVERE, null, ex);
+					}
+				}
+				try {
+					DAO alunoDao = new DAO();
+					alunoDao.alterar(aluno);
+					JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+		});
+		mnAluno.add(mntmAlterar);
+		
+		// Excluir
+		mntmExcluir.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				String rgm = txtRgm.getText().trim();
+
+				try {
+					if (rgm.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor, insira um RGM.");
+						return;
+					}
+
+					AlunoModel aluno = new AlunoModel();
+					aluno.setRgm(rgm);
+
+					DAO dao = new DAO();
+
+					if (dao.rgmExiste(rgm)) {
+						dao.excluir(aluno);
+						JOptionPane.showMessageDialog(null, "Aluno deletado");
+					} else {
+						JOptionPane.showMessageDialog(null, "O RGM informado não foi encontrado no banco de dados.");
+					}
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "RGM deve ser um número.");
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		mnAluno.add(mntmExcluir);
+		
+		// Consultar
+		mntmConsultar.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String rgm = txtRgm.getText().trim();
+					DAO dao = new DAO();
+					AlunoModel aluno = dao.consultar(rgm);
+
+					if (aluno != null) {
+						txtNome.setText(aluno.getNome());
+						txtCpf.setText(aluno.getCpf());
+						txtEmail.setText(aluno.getEmail());
+						txtEndereco.setText(aluno.getEndereco());
+						txtMunicipio.setText(aluno.getMunicipio());
+						String uf = aluno.getUf();
+						cbxUf.setSelectedItem(uf);
+						txtCelular.setText(aluno.getCelular());
+						txtNascimento.setText(aluno.getNascimento());
+						String fotoPath = aluno.getFoto();
+						lblFoto.setText(fotoPath);
+						exibirImagem(fotoPath);
+					} else {
+						JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
+					}
+
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+		});
+		mnAluno.add(mntmConsultar);
 	}
 
 	// Voids e classes para validar dados
@@ -574,10 +677,10 @@ public class Telas extends JFrame {
 			}
 
 			if (!txtRgm.getText().isEmpty()) {
-			    char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
-			    if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
-			        throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
-			    }
+				char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
+				if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
+					throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
+				}
 			}
 
 			if (!txtEndereco.getText().isEmpty()) {
@@ -624,13 +727,13 @@ public class Telas extends JFrame {
 		}
 
 		AlunoModel aluno = new AlunoModel();
-		
+
 		try {
 			getData();
 		} catch (Exception e) {
 			throw new Exception("Insira uma data válida no seguinte formado: 00/00/0000");
 		}
-		
+
 		if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$")) {
 			throw new Exception("Nome deve ser inteiramente de caracteres ");
 		}
@@ -639,14 +742,14 @@ public class Telas extends JFrame {
 				.matcher(txtEmail.getText().toString()).matches()) {
 			throw new Exception("Insira um email valido");
 		}
-		
+
 		if (!txtRgm.getText().isEmpty()) {
-		    char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
-		    if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
-		        throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
-		    }
+			char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
+			if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
+				throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
+			}
 		}
-		
+
 		if (txtEndereco.getText().equals("")) {
 			throw new Exception("Insira um endereço");
 		}
@@ -666,11 +769,29 @@ public class Telas extends JFrame {
 		if (txtCelular.getText().isEmpty() || !txtCelular.getText().matches("[0-9]+")) {
 			throw new Exception("Insira um número de celular válido");
 		}
-		
+
 		if (txtCpf.getText().isEmpty() || !txtCpf.getText().matches("[0-9]+")) {
-	        throw new Exception("Insira um CPF válido");
-	    }
-		
+			throw new Exception("Insira um CPF válido");
+		}
+
 		return true;
+	}
+
+	private void exibirImagem(String caminhoImagem) {
+		try {
+			if (caminhoImagem != null && !caminhoImagem.isEmpty()) {
+				ImageIcon imagemIcon = new ImageIcon(caminhoImagem);
+				Image imagem = imagemIcon.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(),
+						Image.SCALE_SMOOTH);
+				lblFoto.setIcon(new ImageIcon(imagem));
+			} else {
+				lblFoto.setIcon(null);
+				lblFoto.setText("Imagem não disponível");
+			}
+		} catch (Exception ex) {
+			lblFoto.setIcon(null);
+			lblFoto.setText("Erro ao carregar imagem");
+			Logger.getLogger("Erro ao carregar imagem").log(Level.SEVERE, null, ex);
+		}
 	}
 }
