@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.MaskFormatter;
 
 import dao.DAO;
 import model.AlunoModel;
@@ -99,6 +100,7 @@ public class Telas extends JFrame {
 	private JRadioButton Noturno;
 	private JComboBox<String> cmbCurso;
 	private JComboBox<String> cmbCampus;
+	private JComboBox<String> cmbDisciplina;
 
 	/**
 	 * Launch the application.
@@ -119,7 +121,7 @@ public class Telas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Telas() {
+	public Telas() throws Exception {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 490);
@@ -217,13 +219,13 @@ public class Telas extends JFrame {
 		lblCpf.setBounds(484, 40, 49, 14);
 		panel.add(lblCpf);
 
-		txtNascimento = new JFormattedTextField();
+		txtNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		txtNascimento.setToolTipText("");
 		txtNascimento.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNascimento.setBounds(210, 85, 151, 32);
 		panel.add(txtNascimento);
 
-		txtCelular = new JFormattedTextField();
+		txtCelular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		txtCelular.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtCelular.setBounds(543, 278, 208, 25);
 		panel.add(txtCelular);
@@ -303,7 +305,7 @@ public class Telas extends JFrame {
 		btnFoto.setBounds(428, 160, 157, 32);
 		panel.add(btnFoto);
 
-		txtCpf = new JTextField();
+		txtCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 		txtCpf.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtCpf.setBounds(545, 25, 206, 30);
 		panel.add(txtCpf);
@@ -329,7 +331,7 @@ public class Telas extends JFrame {
 		panel_1.add(cmbCurso);
 		cmbCurso.setModel(model);
 		cmbCurso.setSelectedIndex(0);
-
+		
 		JLabel lblCampus = new JLabel("Campus:");
 		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblCampus.setBounds(48, 87, 96, 49);
@@ -441,60 +443,95 @@ public class Telas extends JFrame {
 		panel_2.setLayout(null);
 
 		JLabel lblRgm_1 = new JLabel("RGM");
-		lblRgm_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblRgm_1.setBounds(10, 32, 46, 14);
+		lblRgm_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblRgm_1.setBounds(10, 32, 46, 24);
 		panel_2.add(lblRgm_1);
 
 		txtRgm_1 = new JTextField();
-		txtRgm_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtRgm_1.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm_1.setColumns(10);
-		txtRgm_1.setBounds(66, 27, 151, 22);
+		txtRgm_1.setBounds(66, 32, 151, 24);
 		panel_2.add(txtRgm_1);
 
 		JLabel lblConsultaNome = new JLabel("nome do usuário");
-		lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 11));
-		lblConsultaNome.setBounds(260, 27, 255, 22);
+		lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 18));
+		lblConsultaNome.setBounds(260, 32, 255, 24);
 		panel_2.add(lblConsultaNome);
 
 		JLabel lblConsultaCurso = new JLabel("curso do usuário");
-		lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 11));
-		lblConsultaCurso.setBounds(10, 72, 255, 22);
+		lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 18));
+		lblConsultaCurso.setBounds(10, 87, 255, 24);
 		panel_2.add(lblConsultaCurso);
 
 		JLabel lblDisciplina_1 = new JLabel("Disciplina");
-		lblDisciplina_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblDisciplina_1.setBounds(10, 138, 83, 24);
+		lblDisciplina_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblDisciplina_1.setBounds(10, 139, 106, 24);
 		panel_2.add(lblDisciplina_1);
 
 		JLabel lblSemetre_1 = new JLabel("Semestre");
-		lblSemetre_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblSemetre_1.setBounds(10, 214, 83, 14);
+		lblSemetre_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblSemetre_1.setBounds(10, 194, 106, 24);
 		panel_2.add(lblSemetre_1);
 
 		JLabel lblNota_1 = new JLabel("Nota");
-		lblNota_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblNota_1.setBounds(197, 217, 46, 14);
+		lblNota_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNota_1.setBounds(197, 194, 70, 24);
 		panel_2.add(lblNota_1);
 
-		JComboBox cbxOpcoesDisciplina = new JComboBox();
-		cbxOpcoesDisciplina.setBounds(103, 142, 30, 22);
-		panel_2.add(cbxOpcoesDisciplina);
+		cmbDisciplina = new JComboBox<>();
+		DefaultComboBoxModel<String> disciplinaModel = new DefaultComboBoxModel<>();
+		cmbDisciplina.setFont(new Font("Poppins", Font.PLAIN, 15));
+		cmbDisciplina.setBounds(126, 139, 235, 24);
+		cmbDisciplina.setModel(disciplinaModel);
+		panel_2.add(cmbDisciplina);
+		
+		cmbCurso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                disciplinaModel.removeAllElements();
+
+                String cursoSelecionado = (String) cmbCurso.getSelectedItem();
+
+                if (!"Selecione um curso".equals(cursoSelecionado)) {
+
+                    if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)) {
+                    	disciplinaModel.addElement("Selecione uma disciplina");
+                    	disciplinaModel.addElement("Disciplina A");
+                        disciplinaModel.addElement("Disciplina B");
+
+                    } else if ("Logística".equals(cursoSelecionado)) {
+                    	disciplinaModel.addElement("Selecione uma disciplina");
+                        disciplinaModel.addElement("Disciplina C");
+                        disciplinaModel.addElement("Disciplina D");
+
+                    } else if ("Comércio Exterior".equals(cursoSelecionado)) {
+                    	disciplinaModel.addElement("Selecione uma disciplina");
+                        disciplinaModel.addElement("Disciplina E");
+                        disciplinaModel.addElement("Disciplina F");
+
+                    }
+                }
+            }
+        });
 
 		JComboBox cbxOpcoesSemestre = new JComboBox();
-		cbxOpcoesSemestre.setBounds(103, 213, 30, 22);
+		cbxOpcoesSemestre.setFont(new Font("Poppins", Font.PLAIN, 15));
+		cbxOpcoesSemestre.setBounds(126, 194, 30, 24);
 		panel_2.add(cbxOpcoesSemestre);
 
 		JComboBox cbxOpcoesNotas = new JComboBox();
-		cbxOpcoesNotas.setBounds(280, 213, 30, 22);
+		cbxOpcoesNotas.setBounds(318, 194, 30, 22);
 		panel_2.add(cbxOpcoesNotas);
 
 		JLabel lblFaltas = new JLabel("Faltas");
-		lblFaltas.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
-		lblFaltas.setBounds(394, 217, 46, 14);
+		lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblFaltas.setBounds(394, 194, 70, 24);
 		panel_2.add(lblFaltas);
 
 		txtFaltas = new JTextField();
-		txtFaltas.setBounds(458, 217, 86, 20);
+		txtFaltas.setFont(new Font("Poppins", Font.PLAIN, 15));
+		txtFaltas.setBounds(470, 194, 60, 24);
 		panel_2.add(txtFaltas);
 		txtFaltas.setColumns(10);
 
@@ -672,8 +709,8 @@ public class Telas extends JFrame {
 	public boolean getDados(boolean att) throws Exception {
 		if (att) {
 			AlunoModel aluno = new AlunoModel();
-			if (!txtCpf.getText().matches("[0-9]+") && !txtCpf.getText().isEmpty()) {
-				throw new Exception("CPF deve conter apenas números");
+			if (!txtCpf.getText().matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$") && !txtCpf.getText().isEmpty()) {
+			    throw new Exception("CPF inválido");
 			}
 
 			if (!txtRgm.getText().isEmpty()) {
@@ -695,9 +732,10 @@ public class Telas extends JFrame {
 				throw new Exception("Selecione um UF válido");
 			}
 
-			if (!txtCelular.getText().matches("[0-9]+") && !txtCelular.getText().isEmpty()) {
-				throw new Exception("Município inválido");
+			if (!txtCelular.getText().matches("^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$") && !txtCelular.getText().isEmpty()) {
+			    throw new Exception("Celular inválido");
 			}
+
 
 			if (!txtNome.getText().matches("^[\\p{L}~`,^ ]+$") && !txtNome.getText().isEmpty()) {
 				throw new Exception("Nome deve ser inteiramente de caracteres");
@@ -766,11 +804,11 @@ public class Telas extends JFrame {
 			throw new Exception("Insira um município");
 		}
 
-		if (txtCelular.getText().isEmpty() || !txtCelular.getText().matches("[0-9]+")) {
+		if (txtCelular.getText().isEmpty() || !txtCelular.getText().matches("^\\(\\d{2}\\)\\s\\d{5}-\\d{4}$")) {
 			throw new Exception("Insira um número de celular válido");
 		}
 
-		if (txtCpf.getText().isEmpty() || !txtCpf.getText().matches("[0-9]+")) {
+		if (txtCpf.getText().isEmpty() || !txtCpf.getText().matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
 			throw new Exception("Insira um CPF válido");
 		}
 
