@@ -14,6 +14,7 @@ import model.AlunoModel;
 import model.CursoModel;
 
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -38,6 +39,7 @@ import java.awt.ScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
@@ -359,16 +361,17 @@ public class Telas extends JFrame {
 		lblCampus.setBounds(69, 139, 96, 49);
 		panel_1.add(lblCampus);
 
-		JComboBox cmbCampus = new JComboBox();
+		cmbCampus = new JComboBox<>();
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(169, 139, 493, 49);
-		panel_1.add(cmbCampus);
+		
 
 		DefaultComboBoxModel<String> modelCampus = new DefaultComboBoxModel<>();
 		modelCampus.addElement("Selecione um câmpus");
 		modelCampus.addElement("Guarulhos");
 		modelCampus.addElement("São Paulo");
 		modelCampus.addElement("São Caetano");
+		panel_1.add(cmbCampus);
 		cmbCampus.setModel(modelCampus);
 		cmbCampus.setSelectedIndex(0);
 
@@ -410,12 +413,47 @@ public class Telas extends JFrame {
 		panel_1.add(btnSair);
 
 		JButton btnAlterar = new JButton("");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar.setBounds(181, 268, 96, 79);
 		panel_1.add(btnAlterar);
 
 		JButton btnConsultar = new JButton("");
+		btnConsultar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            String rgm = txtRGMCurso.getText().trim();
+		            CursoDAO dao = new CursoDAO();
+		            CursoModel curso = dao.consultar(rgm); 
+
+		            if (curso != null) { // Verifica se o curso foi encontrado
+		                cmbCurso.setSelectedItem(curso.getNomeCurso());
+		                cmbCampus.setSelectedItem(curso.getCampus());
+		                String periodo = curso.getPeriodo(); 
+
+		                Enumeration<AbstractButton> buttons = bg.getElements();
+		                while (buttons.hasMoreElements()) {
+		                    JRadioButton radioButton = (JRadioButton) buttons.nextElement();
+		                    if (radioButton.getText().equals(periodo)) {
+		                        radioButton.setSelected(true); 
+		                        break;
+		                    }
+		                }
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Curso não encontrado para o RGM informado.");
+		            }
+		        } catch (Exception e1) {
+		            JOptionPane.showMessageDialog(null, e1.getMessage());
+		        }
+		    }
+		});
+
+		
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(338, 268, 86, 79);
@@ -425,9 +463,10 @@ public class Telas extends JFrame {
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmbCampus.setSelectedIndex(0);
-				txtRGMCurso.setText("");
 				cmbCurso.setSelectedIndex(0);
 				bg.clearSelection();
+				txtRGMCurso.setText("");
+				
 			}
 		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
@@ -435,7 +474,9 @@ public class Telas extends JFrame {
 		btnLimpar.setBounds(490, 268, 96, 79);
 		panel_1.add(btnLimpar);
 
-		JButton btnSalvar = new JButton("");
+		
+JButton btnSalvar = new JButton("");
+		
 		btnSalvar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        CursoModel cursoModel = new CursoModel();
@@ -451,6 +492,7 @@ public class Telas extends JFrame {
 		            cursoModel.setRgm(txtRGMCurso.getText());
 		            cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
 		            cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
+		          
 
 		            String periodoSelecionado = null;
 
@@ -461,6 +503,7 @@ public class Telas extends JFrame {
 		            } else if (Noturno.isSelected()) {
 		                periodoSelecionado = "Noturno";
 		            }
+
 
 		            if (periodoSelecionado != null) {
 		                cursoModel.setPeriodo(periodoSelecionado);
@@ -486,16 +529,15 @@ public class Telas extends JFrame {
 		    }
 		});
 
-		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
-		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnSalvar.setBounds(643, 268, 96, 79);
-		panel_1.add(btnSalvar);
 
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 96, 79);
 		panel_1.add(btnSalvar);
 
+
+
+		
 		lblrgmcurso = new JLabel("RGM");
 		lblrgmcurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblrgmcurso.setBounds(69, 21, 96, 49);

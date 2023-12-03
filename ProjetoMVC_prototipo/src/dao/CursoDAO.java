@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import model.AlunoModel;
 import model.CursoModel;
 import utils.ConnectionFactory;
 
@@ -45,6 +46,30 @@ public class CursoDAO {
 			throw new Exception("Erro ao inserir dados " + sqle);
 		} finally {
 			ConnectionFactory.closeConnection(conn, ps);
+		}
+	}
+	
+	public CursoModel consultar(String rgmAluno) throws Exception {
+
+		try {
+			String SQL = "SELECT  * FROM aluno WHERE rgm=?";
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, rgmAluno);			
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				String rgm = rs.getString("rgm");
+				int idCurso = rs.getInt("id_curso");
+				String nomeCurso = rs.getString("nome_curso");
+				String campus = rs.getString("campus");
+				String periodo = rs.getString("periodo");
+				
+				cursoModel = new CursoModel(rgm, idCurso, nomeCurso, campus, periodo);
+			}
+			return cursoModel;
+		} catch (SQLException sqle) {
+			throw new Exception(sqle);
+		} finally {
+			ConnectionFactory.closeConnection(conn, ps, rs);
 		}
 	}
 	
