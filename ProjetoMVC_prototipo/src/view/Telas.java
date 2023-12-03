@@ -236,7 +236,7 @@ public class Telas extends JFrame {
 		txtCelular.setBounds(543, 278, 208, 25);
 		panel.add(txtCelular);
 
-		txtRgm = new JTextField();
+		txtRgm = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRgm.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm.setBounds(65, 24, 151, 32);
 		panel.add(txtRgm);
@@ -1026,6 +1026,17 @@ public class Telas extends JFrame {
 
 					if (dao.rgmExiste(rgm)) {
 						dao.excluir(aluno);
+						txtRgm.setText("");
+						txtNome.setText("");
+						txtCpf.setText("");
+						txtEmail.setText("");
+						txtEndereco.setText("");
+						txtMunicipio.setText("");
+						cbxUf.setSelectedItem(" ");
+						txtCelular.setText("");
+						txtNascimento.setText("");
+						
+						lblFoto.setIcon(new ImageIcon(Telas.class.getResource("/images/285680_camera_icon.png")));
 						JOptionPane.showMessageDialog(null, "Aluno deletado");
 					} else {
 						JOptionPane.showMessageDialog(null, "O RGM informado não foi encontrado no banco de dados.");
