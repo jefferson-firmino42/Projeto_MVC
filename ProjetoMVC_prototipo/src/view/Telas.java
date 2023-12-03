@@ -462,9 +462,6 @@ public class Telas extends JFrame {
 		                periodoSelecionado = "Noturno";
 		            }
 
-		            // Debug - Verificar se está capturando o período corretamente
-		            System.out.println("Período Selecionado: " + periodoSelecionado);
-
 		            if (periodoSelecionado != null) {
 		                cursoModel.setPeriodo(periodoSelecionado);
 
