@@ -78,6 +78,14 @@ public class DAO {
 	    return rs.next();
 	}
 	
+	public boolean cpfExiste(String cpf) throws SQLException {
+	    String SQL = "SELECT cpf FROM aluno WHERE cpf=?";
+	    ps = conn.prepareStatement(SQL);
+	    ps.setString(1, cpf);
+	    rs = ps.executeQuery();
+	    return rs.next();
+	}
+	
 	public AlunoModel consultar(String rgmAluno) throws Exception {
 
 		try {
