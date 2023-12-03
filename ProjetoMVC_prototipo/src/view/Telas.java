@@ -101,7 +101,7 @@ public class Telas extends JFrame {
 	private JComboBox<String> cmbCurso;
 	private JComboBox<String> cmbCampus;
 	private JComboBox<String> cmbDisciplina;
-	private JLabel lblRgm_2;
+	private JLabel lblrgmcurso;
 	private JTextField txtRGMCurso;
 
 	/**
@@ -440,10 +440,10 @@ public class Telas extends JFrame {
 		btnSalvar.setBounds(643, 268, 132, 113);
 		panel_1.add(btnSalvar);
 		
-		lblRgm_2 = new JLabel("RGM:");
-		lblRgm_2.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblRgm_2.setBounds(69, 21, 96, 49);
-		panel_1.add(lblRgm_2);
+		lblrgmcurso = new JLabel("RGM:");
+		lblrgmcurso.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblrgmcurso.setBounds(69, 21, 96, 49);
+		panel_1.add(lblrgmcurso);
 		
 		txtRGMCurso = new JTextField();
 		txtRGMCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
