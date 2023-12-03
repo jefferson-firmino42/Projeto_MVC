@@ -419,9 +419,8 @@ public class Telas extends JFrame {
 				txtRGMCurso.setText("");
 				cmbCurso.setSelectedIndex(0);
 				cmbCampus.setSelectedIndex(0);
-				Matutino.setSelected(false);
-				Vespertino.setSelected(false);
-				Noturno.setSelected(false);
+				bg.clearSelection();
+				
 				
 			}
 		});
@@ -432,8 +431,6 @@ public class Telas extends JFrame {
 		
 
 		JButton btnSalvar = new JButton("");
-		// ... seu código anterior ...
-
 		// ActionListener para o botão Salvar
 		btnSalvar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
