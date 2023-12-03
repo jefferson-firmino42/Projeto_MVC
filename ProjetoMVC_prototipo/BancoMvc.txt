@@ -14,7 +14,7 @@ CREATE TABLE aluno (
     foto VARCHAR(100)
 );
 
-CREATE TABLE cursos (
+CREATE TABLE curso (
     rgm VARCHAR(9),
     id_curso INT PRIMARY KEY AUTO_INCREMENT,
     nome_curso VARCHAR(100) NOT NULL,
@@ -23,17 +23,20 @@ CREATE TABLE cursos (
     FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
 
-CREATE TABLE disciplinas (
+CREATE TABLE disciplina (
     id_disciplina INT PRIMARY KEY AUTO_INCREMENT,
     id_curso INT,
+    rgm VARCHAR(9),
     nome_disciplina VARCHAR(100) NOT NULL,
     semestre VARCHAR(20),
     notas DECIMAL(5,2),
     faltas INT,
-    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE
+    FOREIGN KEY (id_curso) REFERENCES curso(id_curso) ON DELETE CASCADE,
+    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
 
 CREATE TABLE boletim (
+	id_boletim INT PRIMARY KEY AUTO_INCREMENT,
     rgm VARCHAR(9),
     id_disciplina INT,
     id_curso INT,
@@ -43,7 +46,6 @@ CREATE TABLE boletim (
     faltas INT,
     imagem VARCHAR(100),
     FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE,
-    FOREIGN KEY (id_disciplina) REFERENCES disciplinas(id_disciplina) ON DELETE CASCADE,
-    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE,
-    PRIMARY KEY (rgm, id_disciplina, id_curso)
+    FOREIGN KEY (id_disciplina) REFERENCES disciplina(id_disciplina) ON DELETE CASCADE,
+    FOREIGN KEY (id_curso) REFERENCES curso(id_curso) ON DELETE CASCADE
 );
