@@ -727,10 +727,7 @@ public class Telas extends JFrame {
 			}
 
 			if (!txtRgm.getText().isEmpty()) {
-				char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
-				if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
-					throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
-				}
+				throw new Exception("Digite um RGM.");
 			}
 
 			if (!txtEndereco.getText().isEmpty()) {
@@ -794,11 +791,8 @@ public class Telas extends JFrame {
 			throw new Exception("Insira um email valido");
 		}
 
-		if (!txtRgm.getText().isEmpty()) {
-			char lastChar = txtRgm.getText().charAt(txtRgm.getText().length() - 1);
-			if (!Character.isDigit(lastChar) && !Character.isLetter(lastChar)) {
-				throw new Exception("O último dígito do RGM deve ser um número ou uma letra");
-			}
+		if (txtRgm.getText().equals("") || txtRgm.getText().length() != 9) {
+			throw new Exception("Digite um RGM válido.");
 		}
 
 		if (txtEndereco.getText().equals("")) {
