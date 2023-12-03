@@ -420,8 +420,6 @@ public class Telas extends JFrame {
 				cmbCurso.setSelectedIndex(0);
 				cmbCampus.setSelectedIndex(0);
 				bg.clearSelection();
-				
-				
 			}
 		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
@@ -453,11 +451,16 @@ public class Telas extends JFrame {
 		        cursoModel.setPeriodo(periodoSelecionado);
 
 		        try {
-		            // Abre a conexão com o banco de dados
-		            // DAO >> Data Access Object
+		        	DAO alunoDAO = new DAO();
+		        	String rgm = txtRGMCurso.getText().trim();
+		        	if (alunoDAO.rgmExiste(rgm)) {						
 		            CursoDAO dao = new CursoDAO();
 		            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
 		            dao.salvarCurso(cursoModel);
+		        	}
+		        	else {
+		        		JOptionPane.showMessageDialog(null, "Aluno não cadastrado");
+		        	}
 		        } catch(Exception e1) {
 		            JOptionPane.showMessageDialog(null, e1.getMessage());
 		        }
@@ -1136,17 +1139,10 @@ public class Telas extends JFrame {
 			if(cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
 				throw new Exception("Selecione um câmpus válido");
 			}
-			
-		
 	}
 		return true;	
 		
 }
-	
-	
-	
-	 
-	
 
 	public boolean getDados(boolean att) throws Exception {
 		if (att) {
