@@ -2,7 +2,6 @@ package model;
 
 public class DisciplinaModel {
 	private int idDisciplina;
-	private int idCurso;
 	private String rgm;
 	private String nomeDisciplina;
 	private String semestre;
@@ -15,14 +14,6 @@ public class DisciplinaModel {
 	
 	public void setIdDisciplina(int idDisciplina) {
 		this.idDisciplina = idDisciplina;
-	}
-	
-	public int getIdCurso() {
-		return idCurso;
-	}
-	
-	public void setIdCurso(int idCurso) {
-		this.idCurso = idCurso;
 	}
 	
 	public String getRgm() {
@@ -67,10 +58,9 @@ public class DisciplinaModel {
 
 	public DisciplinaModel() {}
 
-	public DisciplinaModel(int idDisciplina, int idCurso, String rgm, String nomeDisciplina, String semestre,
+	public DisciplinaModel(int idDisciplina, String rgm, String nomeDisciplina, String semestre,
 			double notas, int faltas) {
 		this.idDisciplina = idDisciplina;
-		this.idCurso = idCurso;
 		this.rgm = rgm;
 		this.nomeDisciplina = nomeDisciplina;
 		this.semestre = semestre;

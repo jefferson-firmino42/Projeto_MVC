@@ -29,15 +29,14 @@ public class DisciplinaDAO {
 			throw new Exception("Os valores não podem ser nulos");
 
 		try {
-			String sql = "INSERT INTO curso (id_curso, rgm, nome_disciplina, semestre, notas, faltas) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO curso (rgm, nome_disciplina, semestre, notas, faltas) VALUES (?, ?, ?, ?, ?)";
 
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, disciplinaModel.getIdCurso());
-			ps.setString(2, disciplinaModel.getRgm());
-			ps.setString(3, disciplinaModel.getNomeDisciplina());
-			ps.setString(4, disciplinaModel.getSemestre());
-			ps.setDouble(5, disciplinaModel.getNotas());
-			ps.setInt(6, disciplinaModel.getFaltas());
+			ps.setString(1, disciplinaModel.getRgm());
+			ps.setString(2, disciplinaModel.getNomeDisciplina());
+			ps.setString(3, disciplinaModel.getSemestre());
+			ps.setDouble(4, disciplinaModel.getNotas());
+			ps.setInt(5, disciplinaModel.getFaltas());
 			
 			ps.executeUpdate();
 

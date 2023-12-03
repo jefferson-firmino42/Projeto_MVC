@@ -25,27 +25,21 @@ CREATE TABLE curso (
 
 CREATE TABLE disciplina (
     id_disciplina INT PRIMARY KEY AUTO_INCREMENT,
-    id_curso INT,
     rgm VARCHAR(9),
     nome_disciplina VARCHAR(100) NOT NULL,
     semestre VARCHAR(20),
     notas DECIMAL(5,2),
     faltas INT,
-    FOREIGN KEY (id_curso) REFERENCES curso(id_curso) ON DELETE CASCADE,
     FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
 
 CREATE TABLE boletim (
 	id_boletim INT PRIMARY KEY AUTO_INCREMENT,
     rgm VARCHAR(9),
-    id_disciplina INT,
-    id_curso INT,
     nome VARCHAR(100) NOT NULL,
     curso VARCHAR(100) NOT NULL,
     notas DECIMAL(5,2),
     faltas INT,
     imagem VARCHAR(100),
-    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE,
-    FOREIGN KEY (id_disciplina) REFERENCES disciplina(id_disciplina) ON DELETE CASCADE,
-    FOREIGN KEY (id_curso) REFERENCES curso(id_curso) ON DELETE CASCADE
+    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
