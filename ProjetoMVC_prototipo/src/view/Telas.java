@@ -424,9 +424,9 @@ public class Telas extends JFrame {
 		JButton btnLimpar = new JButton("");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cmbCampus.setSelectedIndex(0);
 				txtRGMCurso.setText("");
 				cmbCurso.setSelectedIndex(0);
-				cmbCampus.setSelectedIndex(0);
 				bg.clearSelection();
 			}
 		});
@@ -436,43 +436,63 @@ public class Telas extends JFrame {
 		panel_1.add(btnLimpar);
 
 		JButton btnSalvar = new JButton("");
-		// ActionListener para o botão Salvar
 		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CursoModel cursoModel = new CursoModel();
-				cursoModel.setRgm(txtRGMCurso.getText());
-				cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
-				cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
+		    public void actionPerformed(ActionEvent e) {
+		        CursoModel cursoModel = new CursoModel();
+		        boolean valid = false;
+		        
+		        try {
+		            valid = getDadosCurso(true);
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(null, ex.getMessage());
+		        }
 
-				String periodoSelecionado = null;
+		        if (valid) {
+		            cursoModel.setRgm(txtRGMCurso.getText());
+		            cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
+		            cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
 
-				// Verifica qual RadioButton está selecionado
-				if (Matutino.isSelected()) {
-					periodoSelecionado = Matutino.getText();
-				} else if (Vespertino.isSelected()) {
-					periodoSelecionado = Vespertino.getText();
-				} else if (Noturno.isSelected()) {
-					periodoSelecionado = Noturno.getText();
-				}
+		            String periodoSelecionado = null;
 
-				cursoModel.setPeriodo(periodoSelecionado);
+		            if (Matutino.isSelected()) {
+		                periodoSelecionado = "Matutino";
+		            } else if (Vespertino.isSelected()) {
+		                periodoSelecionado = "Vespertino";
+		            } else if (Noturno.isSelected()) {
+		                periodoSelecionado = "Noturno";
+		            }
 
-				try {
+		            // Debug - Verificar se está capturando o período corretamente
+		            System.out.println("Período Selecionado: " + periodoSelecionado);
 
-					DAO alunoDAO = new DAO();
-					String rgm = txtRGMCurso.getText().trim();
-					if (alunoDAO.rgmExiste(rgm)) {
-						CursoDAO dao = new CursoDAO();
-						JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-						dao.salvarCurso(cursoModel);
-					} else {
-						JOptionPane.showMessageDialog(null, "Aluno não cadastrado");
-					}
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
-				}
-			}
+		            if (periodoSelecionado != null) {
+		                cursoModel.setPeriodo(periodoSelecionado);
+
+		                try {
+		                    DAO alunoDAO = new DAO();
+		                    String rgm = txtRGMCurso.getText().trim();
+		                    
+		                    if (alunoDAO.rgmExiste(rgm)) {
+		                        CursoDAO dao = new CursoDAO();
+		                        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+		                        dao.salvarCurso(cursoModel);
+		                    } else {
+		                        JOptionPane.showMessageDialog(null, "Aluno não cadastrado");
+		                    }
+		                } catch (Exception e1) {
+		                    JOptionPane.showMessageDialog(null, e1.getMessage());
+		                }
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Selecione um período");
+		            }
+		        }
+		    }
 		});
+
+		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
+		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
+		btnSalvar.setBounds(643, 268, 96, 79);
+		panel_1.add(btnSalvar);
 
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
@@ -1190,19 +1210,21 @@ public class Telas extends JFrame {
 		}
 	}
 
-	public boolean getDadosCurso(boolean att) throws Exception {
-
-		if (att) {
-			CursoModel cursoModel = new CursoModel();
-			if (cmbCurso.getSelectedItem().equals("Selecione um curso")) {
-				throw new Exception("Selecione um curso válido");
-			}
-			if (cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
-				throw new Exception("Selecione um câmpus válido");
-			}
-		}
-		return true;
-
+	public boolean  getDadosCurso(boolean att) throws Exception {
+	    if(att) {
+	        if (cmbCurso.getSelectedItem().equals("Selecione um curso")) {
+	            throw new Exception("Selecione um curso válido");
+	        }
+	        else if (cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
+	            throw new Exception("Selecione um câmpus válido");
+	        }
+	        
+	        else if(bg.getSelection() == null) {
+	            throw new Exception("Selecione um período válido");
+	        }
+	    }
+	    
+	    return true; 
 	}
 
 	public boolean getDados(boolean att) throws Exception {
