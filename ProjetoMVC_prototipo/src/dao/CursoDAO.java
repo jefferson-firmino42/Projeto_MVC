@@ -52,7 +52,7 @@ public class CursoDAO {
 	public CursoModel consultar(String rgmAluno) throws Exception {
 
 		try {
-			String SQL = "SELECT  * FROM aluno WHERE rgm=?";
+			String SQL = "SELECT  * FROM curso WHERE rgm=?";
 			ps = conn.prepareStatement(SQL);
 			ps.setString(1, rgmAluno);			
 			rs = ps.executeQuery();
@@ -74,7 +74,7 @@ public class CursoDAO {
 	}
 	
 	public boolean rgmExiste(String rgm) throws SQLException {
-	    String SQL = "SELECT rgm FROM aluno WHERE rgm=?";
+	    String SQL = "SELECT rgm FROM curso WHERE rgm=?";
 	    ps = conn.prepareStatement(SQL);
 	    ps.setString(1, rgm);
 	    rs = ps.executeQuery();

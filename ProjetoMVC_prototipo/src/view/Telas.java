@@ -364,7 +364,6 @@ public class Telas extends JFrame {
 		cmbCampus = new JComboBox<>();
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(169, 139, 493, 49);
-		
 
 		DefaultComboBoxModel<String> modelCampus = new DefaultComboBoxModel<>();
 		modelCampus.addElement("Selecione um câmpus");
@@ -415,7 +414,7 @@ public class Telas extends JFrame {
 		JButton btnAlterar = new JButton("");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
@@ -425,35 +424,34 @@ public class Telas extends JFrame {
 
 		JButton btnConsultar = new JButton("");
 		btnConsultar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            String rgm = txtRGMCurso.getText().trim();
-		            CursoDAO dao = new CursoDAO();
-		            CursoModel curso = dao.consultar(rgm); 
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String rgm = txtRGMCurso.getText().trim();
+					CursoDAO dao = new CursoDAO();
+					CursoModel curso = dao.consultar(rgm);
 
-		            if (curso != null) { // Verifica se o curso foi encontrado
-		                cmbCurso.setSelectedItem(curso.getNomeCurso());
-		                cmbCampus.setSelectedItem(curso.getCampus());
-		                String periodo = curso.getPeriodo(); 
+					if (curso != null) { // Verifica se o curso foi encontrado
+						cmbCurso.setSelectedItem(curso.getNomeCurso());
+						cmbCampus.setSelectedItem(curso.getCampus());
+						String periodo = curso.getPeriodo();
 
-		                Enumeration<AbstractButton> buttons = bg.getElements();
-		                while (buttons.hasMoreElements()) {
-		                    JRadioButton radioButton = (JRadioButton) buttons.nextElement();
-		                    if (radioButton.getText().equals(periodo)) {
-		                        radioButton.setSelected(true); 
-		                        break;
-		                    }
-		                }
-		            } else {
-		                JOptionPane.showMessageDialog(null, "Curso não encontrado para o RGM informado.");
-		            }
-		        } catch (Exception e1) {
-		            JOptionPane.showMessageDialog(null, e1.getMessage());
-		        }
-		    }
+						Enumeration<AbstractButton> buttons = bg.getElements();
+						while (buttons.hasMoreElements()) {
+							JRadioButton radioButton = (JRadioButton) buttons.nextElement();
+							if (radioButton.getText().equals(periodo)) {
+								radioButton.setSelected(true);
+								break;
+							}
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Curso não encontrado para o RGM informado.");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
 		});
 
-		
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(338, 268, 86, 79);
@@ -466,7 +464,7 @@ public class Telas extends JFrame {
 				cmbCurso.setSelectedIndex(0);
 				bg.clearSelection();
 				txtRGMCurso.setText("");
-				
+
 			}
 		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
@@ -474,70 +472,63 @@ public class Telas extends JFrame {
 		btnLimpar.setBounds(490, 268, 96, 79);
 		panel_1.add(btnLimpar);
 
-		
-JButton btnSalvar = new JButton("");
-		
+		JButton btnSalvar = new JButton("");
+
 		btnSalvar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        CursoModel cursoModel = new CursoModel();
-		        boolean valid = false;
-		        
-		        try {
-		            valid = getDadosCurso(true);
-		        } catch (Exception ex) {
-		            JOptionPane.showMessageDialog(null, ex.getMessage());
-		        }
+			public void actionPerformed(ActionEvent e) {
+				CursoModel cursoModel = new CursoModel();
+				boolean valid = false;
 
-		        if (valid) {
-		            cursoModel.setRgm(txtRGMCurso.getText());
-		            cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
-		            cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
-		          
+				try {
+					valid = getDadosCurso(true);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
 
-		            String periodoSelecionado = null;
+				if (valid) {
+					cursoModel.setRgm(txtRGMCurso.getText());
+					cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
+					cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
 
-		            if (Matutino.isSelected()) {
-		                periodoSelecionado = "Matutino";
-		            } else if (Vespertino.isSelected()) {
-		                periodoSelecionado = "Vespertino";
-		            } else if (Noturno.isSelected()) {
-		                periodoSelecionado = "Noturno";
-		            }
+					String periodoSelecionado = null;
 
+					if (Matutino.isSelected()) {
+						periodoSelecionado = "Matutino";
+					} else if (Vespertino.isSelected()) {
+						periodoSelecionado = "Vespertino";
+					} else if (Noturno.isSelected()) {
+						periodoSelecionado = "Noturno";
+					}
 
-		            if (periodoSelecionado != null) {
-		                cursoModel.setPeriodo(periodoSelecionado);
+					if (periodoSelecionado != null) {
+						cursoModel.setPeriodo(periodoSelecionado);
 
-		                try {
-		                    DAO alunoDAO = new DAO();
-		                    String rgm = txtRGMCurso.getText().trim();
-		                    
-		                    if (alunoDAO.rgmExiste(rgm)) {
-		                        CursoDAO dao = new CursoDAO();
-		                        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-		                        dao.salvarCurso(cursoModel);
-		                    } else {
-		                        JOptionPane.showMessageDialog(null, "Aluno não cadastrado");
-		                    }
-		                } catch (Exception e1) {
-		                    JOptionPane.showMessageDialog(null, e1.getMessage());
-		                }
-		            } else {
-		                JOptionPane.showMessageDialog(null, "Selecione um período");
-		            }
-		        }
-		    }
+						try {
+							DAO alunoDAO = new DAO();
+							CursoDAO cursoDAO = new CursoDAO();
+							String rgm = txtRGMCurso.getText().trim();
+
+							if (alunoDAO.rgmExiste(rgm) && !cursoDAO.rgmExiste(rgm)) {
+								JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+								cursoDAO.salvarCurso(cursoModel);
+							} else {
+								JOptionPane.showMessageDialog(null, "Aluno não cadastrado no sistema ou já possui algum curso.");
+							}
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage());
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um período");
+					}
+				}
+			}
 		});
-
 
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 96, 79);
 		panel_1.add(btnSalvar);
 
-
-
-		
 		lblrgmcurso = new JLabel("RGM");
 		lblrgmcurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblrgmcurso.setBounds(69, 21, 96, 49);
@@ -1249,21 +1240,20 @@ JButton btnSalvar = new JButton("");
 		}
 	}
 
-	public boolean  getDadosCurso(boolean att) throws Exception {
-	    if(att) {
-	        if (cmbCurso.getSelectedItem().equals("Selecione um curso")) {
-	            throw new Exception("Selecione um curso válido");
-	        }
-	        else if (cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
-	            throw new Exception("Selecione um câmpus válido");
-	        }
-	        
-	        else if(bg.getSelection() == null) {
-	            throw new Exception("Selecione um período válido");
-	        }
-	    }
-	    
-	    return true; 
+	public boolean getDadosCurso(boolean att) throws Exception {
+		if (att) {
+			if (cmbCurso.getSelectedItem().equals("Selecione um curso")) {
+				throw new Exception("Selecione um curso válido");
+			} else if (cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
+				throw new Exception("Selecione um câmpus válido");
+			}
+
+			else if (bg.getSelection() == null) {
+				throw new Exception("Selecione um período válido");
+			}
+		}
+
+		return true;
 	}
 
 	public boolean getDados(boolean att) throws Exception {
