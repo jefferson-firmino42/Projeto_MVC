@@ -8,8 +8,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
 
+import dao.CursoDAO;
 import dao.DAO;
 import model.AlunoModel;
+import model.CursoModel;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ import java.awt.ScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -51,6 +54,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -100,6 +104,7 @@ public class Telas extends JFrame {
 	private JRadioButton Matutino;
 	private JRadioButton Vespertino;
 	private JRadioButton Noturno;
+	private ButtonGroup bg = new ButtonGroup();
 	private JComboBox<String> cmbCurso;
 	private JComboBox<String> cmbCampus;
 	private JComboBox<String> cmbDisciplina;
@@ -360,45 +365,30 @@ public class Telas extends JFrame {
 		lblPerodo.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblPerodo.setBounds(69, 209, 96, 49);
 		panel_1.add(lblPerodo);
+		
 
+
+		// Restante do seu código para salvar no banco de dados...
+
+		
 		Matutino = new JRadioButton("Matutino");
-		Matutino.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Matutino.isSelected()) {
-					Vespertino.setSelected(false);
-					Noturno.setSelected(false);
-				}
-			}
-		});
 		Matutino.setFont(new Font("Poppins", Font.PLAIN, 20));
 		Matutino.setBounds(184, 223, 132, 21);
 		panel_1.add(Matutino);
 
 		Vespertino = new JRadioButton("Vespertino");
-		Vespertino.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Vespertino.isSelected()) {
-					Matutino.setSelected(false);
-					Noturno.setSelected(false);
-				}
-			}
-		});
 		Vespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
-		Vespertino.setBounds(336, 223, 166, 21);
+		Vespertino.setBounds(338, 223, 166, 21);
 		panel_1.add(Vespertino);
 
 		Noturno = new JRadioButton("Noturno");
-		Noturno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Noturno.isSelected()) {
-					Matutino.setSelected(false);
-					Vespertino.setSelected(false);
-				}
-			}
-		});
 		Noturno.setFont(new Font("Poppins", Font.PLAIN, 20));
-		Noturno.setBounds(504, 223, 166, 21);
+		Noturno.setBounds(522, 223, 166, 21);
 		panel_1.add(Noturno);
+		
+		bg.add(Matutino);
+		bg.add(Vespertino);
+		bg.add(Noturno);
 
 		JButton btnSair = new JButton("");
 		btnSair.addActionListener(new ActionListener() {
@@ -426,19 +416,57 @@ public class Telas extends JFrame {
 		JButton btnLimpar = new JButton("");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				txtRGMCurso.setText("");
 				cmbCurso.setSelectedIndex(0);
 				cmbCampus.setSelectedIndex(0);
 				Matutino.setSelected(false);
 				Vespertino.setSelected(false);
 				Noturno.setSelected(false);
+				
 			}
 		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar.setBounds(490, 268, 132, 113);
 		panel_1.add(btnLimpar);
+		
 
 		JButton btnSalvar = new JButton("");
+		// ... seu código anterior ...
+
+		// ActionListener para o botão Salvar
+		btnSalvar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        CursoModel cursoModel = new CursoModel();
+		        cursoModel.setRgm(txtRGMCurso.getText());
+		        cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
+		        cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
+		        
+		        String periodoSelecionado = null;
+		        
+		        // Verifica qual RadioButton está selecionado
+		        if (Matutino.isSelected()) {
+		            periodoSelecionado = Matutino.getText();
+		        } else if (Vespertino.isSelected()) {
+		            periodoSelecionado = Vespertino.getText();
+		        } else if (Noturno.isSelected()) {
+		            periodoSelecionado = Noturno.getText();
+		        }
+		        
+		        cursoModel.setPeriodo(periodoSelecionado);
+
+		        try {
+		            // Abre a conexão com o banco de dados
+		            // DAO >> Data Access Object
+		            CursoDAO dao = new CursoDAO();
+		            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+		            dao.salvarCurso(cursoModel);
+		        } catch(Exception e1) {
+		            JOptionPane.showMessageDialog(null, e1.getMessage());
+		        }
+		    }
+		});
+
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 132, 113);
@@ -449,7 +477,7 @@ public class Telas extends JFrame {
 		lblrgmcurso.setBounds(69, 21, 96, 49);
 		panel_1.add(lblrgmcurso);
 		
-		txtRGMCurso = new JTextField();
+		txtRGMCurso = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRGMCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		txtRGMCurso.setBounds(169, 21, 493, 49);
 		panel_1.add(txtRGMCurso);
@@ -1100,6 +1128,28 @@ public class Telas extends JFrame {
 			throw new Exception();
 		}
 	}
+	
+	public boolean getDadosCurso(boolean att) throws Exception{
+		
+		if(att) {
+			CursoModel cursoModel = new CursoModel();
+			if (cmbCurso.getSelectedItem().equals("Selecione um curso")) {
+			throw new Exception("Selecione um curso válido");
+			}
+			if(cmbCampus.getSelectedItem().equals("Selecione um câmpus")) {
+				throw new Exception("Selecione um câmpus válido");
+			}
+			
+		
+	}
+		return true;	
+		
+}
+	
+	
+	
+	 
+	
 
 	public boolean getDados(boolean att) throws Exception {
 		if (att) {
