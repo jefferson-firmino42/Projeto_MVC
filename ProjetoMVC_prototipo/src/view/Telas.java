@@ -106,11 +106,22 @@ public class Telas extends JFrame {
 	private JRadioButton Noturno;
 	private ButtonGroup bg = new ButtonGroup();
 	private JComboBox<String> cmbCurso;
+	private JComboBox<String> cmbSemestre;
 	private JComboBox<String> cmbCampus;
 	private JComboBox<String> cmbDisciplina;
 	private JTextField txtNota;
 	private JLabel lblrgmcurso;
 	private JTextField txtRGMCurso;
+	private JLabel lblSair;
+	private JLabel lblConsultar;
+	private JLabel lblConsultar_1;
+	private JLabel lblLimpar;
+	private JLabel lblSalvar;
+	private JLabel lblSair_1;
+	private JLabel lblConsultar_2;
+	private JLabel lblConsultar_3;
+	private JLabel lblLimpar_1;
+	private JLabel lblSalvar_1;
 
 
 	/**
@@ -326,7 +337,7 @@ public class Telas extends JFrame {
 		tabbedPane_1.addTab("Curso", null, panel_1, null);
 		panel_1.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Curso:");
+		JLabel lblNewLabel = new JLabel("Curso");
 		lblNewLabel.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblNewLabel.setBounds(69, 80, 96, 49);
 		panel_1.add(lblNewLabel);
@@ -343,7 +354,7 @@ public class Telas extends JFrame {
 		cmbCurso.setModel(model);
 		cmbCurso.setSelectedIndex(0);
 		
-		JLabel lblCampus = new JLabel("Campus:");
+		JLabel lblCampus = new JLabel("Campus");
 		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblCampus.setBounds(69, 139, 96, 49);
 		panel_1.add(lblCampus);
@@ -398,19 +409,19 @@ public class Telas extends JFrame {
 		});
 		btnSair.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
 		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnSair.setBounds(28, 268, 132, 113);
+		btnSair.setBounds(28, 268, 96, 79);
 		panel_1.add(btnSair);
 
 		JButton btnAlterar = new JButton("");
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnAlterar.setBounds(181, 268, 132, 113);
+		btnAlterar.setBounds(181, 268, 96, 79);
 		panel_1.add(btnAlterar);
 
 		JButton btnConsultar = new JButton("");
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnConsultar.setBounds(338, 268, 132, 113);
+		btnConsultar.setBounds(338, 268, 86, 79);
 		panel_1.add(btnConsultar);
 
 		JButton btnLimpar = new JButton("");
@@ -424,7 +435,7 @@ public class Telas extends JFrame {
 		});
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnLimpar.setBounds(490, 268, 132, 113);
+		btnLimpar.setBounds(490, 268, 96, 79);
 		panel_1.add(btnLimpar);
 		
 
@@ -451,6 +462,7 @@ public class Telas extends JFrame {
 		        cursoModel.setPeriodo(periodoSelecionado);
 
 		        try {
+		        	
 		        	DAO alunoDAO = new DAO();
 		        	String rgm = txtRGMCurso.getText().trim();
 		        	if (alunoDAO.rgmExiste(rgm)) {						
@@ -469,10 +481,10 @@ public class Telas extends JFrame {
 
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnSalvar.setBounds(643, 268, 132, 113);
+		btnSalvar.setBounds(643, 268, 96, 79);
 		panel_1.add(btnSalvar);
 		
-		lblrgmcurso = new JLabel("RGM:");
+		lblrgmcurso = new JLabel("RGM");
 		lblrgmcurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblrgmcurso.setBounds(69, 21, 96, 49);
 		panel_1.add(lblrgmcurso);
@@ -482,55 +494,32 @@ public class Telas extends JFrame {
 		txtRGMCurso.setBounds(169, 21, 493, 49);
 		panel_1.add(txtRGMCurso);
 		txtRGMCurso.setColumns(10);
-
-		panel_2 = new JPanel();
-		tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
-		panel_2.setLayout(null);
-
-		JLabel lblRgm_1 = new JLabel("RGM");
-		lblRgm_1.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblRgm_1.setBounds(10, 32, 46, 24);
-		panel_2.add(lblRgm_1);
-
-		txtRgm_1 = new JTextField();
-		txtRgm_1.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtRgm_1.setColumns(10);
-		txtRgm_1.setBounds(66, 32, 151, 24);
-		panel_2.add(txtRgm_1);
-
-		JLabel lblConsultaNome = new JLabel("nome do usuário");
-		lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 18));
-		lblConsultaNome.setBounds(260, 32, 255, 24);
-		panel_2.add(lblConsultaNome);
-
-		JLabel lblConsultaCurso = new JLabel("curso do usuário");
-		lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 18));
-		lblConsultaCurso.setBounds(10, 87, 255, 24);
-		panel_2.add(lblConsultaCurso);
-
-		JLabel lblDisciplina_1 = new JLabel("Disciplina");
-		lblDisciplina_1.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblDisciplina_1.setBounds(240, 139, 106, 24);
-		panel_2.add(lblDisciplina_1);
-
-		JLabel lblSemetre_1 = new JLabel("Semestre");
-		lblSemetre_1.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblSemetre_1.setBounds(10, 139, 106, 24);
-		panel_2.add(lblSemetre_1);
-
-		JLabel lblNota_1 = new JLabel("Nota");
-		lblNota_1.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblNota_1.setBounds(240, 194, 70, 24);
-		panel_2.add(lblNota_1);
-
-		cmbDisciplina = new JComboBox<>();
-		DefaultComboBoxModel<String> disciplinaModel = new DefaultComboBoxModel<>();
-		cmbDisciplina.setFont(new Font("Poppins", Font.PLAIN, 15));
-		cmbDisciplina.setBounds(360, 139, 235, 24);
-		cmbDisciplina.setModel(disciplinaModel);
-		panel_2.add(cmbDisciplina);
 		
-		JComboBox cmbSemestre = new JComboBox();
+		lblSair = new JLabel("Sair");
+		lblSair.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblSair.setBounds(57, 337, 61, 44);
+		panel_1.add(lblSair);
+		
+		lblConsultar = new JLabel("Alterar");
+		lblConsultar.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblConsultar.setBounds(201, 337, 70, 44);
+		panel_1.add(lblConsultar);
+		
+		lblConsultar_1 = new JLabel("Consultar");
+		lblConsultar_1.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblConsultar_1.setBounds(338, 337, 96, 44);
+		panel_1.add(lblConsultar_1);
+		
+		lblLimpar = new JLabel("Limpar");
+		lblLimpar.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblLimpar.setBounds(510, 337, 70, 44);
+		panel_1.add(lblLimpar);
+		
+		lblSalvar = new JLabel("Salvar");
+		lblSalvar.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblSalvar.setBounds(663, 337, 70, 44);
+		panel_1.add(lblSalvar);
+		DefaultComboBoxModel<String> disciplinaModel = new DefaultComboBoxModel<>();
 		DefaultComboBoxModel<String> semestreModel = new DefaultComboBoxModel<>();
 		semestreModel.addElement("Selecione");
 		semestreModel.addElement("1º");
@@ -539,11 +528,6 @@ public class Telas extends JFrame {
 		semestreModel.addElement("4º");
 		semestreModel.addElement("5º");
 		semestreModel.addElement("6º");
-		cmbSemestre.setFont(new Font("Poppins", Font.PLAIN, 15));
-		cmbSemestre.setBounds(126, 139, 85, 24);
-		panel_2.add(cmbSemestre);
-		cmbSemestre.setModel(semestreModel);
-		cmbSemestre.setSelectedIndex(0);
 		
 		//Seleção das Disciplinas
 		cmbCurso.addItemListener(new ItemListener() {
@@ -718,234 +702,313 @@ public class Telas extends JFrame {
 		        }
 		    }
 		});
-
-		cmbSemestre.addItemListener(new ItemListener() {
-		    @Override
-		    public void itemStateChanged(ItemEvent e) {
-		        if (e.getStateChange() == ItemEvent.SELECTED) {
-
-		            disciplinaModel.removeAllElements();
-
-		            String cursoSelecionado = (String) cmbCurso.getSelectedItem();
-		            String semestreSelecionado = (String) cmbSemestre.getSelectedItem();
-
-		            if (!"Selecione um curso".equals(cursoSelecionado)) {
-
-	                    if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Programação em Microinformática");
-	                        disciplinaModel.addElement("Algoritmos e Lógica de Programação");
-	                        disciplinaModel.addElement("Laboratório de Hardware ");
-	                        disciplinaModel.addElement("Arquitetura e Organização de Computadores");
-	                        disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Matemática Discreta");
-	                        disciplinaModel.addElement("Inglês I ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software I ");
-	                        disciplinaModel.addElement("Linguagem de Programação");
-	                        disciplinaModel.addElement("Sistemas de Informação");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Cálculo");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Inglês II ");
-	                        }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software II");
-	                        disciplinaModel.addElement("Interação Humano Computador");
-	                        disciplinaModel.addElement("Estruturas de Dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais I");
-	                        disciplinaModel.addElement("Economia e Finanças");
-	                        disciplinaModel.addElement("Estatística aplicada");
-	                        disciplinaModel.addElement("Sociedade e Tecnologia");
-	                        disciplinaModel.addElement("Inglês III ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software III");
-	                        disciplinaModel.addElement("Programação Orientada a Objetos");
-	                        disciplinaModel.addElement("Banco de dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais II ");
-	                        disciplinaModel.addElement("Programação para Dispositivos Móveis");
-	                        disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
-	                        disciplinaModel.addElement("Inglês IV");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Laboratório de Engenharia de Software");
-	                        disciplinaModel.addElement("Projeto de Redes de Computadores");
-	                        disciplinaModel.addElement("Redes de computadores");
-	                        disciplinaModel.addElement("Laboratório de Banco de Dados");
-	                        disciplinaModel.addElement("Sistemas distribuídos");
-	                        disciplinaModel.addElement("Segurança da Informação");
-	                        disciplinaModel.addElement("Programação Linear e Aplicações");
-	                        disciplinaModel.addElement("Inglês V ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Gestão de Projetos ");
-	                        disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
-	                        disciplinaModel.addElement("Tópicos Especiais em Informática ");
-	                        disciplinaModel.addElement("Laboratório de Redes");
-	                        disciplinaModel.addElement("Inteligência Artificial");
-	                        disciplinaModel.addElement("Auditoria de Sistemas");
-	                        disciplinaModel.addElement("Gestão de Equipes ");
-	                        disciplinaModel.addElement("Empreendedorismo");
-	                        disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
-	                        disciplinaModel.addElement("Inglês VI");
-	                    }
-	                       
-	                    else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Cálculo I");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Informatica Básica");
-	                        disciplinaModel.addElement("Inglês I");
-	                        disciplinaModel.addElement("Logística");
-	                        disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar I");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Cálculo Diferencial e Integral");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Espanhol I");
-	                        disciplinaModel.addElement("Estatística Aplicada à Gestão");
-	                        disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
-	                        disciplinaModel.addElement("Inglês II");
-	                    	disciplinaModel.addElement("Matemática Financeira");
-	                        disciplinaModel.addElement("Modalidade e Intermodalidade");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar II");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Economia e Finanças empresariais");
-	                        disciplinaModel.addElement("Espanhol II");
-	                        disciplinaModel.addElement("Gestão de Equipes");
-	                        disciplinaModel.addElement("Gestão de Produção e Operações");
-	                        disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
-	                        disciplinaModel.addElement("Inglês III");
-	                        disciplinaModel.addElement("Pesquisa Operacional");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar III");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Custos e tarifas Logísticos");
-	                        disciplinaModel.addElement("Eletiva I");
-	                        disciplinaModel.addElement("Gestão de estoques");
-	                        disciplinaModel.addElement("Inglês IV");
-	                        disciplinaModel.addElement("Fundamentos de Marketing");
-	                        disciplinaModel.addElement("Métodos Quantitativos de Gestão");
-	                        disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar IV");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Embalagens e Unitização");
-	                        disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
-	                        disciplinaModel.addElement("Inglês V");
-	                        disciplinaModel.addElement("Inovação e Empreendedorismo");
-	                        disciplinaModel.addElement("Movimentação e Armazenagem");
-	                        disciplinaModel.addElement("Projeto Aplicado à Logística");
-	                        disciplinaModel.addElement("Simulação em Logística");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar V");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Gestão de Projetos Logísticos");
-	                        disciplinaModel.addElement("Eletiva II");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar VI");
-	                        disciplinaModel.addElement("Comércio Exterior e Logística");
-	                        disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
-	                        disciplinaModel.addElement("Tecnologia de Transportes");
-	                        disciplinaModel.addElement("Transportes de Cargas Especiais");
-	                        disciplinaModel.addElement("Inglês VI");
-	                        
-	                    } 
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Comércio Exterior");
-	                        disciplinaModel.addElement("");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    }
-
-		            }
-		        }
-		    }
-		});
 		
-		JComboBox cbxOpcoesNotas = new JComboBox();
-		cbxOpcoesNotas.setBounds(126, 194, 90, 22);
-		panel_2.add(cbxOpcoesNotas);
-
-		JLabel lblFaltas = new JLabel("Faltas");
-		lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblFaltas.setBounds(394, 194, 70, 24);
-		panel_2.add(lblFaltas);
-
-		txtFaltas = new JTextField();
-		txtFaltas.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtFaltas.setBounds(470, 194, 60, 24);
-		panel_2.add(txtFaltas);
-		txtFaltas.setColumns(10);
-		
-		JLabel lblPeriodo = new JLabel("Período");
-		lblPeriodo.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblPeriodo.setBounds(10, 194, 100, 24);
-		panel_2.add(lblPeriodo);
-		
-		txtNota = new JTextField();
-		txtNota.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtNota.setColumns(10);
-		txtNota.setBounds(309, 194, 60, 24);
-		panel_2.add(txtNota);
-		
-		JButton btnSair_1 = new JButton("");
-		btnSair_1.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
-		btnSair_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnSair_1.setBounds(10, 240, 132, 113);
-		panel_2.add(btnSair_1);
-		
-		JButton btnAlterar_1 = new JButton("");
-		btnAlterar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
-		btnAlterar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnAlterar_1.setBounds(163, 240, 132, 113);
-		panel_2.add(btnAlterar_1);
-		
-		JButton btnConsultar_1 = new JButton("");
-		btnConsultar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
-		btnConsultar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnConsultar_1.setBounds(320, 240, 132, 113);
-		panel_2.add(btnConsultar_1);
-		
-		JButton btnLimpar_1 = new JButton("");
-		btnLimpar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
-		btnLimpar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnLimpar_1.setBounds(472, 240, 132, 113);
-		panel_2.add(btnLimpar_1);
-		
-		JButton btnSalvar_1 = new JButton("");
-		btnSalvar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
-		btnSalvar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
-		btnSalvar_1.setBounds(625, 240, 132, 113);
-		panel_2.add(btnSalvar_1);
+				panel_2 = new JPanel();
+				tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
+				panel_2.setLayout(null);
+				
+						JLabel lblRgm_1 = new JLabel("RGM");
+						lblRgm_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+						lblRgm_1.setBounds(10, 32, 62, 24);
+						panel_2.add(lblRgm_1);
+						
+								txtRgm_1 = new JTextField();
+								txtRgm_1.setFont(new Font("Poppins", Font.PLAIN, 15));
+								txtRgm_1.setColumns(10);
+								txtRgm_1.setBounds(82, 18, 151, 39);
+								panel_2.add(txtRgm_1);
+								
+										JLabel lblConsultaNome = new JLabel("nome do usuário");
+										lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 18));
+										lblConsultaNome.setBounds(260, 32, 255, 24);
+										panel_2.add(lblConsultaNome);
+										
+												JLabel lblConsultaCurso = new JLabel("curso do usuário");
+												lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 18));
+												lblConsultaCurso.setBounds(10, 87, 255, 24);
+												panel_2.add(lblConsultaCurso);
+												
+														JLabel lblDisciplina_1 = new JLabel("Disciplina");
+														lblDisciplina_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+														lblDisciplina_1.setBounds(275, 139, 106, 24);
+														panel_2.add(lblDisciplina_1);
+														
+																JLabel lblSemetre_1 = new JLabel("Semestre");
+																lblSemetre_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+																lblSemetre_1.setBounds(10, 139, 106, 24);
+																panel_2.add(lblSemetre_1);
+																
+																		JLabel lblNota_1 = new JLabel("Nota");
+																		lblNota_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+																		lblNota_1.setBounds(240, 194, 70, 24);
+																		panel_2.add(lblNota_1);
+																		
+																				cmbDisciplina = new JComboBox<>();
+																				cmbDisciplina.setFont(new Font("Poppins", Font.PLAIN, 15));
+																				cmbDisciplina.setBounds(382, 124, 370, 39);
+																				cmbDisciplina.setModel(disciplinaModel);
+																				panel_2.add(cmbDisciplina);
+																				
+																				JComboBox cmbSemestre = new JComboBox();
+																				cmbSemestre.setFont(new Font("Poppins", Font.PLAIN, 15));
+																				cmbSemestre.setBounds(126, 124, 125, 39);
+																				panel_2.add(cmbSemestre);
+																				cmbSemestre.setModel(semestreModel);
+																				cmbSemestre.setSelectedIndex(0);
+																				
+																						cmbSemestre.addItemListener(new ItemListener() {
+																						    @Override
+																						    public void itemStateChanged(ItemEvent e) {
+																						        if (e.getStateChange() == ItemEvent.SELECTED) {
+																				
+																						            disciplinaModel.removeAllElements();
+																				
+																						            String cursoSelecionado = (String) cmbCurso.getSelectedItem();
+																						            String semestreSelecionado = (String) cmbSemestre.getSelectedItem();
+																				
+																						            if (!"Selecione um curso".equals(cursoSelecionado)) {
+																				
+																					                    if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Programação em Microinformática");
+																					                        disciplinaModel.addElement("Algoritmos e Lógica de Programação");
+																					                        disciplinaModel.addElement("Laboratório de Hardware ");
+																					                        disciplinaModel.addElement("Arquitetura e Organização de Computadores");
+																					                        disciplinaModel.addElement("Administração Geral");
+																					                        disciplinaModel.addElement("Matemática Discreta");
+																					                        disciplinaModel.addElement("Inglês I ");
+																					                    }
+																					                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Engenharia de Software I ");
+																					                        disciplinaModel.addElement("Linguagem de Programação");
+																					                        disciplinaModel.addElement("Sistemas de Informação");
+																					                        disciplinaModel.addElement("Contabilidade");
+																					                        disciplinaModel.addElement("Cálculo");
+																					                        disciplinaModel.addElement("Comunicação e Expressão");
+																					                        disciplinaModel.addElement("Inglês II ");
+																					                        }
+																					                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)){
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Engenharia de Software II");
+																					                        disciplinaModel.addElement("Interação Humano Computador");
+																					                        disciplinaModel.addElement("Estruturas de Dados ");
+																					                        disciplinaModel.addElement("Sistemas Operacionais I");
+																					                        disciplinaModel.addElement("Economia e Finanças");
+																					                        disciplinaModel.addElement("Estatística aplicada");
+																					                        disciplinaModel.addElement("Sociedade e Tecnologia");
+																					                        disciplinaModel.addElement("Inglês III ");
+																					                    }
+																					                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)){
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Engenharia de Software III");
+																					                        disciplinaModel.addElement("Programação Orientada a Objetos");
+																					                        disciplinaModel.addElement("Banco de dados ");
+																					                        disciplinaModel.addElement("Sistemas Operacionais II ");
+																					                        disciplinaModel.addElement("Programação para Dispositivos Móveis");
+																					                        disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
+																					                        disciplinaModel.addElement("Inglês IV");
+																					                    }
+																					                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)){
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Laboratório de Engenharia de Software");
+																					                        disciplinaModel.addElement("Projeto de Redes de Computadores");
+																					                        disciplinaModel.addElement("Redes de computadores");
+																					                        disciplinaModel.addElement("Laboratório de Banco de Dados");
+																					                        disciplinaModel.addElement("Sistemas distribuídos");
+																					                        disciplinaModel.addElement("Segurança da Informação");
+																					                        disciplinaModel.addElement("Programação Linear e Aplicações");
+																					                        disciplinaModel.addElement("Inglês V ");
+																					                    }
+																					                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)){
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Gestão de Projetos ");
+																					                        disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
+																					                        disciplinaModel.addElement("Tópicos Especiais em Informática ");
+																					                        disciplinaModel.addElement("Laboratório de Redes");
+																					                        disciplinaModel.addElement("Inteligência Artificial");
+																					                        disciplinaModel.addElement("Auditoria de Sistemas");
+																					                        disciplinaModel.addElement("Gestão de Equipes ");
+																					                        disciplinaModel.addElement("Empreendedorismo");
+																					                        disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
+																					                        disciplinaModel.addElement("Inglês VI");
+																					                    }
+																					                       
+																					                    else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    	disciplinaModel.addElement("Administração Geral");
+																					                        disciplinaModel.addElement("Cálculo I");
+																					                        disciplinaModel.addElement("Comunicação e Expressão");
+																					                        disciplinaModel.addElement("Informatica Básica");
+																					                        disciplinaModel.addElement("Inglês I");
+																					                        disciplinaModel.addElement("Logística");
+																					                        disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar I");
+																					                    }
+																					                    else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Cálculo Diferencial e Integral");
+																					                        disciplinaModel.addElement("Contabilidade");
+																					                        disciplinaModel.addElement("Espanhol I");
+																					                        disciplinaModel.addElement("Estatística Aplicada à Gestão");
+																					                        disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
+																					                        disciplinaModel.addElement("Inglês II");
+																					                    	disciplinaModel.addElement("Matemática Financeira");
+																					                        disciplinaModel.addElement("Modalidade e Intermodalidade");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar II");
+																					                    }
+																					                    else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Economia e Finanças empresariais");
+																					                        disciplinaModel.addElement("Espanhol II");
+																					                        disciplinaModel.addElement("Gestão de Equipes");
+																					                        disciplinaModel.addElement("Gestão de Produção e Operações");
+																					                        disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
+																					                        disciplinaModel.addElement("Inglês III");
+																					                        disciplinaModel.addElement("Pesquisa Operacional");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar III");
+																					                    }
+																					                    else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Custos e tarifas Logísticos");
+																					                        disciplinaModel.addElement("Eletiva I");
+																					                        disciplinaModel.addElement("Gestão de estoques");
+																					                        disciplinaModel.addElement("Inglês IV");
+																					                        disciplinaModel.addElement("Fundamentos de Marketing");
+																					                        disciplinaModel.addElement("Métodos Quantitativos de Gestão");
+																					                        disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar IV");
+																					                    }
+																					                    else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Embalagens e Unitização");
+																					                        disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
+																					                        disciplinaModel.addElement("Inglês V");
+																					                        disciplinaModel.addElement("Inovação e Empreendedorismo");
+																					                        disciplinaModel.addElement("Movimentação e Armazenagem");
+																					                        disciplinaModel.addElement("Projeto Aplicado à Logística");
+																					                        disciplinaModel.addElement("Simulação em Logística");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar V");
+																					                    }
+																					                    else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Gestão de Projetos Logísticos");
+																					                        disciplinaModel.addElement("Eletiva II");
+																					                        disciplinaModel.addElement("Projeto Interdisciplinar VI");
+																					                        disciplinaModel.addElement("Comércio Exterior e Logística");
+																					                        disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
+																					                        disciplinaModel.addElement("Tecnologia de Transportes");
+																					                        disciplinaModel.addElement("Transportes de Cargas Especiais");
+																					                        disciplinaModel.addElement("Inglês VI");
+																					                        
+																					                    } 
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                        disciplinaModel.addElement("Comércio Exterior");
+																					                        disciplinaModel.addElement("");
+																					                    }
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    }
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    }
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    }
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    }
+																					                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+																					                    	disciplinaModel.addElement("Selecione uma disciplina");
+																					                    }
+																				
+																						            }
+																						        }
+																						    }
+																						});
+																						
+																						JComboBox cbxOpcoesNotas = new JComboBox();
+																						cbxOpcoesNotas.setFont(new Font("Poppins", Font.PLAIN, 15));
+																						cbxOpcoesNotas.setBounds(126, 194, 90, 31);
+																						panel_2.add(cbxOpcoesNotas);
+																						
+																								JLabel lblFaltas = new JLabel("Faltas");
+																								lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
+																								lblFaltas.setBounds(394, 194, 70, 24);
+																								panel_2.add(lblFaltas);
+																								
+																										txtFaltas = new JTextField();
+																										txtFaltas.setFont(new Font("Poppins", Font.PLAIN, 15));
+																										txtFaltas.setBounds(470, 194, 60, 31);
+																										panel_2.add(txtFaltas);
+																										txtFaltas.setColumns(10);
+																										
+																										JLabel lblPeriodo = new JLabel("Período");
+																										lblPeriodo.setFont(new Font("Poppins", Font.PLAIN, 20));
+																										lblPeriodo.setBounds(10, 194, 100, 24);
+																										panel_2.add(lblPeriodo);
+																										
+																										txtNota = new JTextField();
+																										txtNota.setFont(new Font("Poppins", Font.PLAIN, 15));
+																										txtNota.setColumns(10);
+																										txtNota.setBounds(309, 194, 60, 31);
+																										panel_2.add(txtNota);
+																										
+																										JButton btnSair_1 = new JButton("");
+																										btnSair_1.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
+																										btnSair_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+																										btnSair_1.setBounds(52, 257, 100, 79);
+																										panel_2.add(btnSair_1);
+																										
+																										JButton btnAlterar_1 = new JButton("");
+																										btnAlterar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
+																										btnAlterar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+																										btnAlterar_1.setBounds(196, 257, 102, 79);
+																										panel_2.add(btnAlterar_1);
+																										
+																										JButton btnConsultar_1 = new JButton("");
+																										btnConsultar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
+																										btnConsultar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+																										btnConsultar_1.setBounds(330, 257, 100, 79);
+																										panel_2.add(btnConsultar_1);
+																										
+																										JButton btnLimpar_1 = new JButton("");
+																										btnLimpar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
+																										btnLimpar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+																										btnLimpar_1.setBounds(476, 257, 106, 79);
+																										panel_2.add(btnLimpar_1);
+																										
+																										JButton btnSalvar_1 = new JButton("");
+																										btnSalvar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
+																										btnSalvar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
+																										btnSalvar_1.setBounds(632, 257, 100, 79);
+																										panel_2.add(btnSalvar_1);
+																										
+																										lblSair_1 = new JLabel("Sair");
+																										lblSair_1.setFont(new Font("Poppins", Font.BOLD, 15));
+																										lblSair_1.setBounds(82, 323, 61, 44);
+																										panel_2.add(lblSair_1);
+																										
+																										lblConsultar_2 = new JLabel("Alterar");
+																										lblConsultar_2.setFont(new Font("Poppins", Font.BOLD, 15));
+																										lblConsultar_2.setBounds(217, 323, 70, 44);
+																										panel_2.add(lblConsultar_2);
+																										
+																										lblConsultar_3 = new JLabel("Consultar");
+																										lblConsultar_3.setFont(new Font("Poppins", Font.BOLD, 15));
+																										lblConsultar_3.setBounds(340, 323, 96, 44);
+																										panel_2.add(lblConsultar_3);
+																										
+																										lblLimpar_1 = new JLabel("Limpar");
+																										lblLimpar_1.setFont(new Font("Poppins", Font.BOLD, 15));
+																										lblLimpar_1.setBounds(501, 323, 70, 44);
+																										panel_2.add(lblLimpar_1);
+																										
+																										lblSalvar_1 = new JLabel("Salvar");
+																										lblSalvar_1.setFont(new Font("Poppins", Font.BOLD, 15));
+																										lblSalvar_1.setBounds(652, 323, 70, 44);
+																										panel_2.add(lblSalvar_1);
 
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
