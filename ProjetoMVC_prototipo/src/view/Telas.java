@@ -11,12 +11,15 @@ import javax.swing.text.MaskFormatter;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import dao.CursoDAO;
 import dao.DAO;
 import model.AlunoModel;
 import model.CursoModel;
+import utils.ConnectionFactory;
 
 import java.util.Date;
 import java.util.Enumeration;
@@ -56,6 +59,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -1165,7 +1171,7 @@ public class Telas extends JFrame {
 
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
-		
+
 		JButton btnGerarBoletim = new JButton("Gerar boletim\r\n");
 		btnGerarBoletim.setToolTipText("Gerar boletim do aluno");
 		btnGerarBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
@@ -1175,14 +1181,14 @@ public class Telas extends JFrame {
 			}
 		});
 		panel_3.setLayout(null);
-		btnGerarBoletim.setBounds(469, 108, 137, 31);
+		btnGerarBoletim.setBounds(469, 108, 161, 31);
 		panel_3.add(btnGerarBoletim);
-		
+
 		JLabel lblRgmBoletim = new JLabel("RGM");
 		lblRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblRgmBoletim.setBounds(126, 109, 45, 30);
 		panel_3.add(lblRgmBoletim);
-		
+
 		txtRgmBoletim = new JTextField();
 		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgmBoletim.setBounds(187, 110, 220, 26);
@@ -1519,23 +1525,100 @@ public class Telas extends JFrame {
 			Logger.getLogger("Erro ao carregar imagem").log(Level.SEVERE, null, ex);
 		}
 	}
-	
+
 	private void gerarPdf() {
-		 Document documento = new Document();
-		 
-		 // Gerando documento
-		 try {
+		Connection con; 
+		PreparedStatement pst;  
+		ResultSet rs;  
+		String rgm = txtRgmBoletim.getText();
+		
+		try {
+			DAO dao = new DAO();
+			if (txtRgmBoletim.getText().equals("") || !dao.rgmExiste(rgm)) {
+				JOptionPane.showMessageDialog(null, "Digite um rgm válido.");
+				return;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		Document documento = new Document();
+
+		// Gerando documento
+		try {
 			PdfWriter.getInstance(documento, new FileOutputStream("boletim.pdf"));
 			documento.open();
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+			documento.add(new Paragraph(formatador.format(data)));
 			documento.add(new Paragraph("Boletim do aluno:"));
+			documento.add(new Paragraph(" "));
+
+			// Tabela
+			PdfPTable tabela = new PdfPTable(3);
+			PdfPCell col1 = new PdfPCell(new Paragraph("RGM"));
+			tabela.addCell(col1);
+			PdfPCell col2 = new PdfPCell(new Paragraph("Nome"));
+			tabela.addCell(col2);
+			PdfPCell col3 = new PdfPCell(new Paragraph("Foto"));
+			tabela.addCell(col3);
+			
+			String buscarAluno = "SELECT * FROM aluno WHERE rgm=?";
+
+			try {
+			    con = ConnectionFactory.getConnection();
+			    pst = con.prepareStatement(buscarAluno);
+			    pst.setString(1, rgm);
+			    rs = pst.executeQuery();
+
+			    while (rs.next()) {
+			        tabela.addCell(rs.getString(1));
+			        tabela.addCell(rs.getString(2));
+			        String caminho = (String) rs.getString(10);
+			        com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(caminho);
+			        tabela.addCell(image);
+			    }
+			    con.close();
+			} catch (Exception e) {
+			    System.out.println(e);
+			}
+			
+			PdfPTable tabela2 = new PdfPTable(3);
+			PdfPCell col4 = new PdfPCell(new Paragraph("Curso"));
+			tabela.addCell(col4);
+			PdfPCell col5 = new PdfPCell(new Paragraph("Campus"));
+			tabela.addCell(col5);
+			PdfPCell col6 = new PdfPCell(new Paragraph("Período"));
+			tabela.addCell(col6);
+			
+			String buscarCurso = "SELECT * FROM curso WHERE rgm=?";
+			
+			try {
+			    con = ConnectionFactory.getConnection();
+			    pst = con.prepareStatement(buscarCurso);
+			    pst.setString(1, rgm);
+			    rs = pst.executeQuery();
+
+			    while (rs.next()) {
+			        tabela.addCell(rs.getString(3));
+			        tabela.addCell(rs.getString(4));
+			        tabela.addCell(rs.getString(5));
+			    }
+			    con.close();
+			} catch (Exception e) {
+			    System.out.println(e);
+			}
+			
+			documento.add(tabela);
+			documento.add(tabela2);
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			documento.close();
 		}
-		 
-		 // Abrir documento no leitor padrão
-		 try {
+
+		// Abrir documento no leitor padrão
+		try {
 			Desktop.getDesktop().open(new File("boletim.pdf"));
 		} catch (Exception e2) {
 			System.out.println(e2);
