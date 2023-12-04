@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import dao.CursoDAO;
 import dao.DAO;
@@ -49,6 +54,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -125,6 +131,7 @@ public class Telas extends JFrame {
 	private JLabel lblLimpar_1;
 	private JLabel lblSalvar_1;
 	private JMenuItem mntmLimparTela;
+	private JTextField txtRgmBoletim;
 
 	/**
 	 * Launch the application.
@@ -1158,6 +1165,29 @@ public class Telas extends JFrame {
 
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
+		
+		JButton btnGerarBoletim = new JButton("Gerar boletim\r\n");
+		btnGerarBoletim.setToolTipText("Gerar boletim do aluno");
+		btnGerarBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
+		btnGerarBoletim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerarPdf();
+			}
+		});
+		panel_3.setLayout(null);
+		btnGerarBoletim.setBounds(469, 108, 137, 31);
+		panel_3.add(btnGerarBoletim);
+		
+		JLabel lblRgmBoletim = new JLabel("RGM");
+		lblRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblRgmBoletim.setBounds(126, 109, 45, 30);
+		panel_3.add(lblRgmBoletim);
+		
+		txtRgmBoletim = new JTextField();
+		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
+		txtRgmBoletim.setBounds(187, 110, 220, 26);
+		panel_3.add(txtRgmBoletim);
+		txtRgmBoletim.setColumns(10);
 
 		// CRUD tela dados pessoais(salvar, consultar, excluir, listar)
 
@@ -1489,7 +1519,26 @@ public class Telas extends JFrame {
 			Logger.getLogger("Erro ao carregar imagem").log(Level.SEVERE, null, ex);
 		}
 	}
-
-	// acessar a tela de ajuda
-
+	
+	private void gerarPdf() {
+		 Document documento = new Document();
+		 
+		 // Gerando documento
+		 try {
+			PdfWriter.getInstance(documento, new FileOutputStream("boletim.pdf"));
+			documento.open();
+			documento.add(new Paragraph("Boletim do aluno:"));
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			documento.close();
+		}
+		 
+		 // Abrir documento no leitor padrão
+		 try {
+			Desktop.getDesktop().open(new File("boletim.pdf"));
+		} catch (Exception e2) {
+			System.out.println(e2);
+		}
+	}
 }
