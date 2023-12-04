@@ -461,7 +461,7 @@ public class Telas extends JFrame {
 					try {
 						CursoDAO cursoDAO = new CursoDAO();
 						cursoDAO.alterar(cursoModel);
-						JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso alteradas com sucesso.");
+						JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso.");
 
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
