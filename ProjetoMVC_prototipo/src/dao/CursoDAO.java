@@ -73,6 +73,34 @@ public class CursoDAO {
 		}
 	}
 	
+	public void alterar(CursoModel cursoModel) throws Exception {
+	    if (cursoModel == null) {
+	        throw new Exception("Os valores não podem ser nulos");
+	    }
+
+	    try (PreparedStatement ps = conn.prepareStatement("UPDATE curso SET nome_curso=?, campus=?, periodo=? WHERE rgm=?")) {
+	        ps.setString(1, cursoModel.getNomeCurso());
+	        ps.setString(2, cursoModel.getCampus());
+	        ps.setString(3, cursoModel.getPeriodo());
+	        ps.setString(4, cursoModel.getRgm()); 
+
+	        int rowsAffected = ps.executeUpdate();
+
+	        if (rowsAffected == 0) {
+	            throw new Exception("Nenhum registro foi alterado. RGM não encontrado.");
+	        }
+
+	    } catch (SQLException sqle) {
+	        throw new Exception("Erro ao alterar dados: " + sqle.getMessage());
+	    } finally {
+	        ConnectionFactory.closeConnection(conn);
+	    }
+	}
+
+
+
+
+	
 	public boolean rgmExiste(String rgm) throws SQLException {
 	    String SQL = "SELECT rgm FROM curso WHERE rgm=?";
 	    ps = conn.prepareStatement(SQL);

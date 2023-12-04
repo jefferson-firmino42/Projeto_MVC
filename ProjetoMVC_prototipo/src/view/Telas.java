@@ -182,15 +182,15 @@ public class Telas extends JFrame {
 		mnNewMenu_1 = new JMenu("Ajuda");
 		menuBar.add(mnNewMenu_1);
 
-		//acessa a tela sobre
+		// acessa a tela sobre
 		btnSobre = new JMenuItem("Sobre");
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tela_Ajuda novaTela = new Tela_Ajuda();
-                novaTela.setVisible(true);
+				novaTela.setVisible(true);
 			}
 		});
-		
+
 		mnNewMenu_1.add(btnSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -422,7 +422,38 @@ public class Telas extends JFrame {
 		JButton btnAlterar = new JButton("");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CursoModel cursoModel = new CursoModel();
+				boolean valid = false;
+				try {
+					valid = getDadosCurso(true);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+				if (valid) {
+					String periodoSelecionado = "";
 
+					Enumeration<AbstractButton> buttons = bg.getElements();
+					while (buttons.hasMoreElements()) {
+						AbstractButton button = buttons.nextElement();
+						if (button.isSelected()) {
+							periodoSelecionado = button.getText();
+							cursoModel.setRgm(txtRGMCurso.getText());
+							cursoModel.setNomeCurso(String.valueOf(cmbCurso.getSelectedItem()));
+							cursoModel.setCampus(String.valueOf(cmbCampus.getSelectedItem()));
+							cursoModel.setPeriodo(periodoSelecionado);
+						}
+
+					}
+
+					try {
+						CursoDAO cursoDAO = new CursoDAO();
+						cursoDAO.alterar(cursoModel);
+						JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso alteradas com sucesso.");
+
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
+				}
 			}
 		});
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
@@ -459,7 +490,6 @@ public class Telas extends JFrame {
 				}
 			}
 		});
-
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(338, 268, 86, 79);
@@ -520,7 +550,8 @@ public class Telas extends JFrame {
 								JOptionPane.showMessageDialog(null, "Salvo com sucesso");
 								cursoDAO.salvarCurso(cursoModel);
 							} else {
-								JOptionPane.showMessageDialog(null, "Aluno não cadastrado no sistema ou já possui algum curso.");
+								JOptionPane.showMessageDialog(null,
+										"Aluno não cadastrado no sistema ou já possui algum curso.");
 							}
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -531,7 +562,6 @@ public class Telas extends JFrame {
 				}
 			}
 		});
-
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 96, 79);
@@ -634,221 +664,210 @@ public class Telas extends JFrame {
 		panel_2.add(cmbSemestre);
 		cmbSemestre.setModel(semestreModel);
 		cmbSemestre.setSelectedIndex(0);
-		
-		//Seleção das Disciplinas
+
+		// Seleção das Disciplinas
 		cmbCurso.addItemListener(new ItemListener() {
-		    @Override
-		    public void itemStateChanged(ItemEvent e) {
-		        if (e.getStateChange() == ItemEvent.SELECTED) {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
 
-		            disciplinaModel.removeAllElements();
+					disciplinaModel.removeAllElements();
 
-		            String cursoSelecionado = (String) cmbCurso.getSelectedItem();
-		            String semestreSelecionado = (String) cmbSemestre.getSelectedItem();
+					String cursoSelecionado = (String) cmbCurso.getSelectedItem();
+					String semestreSelecionado = (String) cmbSemestre.getSelectedItem();
 
-		            if (!"Selecione um curso".equals(cursoSelecionado)) {
+					if (!"Selecione um curso".equals(cursoSelecionado)) {
 
-	                    if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Programação em Microinformática");
-	                        disciplinaModel.addElement("Algoritmos e Lógica de Programação");
-	                        disciplinaModel.addElement("Laboratório de Hardware ");
-	                        disciplinaModel.addElement("Arquitetura e Organização de Computadores");
-	                        disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Matemática Discreta");
-	                        disciplinaModel.addElement("Inglês I ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software I ");
-	                        disciplinaModel.addElement("Linguagem de Programação");
-	                        disciplinaModel.addElement("Sistemas de Informação");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Cálculo");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Inglês II ");
-	                        }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software II");
-	                        disciplinaModel.addElement("Interação Humano Computador");
-	                        disciplinaModel.addElement("Estruturas de Dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais I");
-	                        disciplinaModel.addElement("Economia e Finanças");
-	                        disciplinaModel.addElement("Estatística aplicada");
-	                        disciplinaModel.addElement("Sociedade e Tecnologia");
-	                        disciplinaModel.addElement("Inglês III ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software III");
-	                        disciplinaModel.addElement("Programação Orientada a Objetos");
-	                        disciplinaModel.addElement("Banco de dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais II ");
-	                        disciplinaModel.addElement("Programação para Dispositivos Móveis");
-	                        disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
-	                        disciplinaModel.addElement("Inglês IV");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Laboratório de Engenharia de Software");
-	                        disciplinaModel.addElement("Projeto de Redes de Computadores");
-	                        disciplinaModel.addElement("Redes de computadores");
-	                        disciplinaModel.addElement("Laboratório de Banco de Dados");
-	                        disciplinaModel.addElement("Sistemas distribuídos");
-	                        disciplinaModel.addElement("Segurança da Informação");
-	                        disciplinaModel.addElement("Programação Linear e Aplicações");
-	                        disciplinaModel.addElement("Inglês V ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Gestão de Projetos ");
-	                        disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
-	                        disciplinaModel.addElement("Tópicos Especiais em Informática ");
-	                        disciplinaModel.addElement("Laboratório de Redes");
-	                        disciplinaModel.addElement("Inteligência Artificial");
-	                        disciplinaModel.addElement("Auditoria de Sistemas");
-	                        disciplinaModel.addElement("Gestão de Equipes ");
-	                        disciplinaModel.addElement("Empreendedorismo");
-	                        disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
-	                        disciplinaModel.addElement("Inglês VI");
-	                    }
-	                       
-	                    else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Cálculo I");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Informatica Básica");
-	                        disciplinaModel.addElement("Inglês I");
-	                        disciplinaModel.addElement("Logística");
-	                        disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar I");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Cálculo Diferencial e Integral");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Espanhol I");
-	                        disciplinaModel.addElement("Estatística Aplicada à Gestão");
-	                        disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
-	                        disciplinaModel.addElement("Inglês II");
-	                    	disciplinaModel.addElement("Matemática Financeira");
-	                        disciplinaModel.addElement("Modalidade e Intermodalidade");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar II");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Economia e Finanças empresariais");
-	                        disciplinaModel.addElement("Espanhol II");
-	                        disciplinaModel.addElement("Gestão de Equipes");
-	                        disciplinaModel.addElement("Gestão de Produção e Operações");
-	                        disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
-	                        disciplinaModel.addElement("Inglês III");
-	                        disciplinaModel.addElement("Pesquisa Operacional");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar III");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Custos e tarifas Logísticos");
-	                        disciplinaModel.addElement("Eletiva I");
-	                        disciplinaModel.addElement("Gestão de estoques");
-	                        disciplinaModel.addElement("Inglês IV");
-	                        disciplinaModel.addElement("Fundamentos de Marketing");
-	                        disciplinaModel.addElement("Métodos Quantitativos de Gestão");
-	                        disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar IV");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Embalagens e Unitização");
-	                        disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
-	                        disciplinaModel.addElement("Inglês V");
-	                        disciplinaModel.addElement("Inovação e Empreendedorismo");
-	                        disciplinaModel.addElement("Movimentação e Armazenagem");
-	                        disciplinaModel.addElement("Projeto Aplicado à Logística");
-	                        disciplinaModel.addElement("Simulação em Logística");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar V");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Gestão de Projetos Logísticos");
-	                        disciplinaModel.addElement("Eletiva II");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar VI");
-	                        disciplinaModel.addElement("Comércio Exterior e Logística");
-	                        disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
-	                        disciplinaModel.addElement("Tecnologia de Transportes");
-	                        disciplinaModel.addElement("Transportes de Cargas Especiais");
-	                        disciplinaModel.addElement("Inglês VI");
-	                        
-	                    } 
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Comércio Exterior");
-	                        disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Matemática aplicada");
-	                        disciplinaModel.addElement("Direito público e privado");
-	                        disciplinaModel.addElement("Economia");
-	                        disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
-	                        disciplinaModel.addElement("Comunicação e expressão I ");
-	                        disciplinaModel.addElement("Inglês I e II ");	                        
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior I");
-	                    	disciplinaModel.addElement("Política comercial externa");
-	                    	disciplinaModel.addElement("Economia Internacional ");
-	                    	disciplinaModel.addElement("Sistemas de informações contábeis");
-	                    	disciplinaModel.addElement("Direito internacional");
-	                    	disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
-	                    	disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
-	                    	disciplinaModel.addElement("Comunicação e expressão II ");
-	                    	disciplinaModel.addElement("Inglês III e IV");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior II");
-	                    	disciplinaModel.addElement("Mercado e Finanças Internacionais");
-	                    	disciplinaModel.addElement("Gestão Financeira");
-	                    	disciplinaModel.addElement("Gestão de Custos e Tributos");
-	                    	disciplinaModel.addElement("Logística Aplicada");
-	                    	disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
-	                    	disciplinaModel.addElement("Espanhol I");
-	                    	disciplinaModel.addElement("Inglês V e VI");	                    	
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior III");
-	                    	disciplinaModel.addElement("Marketing Internacional");
-	                    	disciplinaModel.addElement("Inovação e Empreendedorismo");
-	                    	disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
-	                    	disciplinaModel.addElement("Logística Internacional");
-	                    	disciplinaModel.addElement("Espanhol II");
-	                    	disciplinaModel.addElement("Inglês VII e VIII");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior IV");
-	                    	disciplinaModel.addElement("Teoria e prática cambial ");
-	                    	disciplinaModel.addElement("Legislação Aduaneira ");
-	                    	disciplinaModel.addElement("Elementos de Cultura dos Povos ");
-	                    	disciplinaModel.addElement("Espanhol III");
-	                    	disciplinaModel.addElement("Inglês IX e X");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplinaoi");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior V");
-	                    	disciplinaModel.addElement("Negócios Internacionais");
-	                    	disciplinaModel.addElement("Gestão Estratégica Internacional");
-	                    	disciplinaModel.addElement("Sistemática do Comércio Exterior");
-	                    	disciplinaModel.addElement("Espanhol IV ");
-	                    	disciplinaModel.addElement("Inglês XI ");
-	                    }
-	                    
+						if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Programação em Microinformática");
+							disciplinaModel.addElement("Algoritmos e Lógica de Programação");
+							disciplinaModel.addElement("Laboratório de Hardware ");
+							disciplinaModel.addElement("Arquitetura e Organização de Computadores");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Matemática Discreta");
+							disciplinaModel.addElement("Inglês I ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software I ");
+							disciplinaModel.addElement("Linguagem de Programação");
+							disciplinaModel.addElement("Sistemas de Informação");
+							disciplinaModel.addElement("Contabilidade");
+							disciplinaModel.addElement("Cálculo");
+							disciplinaModel.addElement("Comunicação e Expressão");
+							disciplinaModel.addElement("Inglês II ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software II");
+							disciplinaModel.addElement("Interação Humano Computador");
+							disciplinaModel.addElement("Estruturas de Dados ");
+							disciplinaModel.addElement("Sistemas Operacionais I");
+							disciplinaModel.addElement("Economia e Finanças");
+							disciplinaModel.addElement("Estatística aplicada");
+							disciplinaModel.addElement("Sociedade e Tecnologia");
+							disciplinaModel.addElement("Inglês III ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software III");
+							disciplinaModel.addElement("Programação Orientada a Objetos");
+							disciplinaModel.addElement("Banco de dados ");
+							disciplinaModel.addElement("Sistemas Operacionais II ");
+							disciplinaModel.addElement("Programação para Dispositivos Móveis");
+							disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
+							disciplinaModel.addElement("Inglês IV");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Laboratório de Engenharia de Software");
+							disciplinaModel.addElement("Projeto de Redes de Computadores");
+							disciplinaModel.addElement("Redes de computadores");
+							disciplinaModel.addElement("Laboratório de Banco de Dados");
+							disciplinaModel.addElement("Sistemas distribuídos");
+							disciplinaModel.addElement("Segurança da Informação");
+							disciplinaModel.addElement("Programação Linear e Aplicações");
+							disciplinaModel.addElement("Inglês V ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Gestão de Projetos ");
+							disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
+							disciplinaModel.addElement("Tópicos Especiais em Informática ");
+							disciplinaModel.addElement("Laboratório de Redes");
+							disciplinaModel.addElement("Inteligência Artificial");
+							disciplinaModel.addElement("Auditoria de Sistemas");
+							disciplinaModel.addElement("Gestão de Equipes ");
+							disciplinaModel.addElement("Empreendedorismo");
+							disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
+							disciplinaModel.addElement("Inglês VI");
+						}
 
-		            }
-		        }
-		    }
+						else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Cálculo I");
+							disciplinaModel.addElement("Comunicação e Expressão");
+							disciplinaModel.addElement("Informatica Básica");
+							disciplinaModel.addElement("Inglês I");
+							disciplinaModel.addElement("Logística");
+							disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+							disciplinaModel.addElement("Projeto Interdisciplinar I");
+						} else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Cálculo Diferencial e Integral");
+							disciplinaModel.addElement("Contabilidade");
+							disciplinaModel.addElement("Espanhol I");
+							disciplinaModel.addElement("Estatística Aplicada à Gestão");
+							disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
+							disciplinaModel.addElement("Inglês II");
+							disciplinaModel.addElement("Matemática Financeira");
+							disciplinaModel.addElement("Modalidade e Intermodalidade");
+							disciplinaModel.addElement("Projeto Interdisciplinar II");
+						} else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Economia e Finanças empresariais");
+							disciplinaModel.addElement("Espanhol II");
+							disciplinaModel.addElement("Gestão de Equipes");
+							disciplinaModel.addElement("Gestão de Produção e Operações");
+							disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
+							disciplinaModel.addElement("Inglês III");
+							disciplinaModel.addElement("Pesquisa Operacional");
+							disciplinaModel.addElement("Projeto Interdisciplinar III");
+						} else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Custos e tarifas Logísticos");
+							disciplinaModel.addElement("Eletiva I");
+							disciplinaModel.addElement("Gestão de estoques");
+							disciplinaModel.addElement("Inglês IV");
+							disciplinaModel.addElement("Fundamentos de Marketing");
+							disciplinaModel.addElement("Métodos Quantitativos de Gestão");
+							disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
+							disciplinaModel.addElement("Projeto Interdisciplinar IV");
+						} else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Embalagens e Unitização");
+							disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
+							disciplinaModel.addElement("Inglês V");
+							disciplinaModel.addElement("Inovação e Empreendedorismo");
+							disciplinaModel.addElement("Movimentação e Armazenagem");
+							disciplinaModel.addElement("Projeto Aplicado à Logística");
+							disciplinaModel.addElement("Simulação em Logística");
+							disciplinaModel.addElement("Projeto Interdisciplinar V");
+						} else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Gestão de Projetos Logísticos");
+							disciplinaModel.addElement("Eletiva II");
+							disciplinaModel.addElement("Projeto Interdisciplinar VI");
+							disciplinaModel.addElement("Comércio Exterior e Logística");
+							disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
+							disciplinaModel.addElement("Tecnologia de Transportes");
+							disciplinaModel.addElement("Transportes de Cargas Especiais");
+							disciplinaModel.addElement("Inglês VI");
+
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Comércio Exterior");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Matemática aplicada");
+							disciplinaModel.addElement("Direito público e privado");
+							disciplinaModel.addElement("Economia");
+							disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
+							disciplinaModel.addElement("Comunicação e expressão I ");
+							disciplinaModel.addElement("Inglês I e II ");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior I");
+							disciplinaModel.addElement("Política comercial externa");
+							disciplinaModel.addElement("Economia Internacional ");
+							disciplinaModel.addElement("Sistemas de informações contábeis");
+							disciplinaModel.addElement("Direito internacional");
+							disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
+							disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
+							disciplinaModel.addElement("Comunicação e expressão II ");
+							disciplinaModel.addElement("Inglês III e IV");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior II");
+							disciplinaModel.addElement("Mercado e Finanças Internacionais");
+							disciplinaModel.addElement("Gestão Financeira");
+							disciplinaModel.addElement("Gestão de Custos e Tributos");
+							disciplinaModel.addElement("Logística Aplicada");
+							disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
+							disciplinaModel.addElement("Espanhol I");
+							disciplinaModel.addElement("Inglês V e VI");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior III");
+							disciplinaModel.addElement("Marketing Internacional");
+							disciplinaModel.addElement("Inovação e Empreendedorismo");
+							disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+							disciplinaModel.addElement("Logística Internacional");
+							disciplinaModel.addElement("Espanhol II");
+							disciplinaModel.addElement("Inglês VII e VIII");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior IV");
+							disciplinaModel.addElement("Teoria e prática cambial ");
+							disciplinaModel.addElement("Legislação Aduaneira ");
+							disciplinaModel.addElement("Elementos de Cultura dos Povos ");
+							disciplinaModel.addElement("Espanhol III");
+							disciplinaModel.addElement("Inglês IX e X");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplinaoi");
+							disciplinaModel.addElement("Projeto em Comércio Exterior V");
+							disciplinaModel.addElement("Negócios Internacionais");
+							disciplinaModel.addElement("Gestão Estratégica Internacional");
+							disciplinaModel.addElement("Sistemática do Comércio Exterior");
+							disciplinaModel.addElement("Espanhol IV ");
+							disciplinaModel.addElement("Inglês XI ");
+						}
+
+					}
+				}
+			}
 		});
 
 		cmbSemestre.addItemListener(new ItemListener() {
@@ -863,202 +882,192 @@ public class Telas extends JFrame {
 
 					if (!"Selecione um curso".equals(cursoSelecionado)) {
 
-	                    if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Programação em Microinformática");
-	                        disciplinaModel.addElement("Algoritmos e Lógica de Programação");
-	                        disciplinaModel.addElement("Laboratório de Hardware ");
-	                        disciplinaModel.addElement("Arquitetura e Organização de Computadores");
-	                        disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Matemática Discreta");
-	                        disciplinaModel.addElement("Inglês I ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software I ");
-	                        disciplinaModel.addElement("Linguagem de Programação");
-	                        disciplinaModel.addElement("Sistemas de Informação");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Cálculo");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Inglês II ");
-	                        }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software II");
-	                        disciplinaModel.addElement("Interação Humano Computador");
-	                        disciplinaModel.addElement("Estruturas de Dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais I");
-	                        disciplinaModel.addElement("Economia e Finanças");
-	                        disciplinaModel.addElement("Estatística aplicada");
-	                        disciplinaModel.addElement("Sociedade e Tecnologia");
-	                        disciplinaModel.addElement("Inglês III ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Engenharia de Software III");
-	                        disciplinaModel.addElement("Programação Orientada a Objetos");
-	                        disciplinaModel.addElement("Banco de dados ");
-	                        disciplinaModel.addElement("Sistemas Operacionais II ");
-	                        disciplinaModel.addElement("Programação para Dispositivos Móveis");
-	                        disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
-	                        disciplinaModel.addElement("Inglês IV");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Laboratório de Engenharia de Software");
-	                        disciplinaModel.addElement("Projeto de Redes de Computadores");
-	                        disciplinaModel.addElement("Redes de computadores");
-	                        disciplinaModel.addElement("Laboratório de Banco de Dados");
-	                        disciplinaModel.addElement("Sistemas distribuídos");
-	                        disciplinaModel.addElement("Segurança da Informação");
-	                        disciplinaModel.addElement("Programação Linear e Aplicações");
-	                        disciplinaModel.addElement("Inglês V ");
-	                    }
-	                    else if("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)){
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Gestão de Projetos ");
-	                        disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
-	                        disciplinaModel.addElement("Tópicos Especiais em Informática ");
-	                        disciplinaModel.addElement("Laboratório de Redes");
-	                        disciplinaModel.addElement("Inteligência Artificial");
-	                        disciplinaModel.addElement("Auditoria de Sistemas");
-	                        disciplinaModel.addElement("Gestão de Equipes ");
-	                        disciplinaModel.addElement("Empreendedorismo");
-	                        disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
-	                        disciplinaModel.addElement("Inglês VI");
-	                    }
-	                       
-	                    else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Cálculo I");
-	                        disciplinaModel.addElement("Comunicação e Expressão");
-	                        disciplinaModel.addElement("Informatica Básica");
-	                        disciplinaModel.addElement("Inglês I");
-	                        disciplinaModel.addElement("Logística");
-	                        disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar I");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Cálculo Diferencial e Integral");
-	                        disciplinaModel.addElement("Contabilidade");
-	                        disciplinaModel.addElement("Espanhol I");
-	                        disciplinaModel.addElement("Estatística Aplicada à Gestão");
-	                        disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
-	                        disciplinaModel.addElement("Inglês II");
-	                    	disciplinaModel.addElement("Matemática Financeira");
-	                        disciplinaModel.addElement("Modalidade e Intermodalidade");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar II");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Economia e Finanças empresariais");
-	                        disciplinaModel.addElement("Espanhol II");
-	                        disciplinaModel.addElement("Gestão de Equipes");
-	                        disciplinaModel.addElement("Gestão de Produção e Operações");
-	                        disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
-	                        disciplinaModel.addElement("Inglês III");
-	                        disciplinaModel.addElement("Pesquisa Operacional");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar III");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Custos e tarifas Logísticos");
-	                        disciplinaModel.addElement("Eletiva I");
-	                        disciplinaModel.addElement("Gestão de estoques");
-	                        disciplinaModel.addElement("Inglês IV");
-	                        disciplinaModel.addElement("Fundamentos de Marketing");
-	                        disciplinaModel.addElement("Métodos Quantitativos de Gestão");
-	                        disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar IV");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Embalagens e Unitização");
-	                        disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
-	                        disciplinaModel.addElement("Inglês V");
-	                        disciplinaModel.addElement("Inovação e Empreendedorismo");
-	                        disciplinaModel.addElement("Movimentação e Armazenagem");
-	                        disciplinaModel.addElement("Projeto Aplicado à Logística");
-	                        disciplinaModel.addElement("Simulação em Logística");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar V");
-	                    }
-	                    else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Gestão de Projetos Logísticos");
-	                        disciplinaModel.addElement("Eletiva II");
-	                        disciplinaModel.addElement("Projeto Interdisciplinar VI");
-	                        disciplinaModel.addElement("Comércio Exterior e Logística");
-	                        disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
-	                        disciplinaModel.addElement("Tecnologia de Transportes");
-	                        disciplinaModel.addElement("Transportes de Cargas Especiais");
-	                        disciplinaModel.addElement("Inglês VI");
-	                        
-	                    } 
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                        disciplinaModel.addElement("Comércio Exterior");
-	                        disciplinaModel.addElement("Administração Geral");
-	                        disciplinaModel.addElement("Matemática aplicada");
-	                        disciplinaModel.addElement("Direito público e privado");
-	                        disciplinaModel.addElement("Economia");
-	                        disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
-	                        disciplinaModel.addElement("Comunicação e expressão I ");
-	                        disciplinaModel.addElement("Inglês I e II ");	                        
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior I");
-	                    	disciplinaModel.addElement("Política comercial externa");
-	                    	disciplinaModel.addElement("Economia Internacional ");
-	                    	disciplinaModel.addElement("Sistemas de informações contábeis");
-	                    	disciplinaModel.addElement("Direito internacional");
-	                    	disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
-	                    	disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
-	                    	disciplinaModel.addElement("Comunicação e expressão II ");
-	                    	disciplinaModel.addElement("Inglês III e IV");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior II");
-	                    	disciplinaModel.addElement("Mercado e Finanças Internacionais");
-	                    	disciplinaModel.addElement("Gestão Financeira");
-	                    	disciplinaModel.addElement("Gestão de Custos e Tributos");
-	                    	disciplinaModel.addElement("Logística Aplicada");
-	                    	disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
-	                    	disciplinaModel.addElement("Espanhol I");
-	                    	disciplinaModel.addElement("Inglês V e VI");	                    	
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior III");
-	                    	disciplinaModel.addElement("Marketing Internacional");
-	                    	disciplinaModel.addElement("Inovação e Empreendedorismo");
-	                    	disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
-	                    	disciplinaModel.addElement("Logística Internacional");
-	                    	disciplinaModel.addElement("Espanhol II");
-	                    	disciplinaModel.addElement("Inglês VII e VIII");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior IV");
-	                    	disciplinaModel.addElement("Teoria e prática cambial ");
-	                    	disciplinaModel.addElement("Legislação Aduaneira ");
-	                    	disciplinaModel.addElement("Elementos de Cultura dos Povos ");
-	                    	disciplinaModel.addElement("Espanhol III");
-	                    	disciplinaModel.addElement("Inglês IX e X");
-	                    }
-	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplinaoi");
-	                    	disciplinaModel.addElement("Projeto em Comércio Exterior V");
-	                    	disciplinaModel.addElement("Negócios Internacionais");
-	                    	disciplinaModel.addElement("Gestão Estratégica Internacional");
-	                    	disciplinaModel.addElement("Sistemática do Comércio Exterior");
-	                    	disciplinaModel.addElement("Espanhol IV ");
-	                    	disciplinaModel.addElement("Inglês XI ");
-	                    }
+						if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Programação em Microinformática");
+							disciplinaModel.addElement("Algoritmos e Lógica de Programação");
+							disciplinaModel.addElement("Laboratório de Hardware ");
+							disciplinaModel.addElement("Arquitetura e Organização de Computadores");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Matemática Discreta");
+							disciplinaModel.addElement("Inglês I ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software I ");
+							disciplinaModel.addElement("Linguagem de Programação");
+							disciplinaModel.addElement("Sistemas de Informação");
+							disciplinaModel.addElement("Contabilidade");
+							disciplinaModel.addElement("Cálculo");
+							disciplinaModel.addElement("Comunicação e Expressão");
+							disciplinaModel.addElement("Inglês II ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software II");
+							disciplinaModel.addElement("Interação Humano Computador");
+							disciplinaModel.addElement("Estruturas de Dados ");
+							disciplinaModel.addElement("Sistemas Operacionais I");
+							disciplinaModel.addElement("Economia e Finanças");
+							disciplinaModel.addElement("Estatística aplicada");
+							disciplinaModel.addElement("Sociedade e Tecnologia");
+							disciplinaModel.addElement("Inglês III ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Engenharia de Software III");
+							disciplinaModel.addElement("Programação Orientada a Objetos");
+							disciplinaModel.addElement("Banco de dados ");
+							disciplinaModel.addElement("Sistemas Operacionais II ");
+							disciplinaModel.addElement("Programação para Dispositivos Móveis");
+							disciplinaModel.addElement("Metodologia da Pesquisa Científico-tecnológica");
+							disciplinaModel.addElement("Inglês IV");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Laboratório de Engenharia de Software");
+							disciplinaModel.addElement("Projeto de Redes de Computadores");
+							disciplinaModel.addElement("Redes de computadores");
+							disciplinaModel.addElement("Laboratório de Banco de Dados");
+							disciplinaModel.addElement("Sistemas distribuídos");
+							disciplinaModel.addElement("Segurança da Informação");
+							disciplinaModel.addElement("Programação Linear e Aplicações");
+							disciplinaModel.addElement("Inglês V ");
+						} else if ("Análise e Desenvolvimento de Sistemas".equals(cursoSelecionado)
+								&& "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Gestão de Projetos ");
+							disciplinaModel.addElement("Gestão e Governança de Tecnologia da Informação");
+							disciplinaModel.addElement("Tópicos Especiais em Informática ");
+							disciplinaModel.addElement("Laboratório de Redes");
+							disciplinaModel.addElement("Inteligência Artificial");
+							disciplinaModel.addElement("Auditoria de Sistemas");
+							disciplinaModel.addElement("Gestão de Equipes ");
+							disciplinaModel.addElement("Empreendedorismo");
+							disciplinaModel.addElement("Ética e Responsabilidade Profissional ");
+							disciplinaModel.addElement("Inglês VI");
+						}
+
+						else if ("Logística".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Cálculo I");
+							disciplinaModel.addElement("Comunicação e Expressão");
+							disciplinaModel.addElement("Informatica Básica");
+							disciplinaModel.addElement("Inglês I");
+							disciplinaModel.addElement("Logística");
+							disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+							disciplinaModel.addElement("Projeto Interdisciplinar I");
+						} else if ("Logística".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Cálculo Diferencial e Integral");
+							disciplinaModel.addElement("Contabilidade");
+							disciplinaModel.addElement("Espanhol I");
+							disciplinaModel.addElement("Estatística Aplicada à Gestão");
+							disciplinaModel.addElement("Fundamentos de Gestão da Qualidade");
+							disciplinaModel.addElement("Inglês II");
+							disciplinaModel.addElement("Matemática Financeira");
+							disciplinaModel.addElement("Modalidade e Intermodalidade");
+							disciplinaModel.addElement("Projeto Interdisciplinar II");
+						} else if ("Logística".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Economia e Finanças empresariais");
+							disciplinaModel.addElement("Espanhol II");
+							disciplinaModel.addElement("Gestão de Equipes");
+							disciplinaModel.addElement("Gestão de Produção e Operações");
+							disciplinaModel.addElement("Gestão Tributária nas Operações Logísticas");
+							disciplinaModel.addElement("Inglês III");
+							disciplinaModel.addElement("Pesquisa Operacional");
+							disciplinaModel.addElement("Projeto Interdisciplinar III");
+						} else if ("Logística".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Custos e tarifas Logísticos");
+							disciplinaModel.addElement("Eletiva I");
+							disciplinaModel.addElement("Gestão de estoques");
+							disciplinaModel.addElement("Inglês IV");
+							disciplinaModel.addElement("Fundamentos de Marketing");
+							disciplinaModel.addElement("Métodos Quantitativos de Gestão");
+							disciplinaModel.addElement("Sistemas de Movimentação e Transporte");
+							disciplinaModel.addElement("Projeto Interdisciplinar IV");
+						} else if ("Logística".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Embalagens e Unitização");
+							disciplinaModel.addElement("Gestão da Cadeia de Suprimentos");
+							disciplinaModel.addElement("Inglês V");
+							disciplinaModel.addElement("Inovação e Empreendedorismo");
+							disciplinaModel.addElement("Movimentação e Armazenagem");
+							disciplinaModel.addElement("Projeto Aplicado à Logística");
+							disciplinaModel.addElement("Simulação em Logística");
+							disciplinaModel.addElement("Projeto Interdisciplinar V");
+						} else if ("Logística".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Gestão de Projetos Logísticos");
+							disciplinaModel.addElement("Eletiva II");
+							disciplinaModel.addElement("Projeto Interdisciplinar VI");
+							disciplinaModel.addElement("Comércio Exterior e Logística");
+							disciplinaModel.addElement("Gestão de Transporte de Carga e Roteirização");
+							disciplinaModel.addElement("Tecnologia de Transportes");
+							disciplinaModel.addElement("Transportes de Cargas Especiais");
+							disciplinaModel.addElement("Inglês VI");
+
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Comércio Exterior");
+							disciplinaModel.addElement("Administração Geral");
+							disciplinaModel.addElement("Matemática aplicada");
+							disciplinaModel.addElement("Direito público e privado");
+							disciplinaModel.addElement("Economia");
+							disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
+							disciplinaModel.addElement("Comunicação e expressão I ");
+							disciplinaModel.addElement("Inglês I e II ");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior I");
+							disciplinaModel.addElement("Política comercial externa");
+							disciplinaModel.addElement("Economia Internacional ");
+							disciplinaModel.addElement("Sistemas de informações contábeis");
+							disciplinaModel.addElement("Direito internacional");
+							disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
+							disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
+							disciplinaModel.addElement("Comunicação e expressão II ");
+							disciplinaModel.addElement("Inglês III e IV");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior II");
+							disciplinaModel.addElement("Mercado e Finanças Internacionais");
+							disciplinaModel.addElement("Gestão Financeira");
+							disciplinaModel.addElement("Gestão de Custos e Tributos");
+							disciplinaModel.addElement("Logística Aplicada");
+							disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
+							disciplinaModel.addElement("Espanhol I");
+							disciplinaModel.addElement("Inglês V e VI");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior III");
+							disciplinaModel.addElement("Marketing Internacional");
+							disciplinaModel.addElement("Inovação e Empreendedorismo");
+							disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+							disciplinaModel.addElement("Logística Internacional");
+							disciplinaModel.addElement("Espanhol II");
+							disciplinaModel.addElement("Inglês VII e VIII");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplina");
+							disciplinaModel.addElement("Projeto em Comércio Exterior IV");
+							disciplinaModel.addElement("Teoria e prática cambial ");
+							disciplinaModel.addElement("Legislação Aduaneira ");
+							disciplinaModel.addElement("Elementos de Cultura dos Povos ");
+							disciplinaModel.addElement("Espanhol III");
+							disciplinaModel.addElement("Inglês IX e X");
+						} else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
+							disciplinaModel.addElement("Selecione uma disciplinaoi");
+							disciplinaModel.addElement("Projeto em Comércio Exterior V");
+							disciplinaModel.addElement("Negócios Internacionais");
+							disciplinaModel.addElement("Gestão Estratégica Internacional");
+							disciplinaModel.addElement("Sistemática do Comércio Exterior");
+							disciplinaModel.addElement("Espanhol IV ");
+							disciplinaModel.addElement("Inglês XI ");
+						}
 
 					}
 				}
@@ -1480,8 +1489,7 @@ public class Telas extends JFrame {
 			Logger.getLogger("Erro ao carregar imagem").log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	//acessar a tela de ajuda
-	
-	
+
+	// acessar a tela de ajuda
+
 }
