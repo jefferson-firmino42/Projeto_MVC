@@ -667,22 +667,64 @@ public class Telas extends JFrame {
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
 	                        disciplinaModel.addElement("Comércio Exterior");
-	                        disciplinaModel.addElement("");
+	                        disciplinaModel.addElement("Administração Geral");
+	                        disciplinaModel.addElement("Matemática aplicada");
+	                        disciplinaModel.addElement("Direito público e privado");
+	                        disciplinaModel.addElement("Economia");
+	                        disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
+	                        disciplinaModel.addElement("Comunicação e expressão I ");
+	                        disciplinaModel.addElement("Inglês I e II ");	                        
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior I");
+	                    	disciplinaModel.addElement("Política comercial externa");
+	                    	disciplinaModel.addElement("Economia Internacional ");
+	                    	disciplinaModel.addElement("Sistemas de informações contábeis");
+	                    	disciplinaModel.addElement("Direito internacional");
+	                    	disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
+	                    	disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
+	                    	disciplinaModel.addElement("Comunicação e expressão II ");
+	                    	disciplinaModel.addElement("Inglês III e IV");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior II");
+	                    	disciplinaModel.addElement("Mercado e Finanças Internacionais");
+	                    	disciplinaModel.addElement("Gestão Financeira");
+	                    	disciplinaModel.addElement("Gestão de Custos e Tributos");
+	                    	disciplinaModel.addElement("Logística Aplicada");
+	                    	disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
+	                    	disciplinaModel.addElement("Espanhol I");
+	                    	disciplinaModel.addElement("Inglês V e VI");	                    	
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior III");
+	                    	disciplinaModel.addElement("Marketing Internacional");
+	                    	disciplinaModel.addElement("Inovação e Empreendedorismo");
+	                    	disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+	                    	disciplinaModel.addElement("Logística Internacional");
+	                    	disciplinaModel.addElement("Espanhol II");
+	                    	disciplinaModel.addElement("Inglês VII e VIII");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior IV");
+	                    	disciplinaModel.addElement("Teoria e prática cambial ");
+	                    	disciplinaModel.addElement("Legislação Aduaneira ");
+	                    	disciplinaModel.addElement("Elementos de Cultura dos Povos ");
+	                    	disciplinaModel.addElement("Espanhol III");
+	                    	disciplinaModel.addElement("Inglês IX e X");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Selecione uma disciplinaoi");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior V");
+	                    	disciplinaModel.addElement("Negócios Internacionais");
+	                    	disciplinaModel.addElement("Gestão Estratégica Internacional");
+	                    	disciplinaModel.addElement("Sistemática do Comércio Exterior");
+	                    	disciplinaModel.addElement("Espanhol IV ");
+	                    	disciplinaModel.addElement("Inglês XI ");
 	                    }
 	                    
 
@@ -840,22 +882,64 @@ public class Telas extends JFrame {
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "1º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
 	                        disciplinaModel.addElement("Comércio Exterior");
-	                        disciplinaModel.addElement("");
+	                        disciplinaModel.addElement("Administração Geral");
+	                        disciplinaModel.addElement("Matemática aplicada");
+	                        disciplinaModel.addElement("Direito público e privado");
+	                        disciplinaModel.addElement("Economia");
+	                        disciplinaModel.addElement("Informática Aplicada ao Comércio Exterior ");
+	                        disciplinaModel.addElement("Comunicação e expressão I ");
+	                        disciplinaModel.addElement("Inglês I e II ");	                        
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "2º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior I");
+	                    	disciplinaModel.addElement("Política comercial externa");
+	                    	disciplinaModel.addElement("Economia Internacional ");
+	                    	disciplinaModel.addElement("Sistemas de informações contábeis");
+	                    	disciplinaModel.addElement("Direito internacional");
+	                    	disciplinaModel.addElement("Estatística aplicada a Comércio Exterior");
+	                    	disciplinaModel.addElement("Gestão de Pessoas no Comércio Exterior");
+	                    	disciplinaModel.addElement("Comunicação e expressão II ");
+	                    	disciplinaModel.addElement("Inglês III e IV");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "3º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior II");
+	                    	disciplinaModel.addElement("Mercado e Finanças Internacionais");
+	                    	disciplinaModel.addElement("Gestão Financeira");
+	                    	disciplinaModel.addElement("Gestão de Custos e Tributos");
+	                    	disciplinaModel.addElement("Logística Aplicada");
+	                    	disciplinaModel.addElement("Modais de Transporte e Seguro de Carga");
+	                    	disciplinaModel.addElement("Espanhol I");
+	                    	disciplinaModel.addElement("Inglês V e VI");	                    	
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "4º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior III");
+	                    	disciplinaModel.addElement("Marketing Internacional");
+	                    	disciplinaModel.addElement("Inovação e Empreendedorismo");
+	                    	disciplinaModel.addElement("Métodos para a Produção do Conhecimento");
+	                    	disciplinaModel.addElement("Logística Internacional");
+	                    	disciplinaModel.addElement("Espanhol II");
+	                    	disciplinaModel.addElement("Inglês VII e VIII");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "5º".equals(semestreSelecionado)) {
 	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior IV");
+	                    	disciplinaModel.addElement("Teoria e prática cambial ");
+	                    	disciplinaModel.addElement("Legislação Aduaneira ");
+	                    	disciplinaModel.addElement("Elementos de Cultura dos Povos ");
+	                    	disciplinaModel.addElement("Espanhol III");
+	                    	disciplinaModel.addElement("Inglês IX e X");
 	                    }
 	                    else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-	                    	disciplinaModel.addElement("Selecione uma disciplina");
+	                    	disciplinaModel.addElement("Selecione uma disciplinaoi");
+	                    	disciplinaModel.addElement("Projeto em Comércio Exterior V");
+	                    	disciplinaModel.addElement("Negócios Internacionais");
+	                    	disciplinaModel.addElement("Gestão Estratégica Internacional");
+	                    	disciplinaModel.addElement("Sistemática do Comércio Exterior");
+	                    	disciplinaModel.addElement("Espanhol IV ");
+	                    	disciplinaModel.addElement("Inglês XI ");
 	                    }
 
 		            }
