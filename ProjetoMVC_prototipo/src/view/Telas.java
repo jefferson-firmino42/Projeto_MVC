@@ -123,7 +123,7 @@ public class Telas extends JFrame {
 	private JComboBox<String> cmbSemestre;
 	private JComboBox<String> cmbCampus;
 	private JComboBox<String> cmbDisciplina;
-	private JTextField txtNota;
+	private JTextField txtNota_1;
 	private JLabel lblrgmcurso;
 	private JTextField txtRGMCurso;
 	private JLabel lblSair;
@@ -138,6 +138,7 @@ public class Telas extends JFrame {
 	private JLabel lblSalvar_1;
 	private JMenuItem mntmLimparTela;
 	private JTextField txtRgmBoletim;
+	private JTextField txtNota_2;
 
 	/**
 	 * Launch the application.
@@ -660,9 +661,9 @@ public class Telas extends JFrame {
 		lblSemetre_1.setBounds(10, 139, 106, 24);
 		panel_2.add(lblSemetre_1);
 
-		JLabel lblNota_1 = new JLabel("Nota");
+		JLabel lblNota_1 = new JLabel("Nota 1");
 		lblNota_1.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblNota_1.setBounds(240, 194, 70, 24);
+		lblNota_1.setBounds(250, 194, 70, 24);
 		panel_2.add(lblNota_1);
 
 		cmbDisciplina = new JComboBox<>();
@@ -1087,33 +1088,33 @@ public class Telas extends JFrame {
 			}
 		});
 
-		JComboBox cmbPeriodo = new JComboBox();
-		cmbPeriodo.setModel(new DefaultComboBoxModel(new String[] {"\t-", "2020 - 1", "2020 - 2", "2021 - 1", "2021 - 2", "2022 - 1", "2022 - 2", "2023 - 1", "2023 - 2"}));
-		cmbPeriodo.setFont(new Font("Poppins", Font.PLAIN, 15));
-		cmbPeriodo.setBounds(126, 194, 90, 31);
-		panel_2.add(cmbPeriodo);
+		JComboBox cmbEtapa = new JComboBox();
+		cmbEtapa.setModel(new DefaultComboBoxModel(new String[] {"\t-", "2020 - 1", "2020 - 2", "2021 - 1", "2021 - 2", "2022 - 1", "2022 - 2", "2023 - 1", "2023 - 2"}));
+		cmbEtapa.setFont(new Font("Poppins", Font.PLAIN, 15));
+		cmbEtapa.setBounds(126, 194, 90, 31);
+		panel_2.add(cmbEtapa);
 		
 		JLabel lblFaltas = new JLabel("Faltas");
 		lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblFaltas.setBounds(394, 194, 70, 24);
+		lblFaltas.setBounds(550, 194, 70, 24);
 		panel_2.add(lblFaltas);
 
 		txtFaltas = new JTextField();
 		txtFaltas.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtFaltas.setBounds(470, 194, 60, 31);
+		txtFaltas.setBounds(630, 194, 60, 31);
 		panel_2.add(txtFaltas);
 		txtFaltas.setColumns(10);
 
-		JLabel lblPeriodo = new JLabel("Período");
-		lblPeriodo.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblPeriodo.setBounds(10, 194, 100, 24);
-		panel_2.add(lblPeriodo);
+		JLabel lblEtapa = new JLabel("Período");
+		lblEtapa.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblEtapa.setBounds(10, 194, 100, 24);
+		panel_2.add(lblEtapa);
 
-		txtNota = new JTextField();
-		txtNota.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtNota.setColumns(10);
-		txtNota.setBounds(309, 194, 60, 31);
-		panel_2.add(txtNota);
+		txtNota_1 = new JTextField();
+		txtNota_1.setFont(new Font("Poppins", Font.PLAIN, 15));
+		txtNota_1.setColumns(10);
+		txtNota_1.setBounds(319, 194, 60, 31);
+		panel_2.add(txtNota_1);
 
 		JButton btnSair_1 = new JButton("");
 		btnSair_1.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
@@ -1169,6 +1170,17 @@ public class Telas extends JFrame {
 		lblSalvar_1.setFont(new Font("Poppins", Font.BOLD, 15));
 		lblSalvar_1.setBounds(652, 323, 70, 44);
 		panel_2.add(lblSalvar_1);
+		
+		JLabel lblNota_2 = new JLabel("Nota 2");
+		lblNota_2.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNota_2.setBounds(400, 194, 70, 24);
+		panel_2.add(lblNota_2);
+		
+		txtNota_2 = new JTextField();
+		txtNota_2.setFont(new Font("Poppins", Font.PLAIN, 15));
+		txtNota_2.setColumns(10);
+		txtNota_2.setBounds(470, 194, 60, 31);
+		panel_2.add(txtNota_2);
 
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
