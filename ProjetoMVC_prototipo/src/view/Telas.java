@@ -72,7 +72,7 @@ public class Telas extends JFrame {
 	private JMenuItem mntmAlterar;
 	private JMenuItem mntmConsultar;
 	private JMenuItem mntmExcluir;
-	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem btnSobre;
 	private JMenuItem mntmNewMenuItem_4;
 	private JMenuItem mntmNewMenuItem_5;
 	private JMenuItem mntmNewMenuItem_6;
@@ -182,8 +182,16 @@ public class Telas extends JFrame {
 		mnNewMenu_1 = new JMenu("Ajuda");
 		menuBar.add(mnNewMenu_1);
 
-		mntmNewMenuItem_3 = new JMenuItem("Sobre");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
+		//acessa a tela sobre
+		btnSobre = new JMenuItem("Sobre");
+		btnSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tela_Ajuda novaTela = new Tela_Ajuda();
+                novaTela.setVisible(true);
+			}
+		});
+		
+		mnNewMenu_1.add(btnSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -1472,4 +1480,8 @@ public class Telas extends JFrame {
 			Logger.getLogger("Erro ao carregar imagem").log(Level.SEVERE, null, ex);
 		}
 	}
+	
+	//acessar a tela de ajuda
+	
+	
 }
