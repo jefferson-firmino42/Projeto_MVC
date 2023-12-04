@@ -641,13 +641,13 @@ public class Telas extends JFrame {
 		panel_2.add(txtRgm_1);
 
 		JLabel lblConsultaNome = new JLabel("nome do usuário");
-		lblConsultaNome.setFont(new Font("Poppins", Font.PLAIN, 18));
+		lblConsultaNome.setFont(new Font("Poppins", Font.BOLD, 18));
 		lblConsultaNome.setBounds(260, 32, 255, 24);
 		panel_2.add(lblConsultaNome);
 
 		JLabel lblConsultaCurso = new JLabel("curso do usuário");
-		lblConsultaCurso.setFont(new Font("Poppins", Font.PLAIN, 18));
-		lblConsultaCurso.setBounds(10, 87, 255, 24);
+		lblConsultaCurso.setFont(new Font("Poppins", Font.BOLD, 18));
+		lblConsultaCurso.setBounds(10, 85, 255, 24);
 		panel_2.add(lblConsultaCurso);
 
 		JLabel lblDisciplina_1 = new JLabel("Disciplina");
@@ -1087,11 +1087,12 @@ public class Telas extends JFrame {
 			}
 		});
 
-		JComboBox cbxOpcoesNotas = new JComboBox();
-		cbxOpcoesNotas.setFont(new Font("Poppins", Font.PLAIN, 15));
-		cbxOpcoesNotas.setBounds(126, 194, 90, 31);
-		panel_2.add(cbxOpcoesNotas);
-
+		JComboBox cmbPeriodo = new JComboBox();
+		cmbPeriodo.setModel(new DefaultComboBoxModel(new String[] {"\t-", "2020 - 1", "2020 - 2", "2021 - 1", "2021 - 2", "2022 - 1", "2022 - 2", "2023 - 1", "2023 - 2"}));
+		cmbPeriodo.setFont(new Font("Poppins", Font.PLAIN, 15));
+		cmbPeriodo.setBounds(126, 194, 90, 31);
+		panel_2.add(cmbPeriodo);
+		
 		JLabel lblFaltas = new JLabel("Faltas");
 		lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
 		lblFaltas.setBounds(394, 194, 70, 24);
