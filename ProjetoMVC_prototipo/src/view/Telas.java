@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.swing.text.MaskFormatter;
 
 import com.itextpdf.text.BaseColor;
@@ -91,6 +92,8 @@ import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -402,13 +405,28 @@ public class Telas extends JFrame {
 		panel.add(lblFoto);
 
 		JButton btnFoto = new JButton("Selecionar foto");
+		btnFoto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				float[] hsb = Color.RGBtoHSB(4, 54, 74, null);
+		        btnFoto.setBackground(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+		        btnFoto.setForeground(Color.WHITE); 
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnFoto.setBackground(Color.WHITE);
+		        btnFoto.setForeground(Color.BLACK);
+			}
+		});
+		
 		btnFoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFoto.setFont(new Font("Poppins", Font.PLAIN, 15));
 		btnFoto.setBorder(new LineBorder(Color.BLACK, 2, true));
 		btnFoto.setPreferredSize(new Dimension(220, 50));
 		btnFoto.setBackground(Color.WHITE);
 		btnFoto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+
+	public void actionPerformed(ActionEvent e) {
 				JFileChooser jfc = new JFileChooser();
 				jfc.setDialogTitle("Selecione um arquivo de imagem");
 				jfc.setFileFilter(
@@ -1426,6 +1444,19 @@ public class Telas extends JFrame {
 		table_1.setModel(tableModel2);
 
 		JButton btnListarAlunos = new JButton("Listar alunos");
+		btnListarAlunos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				float[] hsb = Color.RGBtoHSB(4, 54, 74, null);
+		        btnListarAlunos.setBackground(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+		        btnListarAlunos.setForeground(Color.WHITE); 
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnListarAlunos.setBackground(Color.WHITE);
+		        btnListarAlunos.setForeground(Color.BLACK);
+			}
+		});
 		btnListarAlunos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnListarAlunos.setFont(new Font("Poppins", Font.PLAIN, 15));
 		btnListarAlunos.setBorder(new LineBorder(Color.BLACK, 2, true));
@@ -1435,18 +1466,15 @@ public class Telas extends JFrame {
 		    public void actionPerformed(ActionEvent e) {
 		        try {
 		            CursoDAO cursoDAO = new CursoDAO();
-		            List<CursoModel> cursos = cursoDAO.obterCursos(); // Método fictício para obter todos os cursos
+		            List<CursoModel> cursos = cursoDAO.obterCursos();
 		            DAO dao = new DAO();
 		            DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
-
-		            // Limpa dados antigos do modelo original (tableModel2)
 		            tableModel2.setRowCount(0);
 
 		            for (CursoModel curso : cursos) {
-		                AlunoModel aluno = dao.obterAlunoPorCurso(curso); // Método fictício para obter aluno por curso
+		                AlunoModel aluno = dao.obterAlunoPorCurso(curso); 
 
 		                if (aluno != null) {
-		                    // Adiciona uma nova linha com os dados do curso e do aluno no modelo original
 		                    Object[] rowData = {
 		                        curso.getRgm(),
 		                        aluno.getNome(),
@@ -1472,6 +1500,19 @@ public class Telas extends JFrame {
 		panel_4.add(btnListarAlunos);
 		
 		JButton btnLimparAlunos = new JButton("Limpar");
+		btnLimparAlunos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				float[] hsb = Color.RGBtoHSB(4, 54, 74, null);
+		        btnLimparAlunos.setBackground(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+		        btnLimparAlunos.setForeground(Color.WHITE); 
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnLimparAlunos.setBackground(Color.WHITE);
+		        btnLimparAlunos.setForeground(Color.BLACK);
+			}
+		});
 		btnLimparAlunos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimparAlunos.setFont(new Font("Poppins", Font.PLAIN, 15));
 		btnLimparAlunos.setBorder(new LineBorder(Color.BLACK, 2, true));
