@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -28,6 +29,7 @@ import utils.ConnectionFactory;
 
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -74,6 +76,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class Telas extends JFrame {
@@ -649,7 +652,7 @@ public class Telas extends JFrame {
 		lblRgm_1.setBounds(10, 32, 62, 24);
 		panel_2.add(lblRgm_1);
 
-		txtRgm_1 = new JTextField();
+		txtRgm_1 = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRgm_1.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm_1.setColumns(10);
 		txtRgm_1.setBounds(82, 18, 151, 39);
@@ -1244,10 +1247,29 @@ public class Telas extends JFrame {
 		panel_3.add(txtRgmBoletim);
 		txtRgmBoletim.setColumns(10);
 
-		JLabel lblConsultar_2_1 = new JLabel("Gerar PDF");
+		JLabel lblConsultar_2_1 = new JLabel("Gerar boletim");
 		lblConsultar_2_1.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblConsultar_2_1.setBounds(641, 110, 97, 21);
+		lblConsultar_2_1.setBounds(631, 110, 150, 21);
 		panel_3.add(lblConsultar_2_1);
+
+		tableModel = new DefaultTableModel();
+		tableModel.addColumn("Disciplina");
+		tableModel.addColumn("Semestre");
+		tableModel.addColumn("Média");
+		tableModel.addColumn("Faltas");
+
+		table = new JTable(tableModel);
+		JScrollPane scrollPane = new JScrollPane(table);
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+		}
+
+		scrollPane.setBounds(10, 142, 770, 231);
+		panel_3.add(scrollPane);
 
 		JButton btnConsultarBoletim = new JButton("");
 		btnConsultarBoletim.addActionListener(new ActionListener() {
@@ -1255,18 +1277,24 @@ public class Telas extends JFrame {
 				try {
 					String rgm = txtRgmBoletim.getText().trim();
 					DisciplinaDAO dao = new DisciplinaDAO();
-					DisciplinaModel disciplina = dao.consultarDisciplina(rgm);
+					DAO alunoDao = new DAO();
+					AlunoModel aluno = alunoDao.consultar(rgm);
+					lblNomeBoletim.setText(aluno.getNome());
 
-					if (disciplina != null) {
+					List<DisciplinaModel> disciplinas = dao.consultarDisciplinasDoAluno(rgm);
 
-						String[] dadosAluno = { disciplina.getNomeDisciplina(), disciplina.getSemestre(),
-								String.valueOf(disciplina.getFaltas()), String.valueOf(disciplina.getMediaNotas()) };
-						tableModel.addRow(dadosAluno);
+					if (!disciplinas.isEmpty()) {
+						tableModel.setRowCount(0);
 
+						for (DisciplinaModel disciplina : disciplinas) {
+							String[] dadosDisciplina = { disciplina.getNomeDisciplina(), disciplina.getSemestre(),
+									String.valueOf(disciplina.getMediaNotas()),
+									String.valueOf(disciplina.getFaltas()) };
+							tableModel.addRow(dadosDisciplina);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
+						JOptionPane.showMessageDialog(null, "Aluno não encontrado ou sem disciplinas cadastradas.");
 					}
-
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
@@ -1280,16 +1308,6 @@ public class Telas extends JFrame {
 		lblConsultar_2_1_1.setFont(new Font("Poppins", Font.BOLD, 15));
 		lblConsultar_2_1_1.setBounds(494, 110, 97, 21);
 		panel_3.add(lblConsultar_2_1_1);
-
-		tableModel = new DefaultTableModel();
-		tableModel.addColumn("Disciplina");
-		tableModel.addColumn("Semestre");
-		tableModel.addColumn("Média");
-		tableModel.addColumn("Faltas");
-
-		table = new JTable(tableModel);
-		table.setBounds(23, 150, 742, 231);
-		panel_3.add(table);
 
 		lblNomeBoletim = new JLabel("Nome do aluno");
 		lblNomeBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
@@ -1797,17 +1815,17 @@ public class Telas extends JFrame {
 
 			// Tabela
 			PdfPTable tabela = new PdfPTable(3);
-			
+
 			PdfPCell col1 = new PdfPCell(new Paragraph("Foto"));
 			col1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col1.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
 			tabela.addCell(col1);
-			
+
 			PdfPCell col2 = new PdfPCell(new Paragraph("RGM"));
 			col2.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col2.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
 			tabela.addCell(col2);
-			
+
 			PdfPCell col3 = new PdfPCell(new Paragraph("Nome"));
 			col3.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col3.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
@@ -1823,33 +1841,32 @@ public class Telas extends JFrame {
 
 				while (rs.next()) {
 					PdfPCell imageCell = new PdfPCell();
-			        imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        imageCell.setBackgroundColor(BaseColor.WHITE);
-			        
-			        String caminho = (String) rs.getString(10);
-			        com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(caminho);
-			        imageCell.addElement(image);
-			        imageCell.setBorderWidth(0);
-			        tabela.addCell(imageCell);
+					imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					imageCell.setBackgroundColor(BaseColor.WHITE);
 
-			        PdfPCell rgmCell = new PdfPCell(new Paragraph(rs.getString(1)));
-			        rgmCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        rgmCell.setBackgroundColor(BaseColor.WHITE);
-			        rgmCell.setBorderWidth(0);
-			        tabela.addCell(rgmCell);
+					String caminho = (String) rs.getString(10);
+					com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(caminho);
+					imageCell.addElement(image);
+					imageCell.setBorderWidth(0);
+					tabela.addCell(imageCell);
 
-			        PdfPCell nameCell = new PdfPCell(new Paragraph(rs.getString(2)));
-			        nameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        nameCell.setBackgroundColor(BaseColor.WHITE);
-			        nameCell.setBorderWidth(0);
-			        tabela.addCell(nameCell);
+					PdfPCell rgmCell = new PdfPCell(new Paragraph(rs.getString(1)));
+					rgmCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					rgmCell.setBackgroundColor(BaseColor.WHITE);
+					rgmCell.setBorderWidth(0);
+					tabela.addCell(rgmCell);
+
+					PdfPCell nameCell = new PdfPCell(new Paragraph(rs.getString(2)));
+					nameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					nameCell.setBackgroundColor(BaseColor.WHITE);
+					nameCell.setBorderWidth(0);
+					tabela.addCell(nameCell);
 				}
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			
-			
+
 			documento.add(new Paragraph(" "));
 
 			PdfPTable tabela2 = new PdfPTable(3);
@@ -1857,17 +1874,17 @@ public class Telas extends JFrame {
 			col4.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col4.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
 			tabela2.addCell(col4);
-			
+
 			PdfPCell col5 = new PdfPCell(new Paragraph("Faltas"));
 			col5.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col5.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
 			tabela2.addCell(col5);
-			
+
 			PdfPCell col6 = new PdfPCell(new Paragraph("Média"));
 			col6.setHorizontalAlignment(Element.ALIGN_CENTER);
 			col6.setBackgroundColor(BaseColor.LIGHT_GRAY); // Set the background color
 			tabela2.addCell(col6);
-			
+
 			String buscarDisciplina = "SELECT * FROM disciplina WHERE rgm=?";
 
 			try {
@@ -1877,27 +1894,27 @@ public class Telas extends JFrame {
 				rs = pst.executeQuery();
 
 				while (rs.next()) {
-			        PdfPCell disciplinaCell = new PdfPCell(new Paragraph(rs.getString(3)));
-			        disciplinaCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        disciplinaCell.setBackgroundColor(BaseColor.WHITE);
-			        tabela2.addCell(disciplinaCell);
+					PdfPCell disciplinaCell = new PdfPCell(new Paragraph(rs.getString(3)));
+					disciplinaCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					disciplinaCell.setBackgroundColor(BaseColor.WHITE);
+					tabela2.addCell(disciplinaCell);
 
-			        PdfPCell faltasCell = new PdfPCell(new Paragraph(rs.getString(6)));
-			        faltasCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        faltasCell.setBackgroundColor(BaseColor.WHITE);
-			        tabela2.addCell(faltasCell);
+					PdfPCell faltasCell = new PdfPCell(new Paragraph(rs.getString(6)));
+					faltasCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					faltasCell.setBackgroundColor(BaseColor.WHITE);
+					tabela2.addCell(faltasCell);
 
-			        PdfPCell mediaCell = new PdfPCell(new Paragraph(rs.getString(5)));
-			        mediaCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			        mediaCell.setBackgroundColor(BaseColor.WHITE);
-			        tabela2.addCell(mediaCell);
-			    }
+					PdfPCell mediaCell = new PdfPCell(new Paragraph(rs.getString(5)));
+					mediaCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					mediaCell.setBackgroundColor(BaseColor.WHITE);
+					tabela2.addCell(mediaCell);
+				}
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 			tabela2.setSpacingBefore(12);
-			
+
 			documento.add(tabela);
 			documento.add(tabela2);
 		} catch (Exception e) {

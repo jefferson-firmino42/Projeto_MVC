@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.DisciplinaModel;
 import utils.ConnectionFactory;
@@ -155,4 +157,31 @@ public class DisciplinaDAO {
         }
     }
     
+    public List<DisciplinaModel> consultarDisciplinasDoAluno(String rgm) throws SQLException {
+        List<DisciplinaModel> disciplinas = new ArrayList<>();
+        String sql = "SELECT * FROM disciplina WHERE rgm = ?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, rgm);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                DisciplinaModel disciplina = new DisciplinaModel(
+                    rs.getInt("id_disciplina"),
+                    rs.getString("rgm"),
+                    rs.getString("nome_disciplina"),
+                    rs.getString("semestre"),
+                    rs.getDouble("notas"),
+                    rs.getInt("faltas"),
+                    rs.getString("etapa")
+                );
+                disciplinas.add(disciplina);
+            }
+
+            return disciplinas;
+        } finally {
+            closeResources();
+        }
+    }
 }
