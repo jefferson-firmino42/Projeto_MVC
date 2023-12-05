@@ -1508,48 +1508,48 @@ public class Telas extends JFrame {
 //CRUD da tela Notas e Faltas		
 		// Salvar
 		btnSalvar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DisciplinaModel disciplina = new DisciplinaModel();	
-				boolean valid = false;
-				try {
-					valid = getDadosNotas(true);
-				} catch(Exception a){
-					JOptionPane.showMessageDialog(null, a.getMessage());
-				}
-				
-				if(valid) {
-					disciplina.setRgm(txtRgm_1.getText());
-					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
-					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
+		    public void actionPerformed(ActionEvent e) {
+		        DisciplinaModel disciplina = new DisciplinaModel();	
+		        boolean valid = false;
 
-					double nota1 = Double.parseDouble(txtNota_1.getText());
-					double nota2 = Double.parseDouble(txtNota_2.getText());
-					double mediaNotas = (nota1 + nota2) / 2;
-					disciplina.setMediaNotas(mediaNotas);
+		        try {
+		            valid = getDadosNotas(true);
+		        } catch(Exception a) {
+		            JOptionPane.showMessageDialog(null, a.getMessage());
+		        }
 
-					int faltas = Integer.parseInt(txtFaltas.getText());
-					disciplina.setFaltas(faltas);
-					disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
-					
-					try {
-						DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-						if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
-							disciplina.getSemestre())) {
-							disciplinaDAO.salvarDisciplina(disciplina);
-									JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
-								} else {
-									JOptionPane.showMessageDialog(null, "Disciplina já existe.");
-								}
+		        if (valid) {
+		            disciplina.setRgm(txtRgm_1.getText());
+		            disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
+		            disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
 
-							} catch (NumberFormatException ex) {
-								JOptionPane.showMessageDialog(null,
-										"Certifique-se de inserir valores válidos para as notas e faltas.");
-							} catch (Exception ex) {
-								JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
-							}
-						}
-				}
+		            try {
+		                double nota1 = Double.parseDouble(txtNota_1.getText());
+		                double nota2 = Double.parseDouble(txtNota_2.getText());
+		                double mediaNotas = (nota1 + nota2) / 2;
+		                disciplina.setMediaNotas(mediaNotas);
+
+		                int faltas = Integer.parseInt(txtFaltas.getText());
+		                disciplina.setFaltas(faltas);
+
+		                DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+
+		                if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
+		                    disciplina.getSemestre())) {
+		                    disciplinaDAO.salvarDisciplina(disciplina);
+		                    JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
+		                } else {
+		                    JOptionPane.showMessageDialog(null, "Disciplina já existe.");
+		                }
+		            } catch (NumberFormatException ex) {
+		                JOptionPane.showMessageDialog(null, "Certifique-se de inserir valores válidos para as notas e faltas.");
+		            } catch (Exception ex) {
+		                JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
+		            }
+		        }
+		    }
 		});
+
 
 		// Alterar
 		btnAlterar_1.addActionListener(new ActionListener() {
