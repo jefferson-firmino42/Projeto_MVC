@@ -85,6 +85,7 @@ import java.awt.Cursor;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import java.awt.Toolkit;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -186,6 +187,8 @@ public class Telas extends JFrame {
 	 * Create the frame.
 	 */
 	public Telas() throws Exception {
+		setTitle("Sistema acadêmico - Roblox");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Telas.class.getResource("/images/4745715_classmates_communication_education_learning_media_icon (2).png")));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 490);

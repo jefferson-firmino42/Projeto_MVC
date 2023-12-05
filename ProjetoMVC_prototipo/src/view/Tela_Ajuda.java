@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Tela_Ajuda extends JFrame {
 
@@ -49,6 +50,7 @@ public class Tela_Ajuda extends JFrame {
 		
         setContentPane(contentPane);
         JTextArea txtInfos = new JTextArea();
+        txtInfos.setBackground(new Color(176, 224, 230));
         txtInfos.setEditable(false);
         txtInfos.setLineWrap(true);
         txtInfos.setWrapStyleWord(true);

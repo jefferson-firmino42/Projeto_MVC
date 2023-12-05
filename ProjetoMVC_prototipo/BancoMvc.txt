@@ -33,15 +33,3 @@ CREATE TABLE disciplina (
     etapa VARCHAR(10),
     FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
-
-CREATE TABLE boletim (
-	id_boletim INT PRIMARY KEY AUTO_INCREMENT,
-    rgm VARCHAR(9),
-    nome VARCHAR(100) NOT NULL,
-    curso VARCHAR(100) NOT NULL,
-	nome_disciplina VARCHAR(100) NOT NULL,
-    notas DECIMAL(5,2),
-    faltas INT,
-    imagem VARCHAR(100),
-    FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
-);
