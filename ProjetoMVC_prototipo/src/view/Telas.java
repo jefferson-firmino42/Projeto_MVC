@@ -773,12 +773,12 @@ public class Telas extends JFrame {
         txtRgm_1.setBackground(Color.WHITE);
 		panel_2.add(txtRgm_1);
 
-		JLabel lblConsultaNome = new JLabel("Nome");
+		JLabel lblConsultaNome = new JLabel("");
 		lblConsultaNome.setFont(new Font("Poppins", Font.BOLD, 18));
 		lblConsultaNome.setBounds(260, 32, 255, 24);
 		panel_2.add(lblConsultaNome);
 
-		JLabel lblConsultaCurso = new JLabel("Curso");
+		JLabel lblConsultaCurso = new JLabel("");
 		lblConsultaCurso.setFont(new Font("Poppins", Font.BOLD, 18));
 		lblConsultaCurso.setBounds(10, 85, 400, 24);
 		panel_2.add(lblConsultaCurso);
