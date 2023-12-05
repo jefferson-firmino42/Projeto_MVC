@@ -1458,6 +1458,11 @@ public class Telas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String rgm = txtRgmBoletim.getText().trim();
+					
+					if (txtRgmBoletim.getText().trim().equals("") || txtRgm.getText().trim().length() == 0) {
+						throw new Exception("Digite um RGM válido.");
+					}
+					
 					DisciplinaDAO dao = new DisciplinaDAO();
 					DAO alunoDao = new DAO();
 					AlunoModel aluno = alunoDao.consultar(rgm);
@@ -1511,6 +1516,7 @@ public class Telas extends JFrame {
 				} catch(Exception a){
 					JOptionPane.showMessageDialog(null, a.getMessage());
 				}
+				
 				if(valid) {
 					disciplina.setRgm(txtRgm_1.getText());
 					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
@@ -1641,7 +1647,6 @@ public class Telas extends JFrame {
 			}
 		});
 
-		// Limpar Tela -- NÃO TA FUNCIONANDOOOO
 		btnExcluir_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtRgm_1.setText("");
