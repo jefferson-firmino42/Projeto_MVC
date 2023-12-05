@@ -1459,7 +1459,7 @@ public class Telas extends JFrame {
 				try {
 					String rgm = txtRgmBoletim.getText().trim();
 					
-					if (txtRgmBoletim.getText().trim().equals("") || txtRgm.getText().trim().length() == 0) {
+					if (txtRgmBoletim.getText().trim().equals("")) {
 						throw new Exception("Digite um RGM válido.");
 					}
 					
