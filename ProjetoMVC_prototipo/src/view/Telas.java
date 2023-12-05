@@ -1470,6 +1470,7 @@ public class Telas extends JFrame {
 
 					if (aluno == null) {
 						lblNomeBoletim.setText("Nome do aluno");
+						tableModel.setRowCount(0);
 						throw new Exception("Aluno não cadastrado.");
 					}
 
