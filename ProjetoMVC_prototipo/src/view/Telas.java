@@ -1217,7 +1217,7 @@ public class Telas extends JFrame {
 							disciplinaModel.addElement("Espanhol III");
 							disciplinaModel.addElement("Inglês IX e X");
 						} else if ("Comércio Exterior".equals(cursoSelecionado) && "6º".equals(semestreSelecionado)) {
-							disciplinaModel.addElement("Selecione uma disciplinaoi");
+							disciplinaModel.addElement("Selecione uma disciplina");
 							disciplinaModel.addElement("Projeto em Comércio Exterior V");
 							disciplinaModel.addElement("Negócios Internacionais");
 							disciplinaModel.addElement("Gestão Estratégica Internacional");
