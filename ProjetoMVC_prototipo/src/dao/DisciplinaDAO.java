@@ -148,11 +148,12 @@ public class DisciplinaDAO {
     
     }
     
-    public void excluirDisciplina(String rgm) throws SQLException {
-        String sql = "DELETE FROM disciplina WHERE rgm = ?";
+    public void excluirDisciplina(String rgm, String nome_disciplina) throws SQLException {
+        String sql = "DELETE FROM disciplina WHERE rgm = ? and nome_disciplina = ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, rgm);
+            ps.setString(2, nome_disciplina);
             ps.executeUpdate();
         }
     }

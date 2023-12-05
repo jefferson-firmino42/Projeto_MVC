@@ -136,6 +136,7 @@ public class Telas extends JFrame {
 	private JComboBox<String> cmbSemestre;
 	private JComboBox<String> cmbCampus;
 	private JComboBox<String> cmbDisciplina;
+	private JComboBox<String> cmbEtapa;
 	private JTextField txtNota_1;
 	private JLabel lblrgmcurso;
 	private JTextField txtRGMCurso;
@@ -789,7 +790,7 @@ public class Telas extends JFrame {
         cmbDisciplina.setBackground(Color.WHITE);
 		panel_2.add(cmbDisciplina);
 
-		JComboBox cmbSemestre = new JComboBox();
+		JComboBox cmbSemestre = new JComboBox<>();
 		cmbSemestre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cmbSemestre
 				.setModel(new DefaultComboBoxModel(new String[] { "Selecione", "1º", "2º", "3º", "4º", "5º", "6º" }));
@@ -1482,40 +1483,43 @@ public class Telas extends JFrame {
 		// Salvar
 		btnSalvar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-					DisciplinaModel disciplina = new DisciplinaModel();
+						try {
+							DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+							DisciplinaModel disciplina = new DisciplinaModel();
 
-					disciplina.setRgm(txtRgm_1.getText());
-					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
-					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
+							disciplina.setRgm(txtRgm_1.getText());
+							disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
+							disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
 
-					double nota1 = Double.parseDouble(txtNota_1.getText());
-					double nota2 = Double.parseDouble(txtNota_2.getText());
-					double mediaNotas = (nota1 + nota2) / 2;
-					disciplina.setMediaNotas(mediaNotas);
+							double nota1 = Double.parseDouble(txtNota_1.getText());
+							double nota2 = Double.parseDouble(txtNota_2.getText());
+							double mediaNotas = (nota1 + nota2) / 2;
+							disciplina.setMediaNotas(mediaNotas);
 
-					int faltas = Integer.parseInt(txtFaltas.getText());
-					disciplina.setFaltas(faltas);
-					disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
+							int faltas = Integer.parseInt(txtFaltas.getText());
+							disciplina.setFaltas(faltas);
+							disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
 
-					if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
-							disciplina.getSemestre())) {
-						disciplinaDAO.salvarDisciplina(disciplina);
-						JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
-					} else {
-						JOptionPane.showMessageDialog(null, "Disciplina já existe.");
+							if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
+									disciplina.getSemestre())) {
+								disciplinaDAO.salvarDisciplina(disciplina);
+								JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
+							} else {
+								JOptionPane.showMessageDialog(null, "Disciplina já existe.");
+							}
+
+						} catch (NumberFormatException ex) {
+							JOptionPane.showMessageDialog(null,
+									"Certifique-se de inserir valores válidos para as notas e faltas.");
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
+						}
 					}
+				});
 
-					JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null,
-							"Certifique-se de inserir valores válidos para as notas e faltas.");
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
-				}
-			}
-		});
+
+
+
 
 		// Alterar
 		btnAlterar_1.addActionListener(new ActionListener() {
@@ -1587,10 +1591,11 @@ public class Telas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String rgm = txtRgm_1.getText().trim();
+					String nome_disciplina = (String) cmbDisciplina.getSelectedItem();;
 					DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 
 					if (!rgm.isEmpty()) {
-						disciplinaDAO.excluirDisciplina(rgm);
+						disciplinaDAO.excluirDisciplina(rgm, nome_disciplina);
 						JOptionPane.showMessageDialog(null, "Disciplina excluída com sucesso!");
 					} else {
 						JOptionPane.showMessageDialog(null, "Por favor, insira um RGM válido.");
@@ -1819,6 +1824,27 @@ public class Telas extends JFrame {
 		} catch (Exception e) {
 			throw new Exception();
 		}
+	}
+	
+	public boolean getDadosNotas(boolean att) throws Exception{
+		if(att) {
+			if(cmbSemestre.getSelectedItem().equals("Selecione")) {
+				throw new Exception("Selecione um semestre válido");
+			} if (cmbEtapa.getSelectedItem().equals("-")) {
+				throw new Exception("Selecione um período válido");
+			}
+			if (cmbDisciplina.getSelectedItem().equals("Selecione")) {
+				throw new Exception("Selecione um período válido");
+			}
+			if(txtNota_1.getText().isEmpty()) {
+				throw new Exception("Digite uma nota válida");
+				
+			}
+			if(txtNota_2.getText().isEmpty()) {
+				throw new Exception("Digite uma nota válida");
+			}
+		}
+		return true;
 	}
 
 	public boolean getDadosCurso(boolean att) throws Exception {
