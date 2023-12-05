@@ -90,7 +90,7 @@ import java.awt.Toolkit;
 public class Telas extends JFrame {
 	private AlunoModel aluno;
 	String path;
-	
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMenuBar menuBar;
@@ -188,7 +188,8 @@ public class Telas extends JFrame {
 	 */
 	public Telas() throws Exception {
 		setTitle("Sistema acadêmico - Roblox");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Telas.class.getResource("/images/4745715_classmates_communication_education_learning_media_icon (2).png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Telas.class
+				.getResource("/images/4745715_classmates_communication_education_learning_media_icon (2).png")));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 490);
@@ -230,7 +231,7 @@ public class Telas extends JFrame {
 		menuExcluir_1 = new JMenuItem("Excluir");
 		menuExcluir_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuExcluir_1);
-		
+
 		menuLimpar_1 = new JMenuItem("Limpar Tela");
 		menuLimpar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuLimpar_1);
@@ -315,24 +316,24 @@ public class Telas extends JFrame {
 		txtNascimento.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNascimento.setBounds(210, 85, 151, 32);
 		txtNascimento.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtNascimento.setPreferredSize(new Dimension(220, 50));
-        txtNascimento.setBackground(Color.WHITE);
+		txtNascimento.setPreferredSize(new Dimension(220, 50));
+		txtNascimento.setBackground(Color.WHITE);
 		panel.add(txtNascimento);
 
 		txtCelular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		txtCelular.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtCelular.setBounds(543, 294, 208, 25);
 		txtCelular.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtCelular.setPreferredSize(new Dimension(220, 50));
-        txtCelular.setBackground(Color.WHITE);
+		txtCelular.setPreferredSize(new Dimension(220, 50));
+		txtCelular.setBackground(Color.WHITE);
 		panel.add(txtCelular);
 
 		txtRgm = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRgm.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm.setBounds(65, 24, 151, 32);
 		txtRgm.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtRgm.setPreferredSize(new Dimension(220, 50));
-        txtRgm.setBackground(Color.WHITE);
+		txtRgm.setPreferredSize(new Dimension(220, 50));
+		txtRgm.setBackground(Color.WHITE);
 		panel.add(txtRgm);
 		txtRgm.setColumns(10);
 
@@ -341,8 +342,8 @@ public class Telas extends JFrame {
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(78, 155, 283, 32);
 		txtEmail.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtEmail.setPreferredSize(new Dimension(220, 50));
-        txtEmail.setBackground(Color.WHITE);
+		txtEmail.setPreferredSize(new Dimension(220, 50));
+		txtEmail.setBackground(Color.WHITE);
 		panel.add(txtEmail);
 
 		txtEndereco = new JTextField();
@@ -350,8 +351,8 @@ public class Telas extends JFrame {
 		txtEndereco.setColumns(10);
 		txtEndereco.setBounds(78, 202, 283, 32);
 		txtEndereco.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtEndereco.setPreferredSize(new Dimension(220, 50));
-        txtEndereco.setBackground(Color.WHITE);
+		txtEndereco.setPreferredSize(new Dimension(220, 50));
+		txtEndereco.setBackground(Color.WHITE);
 		panel.add(txtEndereco);
 
 		txtMunicipio = new JTextField();
@@ -359,8 +360,8 @@ public class Telas extends JFrame {
 		txtMunicipio.setColumns(10);
 		txtMunicipio.setBounds(112, 291, 166, 32);
 		txtMunicipio.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtMunicipio.setPreferredSize(new Dimension(220, 50));
-        txtMunicipio.setBackground(Color.WHITE);
+		txtMunicipio.setPreferredSize(new Dimension(220, 50));
+		txtMunicipio.setBackground(Color.WHITE);
 		panel.add(txtMunicipio);
 
 		txtNome = new JTextField();
@@ -369,15 +370,15 @@ public class Telas extends JFrame {
 		txtNome.setColumns(10);
 		txtNome.setBounds(305, 24, 151, 32);
 		txtNome.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtNome.setPreferredSize(new Dimension(220, 50));
-        txtNome.setBackground(Color.WHITE);
+		txtNome.setPreferredSize(new Dimension(220, 50));
+		txtNome.setBackground(Color.WHITE);
 		panel.add(txtNome);
 
 		cbxUf = new JComboBox();
 		cbxUf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cbxUf.setBorder(new LineBorder(Color.BLACK, 2, true));
-        cbxUf.setPreferredSize(new Dimension(220, 50));
-        cbxUf.setBackground(Color.WHITE);
+		cbxUf.setPreferredSize(new Dimension(220, 50));
+		cbxUf.setBackground(Color.WHITE);
 		cbxUf.setModel(new DefaultComboBoxModel(
 				new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
@@ -397,8 +398,8 @@ public class Telas extends JFrame {
 		btnFoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFoto.setFont(new Font("Poppins", Font.PLAIN, 15));
 		btnFoto.setBorder(new LineBorder(Color.BLACK, 2, true));
-        btnFoto.setPreferredSize(new Dimension(220, 50));
-        btnFoto.setBackground(Color.WHITE);
+		btnFoto.setPreferredSize(new Dimension(220, 50));
+		btnFoto.setBackground(Color.WHITE);
 		btnFoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jfc = new JFileChooser();
@@ -431,8 +432,8 @@ public class Telas extends JFrame {
 		txtCpf.setBounds(545, 25, 206, 30);
 		panel.add(txtCpf);
 		txtCpf.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtCpf.setPreferredSize(new Dimension(220, 50));
-        txtCpf.setBackground(Color.WHITE);
+		txtCpf.setPreferredSize(new Dimension(220, 50));
+		txtCpf.setBackground(Color.WHITE);
 		txtCpf.setColumns(10);
 
 		panel_1 = new JPanel();
@@ -455,8 +456,8 @@ public class Telas extends JFrame {
 		cmbCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCurso.setBounds(169, 80, 493, 50);
 		cmbCurso.setBorder(new LineBorder(Color.BLACK, 2, true));
-        cmbCurso.setPreferredSize(new Dimension(220, 50));
-        cmbCurso.setBackground(Color.WHITE);
+		cmbCurso.setPreferredSize(new Dimension(220, 50));
+		cmbCurso.setBackground(Color.WHITE);
 		panel_1.add(cmbCurso);
 		cmbCurso.setModel(model);
 		cmbCurso.setSelectedIndex(0);
@@ -479,8 +480,8 @@ public class Telas extends JFrame {
 		panel_1.add(cmbCampus);
 		cmbCampus.setModel(modelCampus);
 		cmbCampus.setBorder(new LineBorder(Color.BLACK, 2, true));
-        cmbCampus.setPreferredSize(new Dimension(220, 50));
-        cmbCampus.setBackground(Color.WHITE);
+		cmbCampus.setPreferredSize(new Dimension(220, 50));
+		cmbCampus.setBackground(Color.WHITE);
 		cmbCampus.setSelectedIndex(0);
 
 		JLabel lblPerodo = new JLabel("Período:");
@@ -494,30 +495,30 @@ public class Telas extends JFrame {
 		Matutino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Matutino.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Matutino.setBounds(184, 223, 132, 21);
-		Matutino.setBorderPainted(false); 
-        Matutino.setContentAreaFilled(false); 
-        Matutino.setFocusPainted(false); 
-        Matutino.setOpaque(false);
+		Matutino.setBorderPainted(false);
+		Matutino.setContentAreaFilled(false);
+		Matutino.setFocusPainted(false);
+		Matutino.setOpaque(false);
 		panel_1.add(Matutino);
 
 		Vespertino = new JRadioButton("Vespertino");
 		Vespertino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Vespertino.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Vespertino.setBounds(338, 223, 166, 21);
-		Vespertino.setBorderPainted(false); 
-        Vespertino.setContentAreaFilled(false); 
-        Vespertino.setFocusPainted(false); 
-        Vespertino.setOpaque(false);
+		Vespertino.setBorderPainted(false);
+		Vespertino.setContentAreaFilled(false);
+		Vespertino.setFocusPainted(false);
+		Vespertino.setOpaque(false);
 		panel_1.add(Vespertino);
 
 		Noturno = new JRadioButton("Noturno");
 		Noturno.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Noturno.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Noturno.setBounds(522, 223, 166, 21);
-		Noturno.setBorderPainted(false); 
-        Noturno.setContentAreaFilled(false); 
-        Noturno.setFocusPainted(false); 
-        Noturno.setOpaque(false);
+		Noturno.setBorderPainted(false);
+		Noturno.setContentAreaFilled(false);
+		Noturno.setFocusPainted(false);
+		Noturno.setOpaque(false);
 		panel_1.add(Noturno);
 
 		bg.add(Matutino);
@@ -535,9 +536,9 @@ public class Telas extends JFrame {
 		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSair.setBounds(28, 268, 96, 79);
 		btnSair.setBorderPainted(false);
-		btnSair.setContentAreaFilled(false); 
-        btnSair.setFocusPainted(false); 
-        btnSair.setOpaque(false);
+		btnSair.setContentAreaFilled(false);
+		btnSair.setFocusPainted(false);
+		btnSair.setOpaque(false);
 		panel_1.add(btnSair);
 
 		JButton btnAlterar = new JButton("");
@@ -581,10 +582,10 @@ public class Telas extends JFrame {
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar.setBounds(181, 268, 96, 79);
-		btnAlterar.setBorderPainted(false); 
-        btnAlterar.setContentAreaFilled(false); 
-        btnAlterar.setFocusPainted(false); 
-        btnAlterar.setOpaque(false);
+		btnAlterar.setBorderPainted(false);
+		btnAlterar.setContentAreaFilled(false);
+		btnAlterar.setFocusPainted(false);
+		btnAlterar.setOpaque(false);
 		panel_1.add(btnAlterar);
 
 		JButton btnConsultar = new JButton("");
@@ -620,10 +621,10 @@ public class Telas extends JFrame {
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(338, 268, 86, 79);
-		btnConsultar.setBorderPainted(false); 
-        btnConsultar.setContentAreaFilled(false); 
-        btnConsultar.setFocusPainted(false); 
-        btnConsultar.setOpaque(false);
+		btnConsultar.setBorderPainted(false);
+		btnConsultar.setContentAreaFilled(false);
+		btnConsultar.setFocusPainted(false);
+		btnConsultar.setOpaque(false);
 		panel_1.add(btnConsultar);
 
 		JButton btnLimpar = new JButton("");
@@ -640,10 +641,10 @@ public class Telas extends JFrame {
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/borracha.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar.setBounds(490, 268, 96, 79);
-		btnLimpar.setBorderPainted(false); 
-        btnLimpar.setContentAreaFilled(false); 
-        btnLimpar.setFocusPainted(false); 
-        btnLimpar.setOpaque(false);
+		btnLimpar.setBorderPainted(false);
+		btnLimpar.setContentAreaFilled(false);
+		btnLimpar.setFocusPainted(false);
+		btnLimpar.setOpaque(false);
 		panel_1.add(btnLimpar);
 
 		JButton btnSalvar = new JButton("");
@@ -702,10 +703,10 @@ public class Telas extends JFrame {
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 96, 79);
-		btnSalvar.setBorderPainted(false); 
-        btnSalvar.setContentAreaFilled(false); 
-        btnSalvar.setFocusPainted(false); 
-        btnSalvar.setOpaque(false);
+		btnSalvar.setBorderPainted(false);
+		btnSalvar.setContentAreaFilled(false);
+		btnSalvar.setFocusPainted(false);
+		btnSalvar.setOpaque(false);
 		panel_1.add(btnSalvar);
 
 		lblrgmcurso = new JLabel("RGM");
@@ -717,8 +718,8 @@ public class Telas extends JFrame {
 		txtRGMCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		txtRGMCurso.setBounds(169, 21, 493, 49);
 		txtRGMCurso.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtRGMCurso.setPreferredSize(new Dimension(220, 50));
-        txtRGMCurso.setBackground(Color.WHITE);
+		txtRGMCurso.setPreferredSize(new Dimension(220, 50));
+		txtRGMCurso.setBackground(Color.WHITE);
 		panel_1.add(txtRGMCurso);
 		txtRGMCurso.setColumns(10);
 
@@ -772,8 +773,8 @@ public class Telas extends JFrame {
 		txtRgm_1.setColumns(10);
 		txtRgm_1.setBounds(82, 18, 151, 39);
 		txtRgm_1.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtRgm_1.setPreferredSize(new Dimension(220, 50));
-        txtRgm_1.setBackground(Color.WHITE);
+		txtRgm_1.setPreferredSize(new Dimension(220, 50));
+		txtRgm_1.setBackground(Color.WHITE);
 		panel_2.add(txtRgm_1);
 
 		JLabel lblConsultaNome = new JLabel("");
@@ -807,8 +808,8 @@ public class Telas extends JFrame {
 		cmbDisciplina.setBounds(382, 124, 370, 39);
 		cmbDisciplina.setModel(disciplinaModel);
 		cmbDisciplina.setBorder(new LineBorder(Color.BLACK, 2, true));
-        cmbDisciplina.setPreferredSize(new Dimension(220, 50));
-        cmbDisciplina.setBackground(Color.WHITE);
+		cmbDisciplina.setPreferredSize(new Dimension(220, 50));
+		cmbDisciplina.setBackground(Color.WHITE);
 		panel_2.add(cmbDisciplina);
 
 		cmbSemestre = new JComboBox<>();
@@ -1238,8 +1239,8 @@ public class Telas extends JFrame {
 		cmbEtapa.setFont(new Font("Poppins", Font.PLAIN, 15));
 		cmbEtapa.setBounds(126, 194, 90, 31);
 		cmbEtapa.setBorder(new LineBorder(Color.BLACK, 2, true));
-        cmbEtapa.setPreferredSize(new Dimension(220, 50));
-        cmbEtapa.setBackground(Color.WHITE);
+		cmbEtapa.setPreferredSize(new Dimension(220, 50));
+		cmbEtapa.setBackground(Color.WHITE);
 		panel_2.add(cmbEtapa);
 
 		JLabel lblFaltas = new JLabel("Faltas");
@@ -1253,8 +1254,8 @@ public class Telas extends JFrame {
 		txtFaltas.setBounds(630, 194, 60, 31);
 		panel_2.add(txtFaltas);
 		txtFaltas.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtFaltas.setPreferredSize(new Dimension(220, 50));
-        txtFaltas.setBackground(Color.WHITE);
+		txtFaltas.setPreferredSize(new Dimension(220, 50));
+		txtFaltas.setBackground(Color.WHITE);
 		txtFaltas.setColumns(10);
 
 		JLabel lblEtapa = new JLabel("Etapa");
@@ -1268,8 +1269,8 @@ public class Telas extends JFrame {
 		txtNota_1.setColumns(10);
 		txtNota_1.setBounds(319, 194, 60, 31);
 		txtNota_1.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtNota_1.setPreferredSize(new Dimension(220, 50));
-        txtNota_1.setBackground(Color.WHITE);
+		txtNota_1.setPreferredSize(new Dimension(220, 50));
+		txtNota_1.setBackground(Color.WHITE);
 		panel_2.add(txtNota_1);
 
 		JButton btnSair_1 = new JButton("");
@@ -1293,10 +1294,10 @@ public class Telas extends JFrame {
 		btnAlterar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar_1.setBounds(196, 257, 102, 79);
-		btnAlterar_1.setBorderPainted(false); 
-        btnAlterar_1.setContentAreaFilled(false); 
-        btnAlterar_1.setFocusPainted(false); 
-        btnAlterar_1.setOpaque(false);
+		btnAlterar_1.setBorderPainted(false);
+		btnAlterar_1.setContentAreaFilled(false);
+		btnAlterar_1.setFocusPainted(false);
+		btnAlterar_1.setOpaque(false);
 		panel_2.add(btnAlterar_1);
 
 		JButton btnConsultar_1 = new JButton("");
@@ -1304,10 +1305,10 @@ public class Telas extends JFrame {
 		btnConsultar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar_1.setBounds(330, 257, 100, 79);
-		btnConsultar_1.setBorderPainted(false); 
-        btnConsultar_1.setContentAreaFilled(false); 
-        btnConsultar_1.setFocusPainted(false); 
-        btnConsultar_1.setOpaque(false);
+		btnConsultar_1.setBorderPainted(false);
+		btnConsultar_1.setContentAreaFilled(false);
+		btnConsultar_1.setFocusPainted(false);
+		btnConsultar_1.setOpaque(false);
 		panel_2.add(btnConsultar_1);
 
 		JButton btnLimpar_1 = new JButton("");
@@ -1315,10 +1316,10 @@ public class Telas extends JFrame {
 		btnLimpar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar_1.setBounds(476, 257, 106, 79);
-		btnLimpar_1.setBorderPainted(false); 
-        btnLimpar_1.setContentAreaFilled(false); 
-        btnLimpar_1.setFocusPainted(false); 
-        btnLimpar_1.setOpaque(false);
+		btnLimpar_1.setBorderPainted(false);
+		btnLimpar_1.setContentAreaFilled(false);
+		btnLimpar_1.setFocusPainted(false);
+		btnLimpar_1.setOpaque(false);
 		panel_2.add(btnLimpar_1);
 
 		JButton btnSalvar_1 = new JButton("");
@@ -1326,10 +1327,10 @@ public class Telas extends JFrame {
 		btnSalvar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar_1.setBounds(632, 257, 100, 79);
-		btnSalvar_1.setBorderPainted(false); 
-        btnSalvar_1.setContentAreaFilled(false); 
-        btnSalvar_1.setFocusPainted(false); 
-        btnSalvar_1.setOpaque(false);
+		btnSalvar_1.setBorderPainted(false);
+		btnSalvar_1.setContentAreaFilled(false);
+		btnSalvar_1.setFocusPainted(false);
+		btnSalvar_1.setOpaque(false);
 		panel_2.add(btnSalvar_1);
 
 		lblSair_1 = new JLabel("Sair");
@@ -1369,8 +1370,8 @@ public class Telas extends JFrame {
 		txtNota_2.setColumns(10);
 		txtNota_2.setBounds(470, 194, 60, 31);
 		txtNota_2.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtNota_2.setPreferredSize(new Dimension(220, 50));
-        txtNota_2.setBackground(Color.WHITE);
+		txtNota_2.setPreferredSize(new Dimension(220, 50));
+		txtNota_2.setBackground(Color.WHITE);
 		panel_2.add(txtNota_2);
 
 		JButton btnExcluir_1 = new JButton("");
@@ -1379,10 +1380,10 @@ public class Telas extends JFrame {
 				Telas.class.getResource("/images/3672876_education_eraser_erasing_rubber_stationery_icon.png")));
 		btnExcluir_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnExcluir_1.setBounds(685, 0, 70, 70);
-		btnExcluir_1.setBorderPainted(false); 
-        btnExcluir_1.setContentAreaFilled(false); 
-        btnExcluir_1.setFocusPainted(false); 
-        btnExcluir_1.setOpaque(false);
+		btnExcluir_1.setBorderPainted(false);
+		btnExcluir_1.setContentAreaFilled(false);
+		btnExcluir_1.setFocusPainted(false);
+		btnExcluir_1.setOpaque(false);
 		panel_2.add(btnExcluir_1);
 
 		lblLimpar_2 = new JLabel("Limpar Tela");
@@ -1407,10 +1408,10 @@ public class Telas extends JFrame {
 		});
 		panel_3.setLayout(null);
 		btnGerarBoletim.setBounds(621, 0, 121, 111);
-		btnGerarBoletim.setBorderPainted(false); 
-        btnGerarBoletim.setContentAreaFilled(false); 
-        btnGerarBoletim.setFocusPainted(false); 
-        btnGerarBoletim.setOpaque(false);
+		btnGerarBoletim.setBorderPainted(false);
+		btnGerarBoletim.setContentAreaFilled(false);
+		btnGerarBoletim.setFocusPainted(false);
+		btnGerarBoletim.setOpaque(false);
 		panel_3.add(btnGerarBoletim);
 
 		JLabel lblRgmBoletim = new JLabel("RGM");
@@ -1423,8 +1424,8 @@ public class Telas extends JFrame {
 		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgmBoletim.setBounds(90, 33, 334, 39);
 		txtRgmBoletim.setBorder(new LineBorder(Color.BLACK, 2, true));
-        txtRgmBoletim.setPreferredSize(new Dimension(220, 50));
-        txtRgmBoletim.setBackground(Color.WHITE);
+		txtRgmBoletim.setPreferredSize(new Dimension(220, 50));
+		txtRgmBoletim.setBackground(Color.WHITE);
 		panel_3.add(txtRgmBoletim);
 		txtRgmBoletim.setColumns(10);
 
@@ -1458,14 +1459,20 @@ public class Telas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String rgm = txtRgmBoletim.getText().trim();
-					
+
 					if (txtRgmBoletim.getText().trim().equals("")) {
 						throw new Exception("Digite um RGM válido.");
 					}
-					
+
 					DisciplinaDAO dao = new DisciplinaDAO();
 					DAO alunoDao = new DAO();
 					AlunoModel aluno = alunoDao.consultar(rgm);
+
+					if (aluno == null) {
+						lblNomeBoletim.setText("Nome do aluno");
+						throw new Exception("Aluno não cadastrado.");
+					}
+
 					lblNomeBoletim.setText(aluno.getNome());
 
 					List<DisciplinaModel> disciplinas = dao.consultarDisciplinasDoAluno(rgm);
@@ -1480,7 +1487,7 @@ public class Telas extends JFrame {
 							tableModel.addRow(dadosDisciplina);
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Aluno não encontrado ou sem disciplinas cadastradas.");
+						JOptionPane.showMessageDialog(null, "Aluno não possui disciplinas cadastradas.");
 					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -1489,10 +1496,10 @@ public class Telas extends JFrame {
 		});
 		btnConsultarBoletim.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultarBoletim.setBounds(472, 0, 121, 111);
-		btnConsultarBoletim.setBorderPainted(false); 
-        btnConsultarBoletim.setContentAreaFilled(false); 
-        btnConsultarBoletim.setFocusPainted(false); 
-        btnConsultarBoletim.setOpaque(false);
+		btnConsultarBoletim.setBorderPainted(false);
+		btnConsultarBoletim.setContentAreaFilled(false);
+		btnConsultarBoletim.setFocusPainted(false);
+		btnConsultarBoletim.setOpaque(false);
 		panel_3.add(btnConsultarBoletim);
 
 		JLabel lblConsultar_2_1_1 = new JLabel("Consultar");
@@ -1508,64 +1515,64 @@ public class Telas extends JFrame {
 //CRUD da tela Notas e Faltas		
 		// Salvar
 		btnSalvar_1.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        DisciplinaModel disciplina = new DisciplinaModel();	
-		        boolean valid = false;
+			public void actionPerformed(ActionEvent e) {
+				DisciplinaModel disciplina = new DisciplinaModel();
+				boolean valid = false;
 
-		        try {
-		            valid = getDadosNotas(true);
-		        } catch(Exception a) {
-		            JOptionPane.showMessageDialog(null, a.getMessage());
-		        }
+				try {
+					valid = getDadosNotas(true);
+				} catch (Exception a) {
+					JOptionPane.showMessageDialog(null, a.getMessage());
+				}
 
-		        if (valid) {
-		            disciplina.setRgm(txtRgm_1.getText());
-		            disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
-		            disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
+				if (valid) {
+					disciplina.setRgm(txtRgm_1.getText());
+					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
+					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
 
-		            try {
-		                double nota1 = Double.parseDouble(txtNota_1.getText());
-		                double nota2 = Double.parseDouble(txtNota_2.getText());
-		                double mediaNotas = (nota1 + nota2) / 2;
-		                disciplina.setMediaNotas(mediaNotas);
+					try {
+						double nota1 = Double.parseDouble(txtNota_1.getText());
+						double nota2 = Double.parseDouble(txtNota_2.getText());
+						double mediaNotas = (nota1 + nota2) / 2;
+						disciplina.setMediaNotas(mediaNotas);
 
-		                int faltas = Integer.parseInt(txtFaltas.getText());
-		                disciplina.setFaltas(faltas);
+						int faltas = Integer.parseInt(txtFaltas.getText());
+						disciplina.setFaltas(faltas);
 
-		                DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+						DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 
-		                if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
-		                    disciplina.getSemestre())) {
-		                    disciplinaDAO.salvarDisciplina(disciplina);
-		                    JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
-		                } else {
-		                    JOptionPane.showMessageDialog(null, "Disciplina já existe.");
-		                }
-		            } catch (NumberFormatException ex) {
-		                JOptionPane.showMessageDialog(null, "Certifique-se de inserir valores válidos para as notas e faltas.");
-		            } catch (Exception ex) {
-		                JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
-		            }
-		        }
-		    }
+						if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
+								disciplina.getSemestre())) {
+							disciplinaDAO.salvarDisciplina(disciplina);
+							JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
+						} else {
+							JOptionPane.showMessageDialog(null, "Disciplina já existe.");
+						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(null,
+								"Certifique-se de inserir valores válidos para as notas e faltas.");
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
+					}
+				}
+			}
 		});
-
 
 		// Alterar
 		btnAlterar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DisciplinaModel disciplina = new DisciplinaModel();
 				boolean valid = false;
-				
+
 				try {
 					valid = getDadosNotas(true);
-						
-					}catch(Exception k) {
-						JOptionPane.showMessageDialog(null, k.getMessage());
-					}
-				
-				if(valid) {
-					
+
+				} catch (Exception k) {
+					JOptionPane.showMessageDialog(null, k.getMessage());
+				}
+
+				if (valid) {
+
 					disciplina.setRgm(txtRgm_1.getText());
 					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
 					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
@@ -1578,12 +1585,12 @@ public class Telas extends JFrame {
 					int faltas = Integer.parseInt(txtFaltas.getText());
 					disciplina.setFaltas(faltas);
 					disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
-					
+
 					try {
 						DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 						if (disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
 								disciplina.getSemestre())) {
-	
+
 							disciplinaDAO.atualizarDisciplina(disciplina);
 							JOptionPane.showMessageDialog(null, "Disciplina atualizada com sucesso!");
 						} else {
@@ -1632,7 +1639,8 @@ public class Telas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String rgm = txtRgm_1.getText().trim();
-					String nome_disciplina = (String) cmbDisciplina.getSelectedItem();;
+					String nome_disciplina = (String) cmbDisciplina.getSelectedItem();
+					;
 					DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 
 					if (!rgm.isEmpty()) {
@@ -1660,163 +1668,163 @@ public class Telas extends JFrame {
 				txtFaltas.setText("");
 			}
 		});
-		
-		
-		//CRUD menus notas e faltas		
-				// Salvar
-				menuSalvar_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						DisciplinaModel disciplina = new DisciplinaModel();	
-						boolean valid = false;
-						try {
-							valid = getDadosNotas(true);
-						} catch(Exception a){
-							JOptionPane.showMessageDialog(null, a.getMessage());
+
+		// CRUD menus notas e faltas
+		// Salvar
+		menuSalvar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DisciplinaModel disciplina = new DisciplinaModel();
+				boolean valid = false;
+				try {
+					valid = getDadosNotas(true);
+				} catch (Exception a) {
+					JOptionPane.showMessageDialog(null, a.getMessage());
+				}
+				if (valid) {
+					disciplina.setRgm(txtRgm_1.getText());
+					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
+					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
+
+					double nota1 = Double.parseDouble(txtNota_1.getText());
+					double nota2 = Double.parseDouble(txtNota_2.getText());
+					double mediaNotas = (nota1 + nota2) / 2;
+					disciplina.setMediaNotas(mediaNotas);
+
+					int faltas = Integer.parseInt(txtFaltas.getText());
+					disciplina.setFaltas(faltas);
+					disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
+
+					try {
+						DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+						if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
+								disciplina.getSemestre())) {
+							disciplinaDAO.salvarDisciplina(disciplina);
+							JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
+						} else {
+							JOptionPane.showMessageDialog(null, "Disciplina já existe.");
 						}
-						if(valid) {
-							disciplina.setRgm(txtRgm_1.getText());
-							disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
-							disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
 
-							double nota1 = Double.parseDouble(txtNota_1.getText());
-							double nota2 = Double.parseDouble(txtNota_2.getText());
-							double mediaNotas = (nota1 + nota2) / 2;
-							disciplina.setMediaNotas(mediaNotas);
-
-							int faltas = Integer.parseInt(txtFaltas.getText());
-							disciplina.setFaltas(faltas);
-							disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
-							
-							try {
-								DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-								if (!disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
-									disciplina.getSemestre())) {
-									disciplinaDAO.salvarDisciplina(disciplina);
-											JOptionPane.showMessageDialog(null, "Disciplina salva com sucesso!");
-										} else {
-											JOptionPane.showMessageDialog(null, "Disciplina já existe.");
-										}
-
-									} catch (NumberFormatException ex) {
-										JOptionPane.showMessageDialog(null,
-												"Certifique-se de inserir valores válidos para as notas e faltas.");
-									} catch (Exception ex) {
-										JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
-									}
-								}
-						}
-				});
-
-				// Alterar
-				menuAlterar_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						DisciplinaModel disciplina = new DisciplinaModel();
-						boolean valid = false;
-						
-						try {
-							valid = getDadosNotas(true);
-								
-							}catch(Exception k) {
-								JOptionPane.showMessageDialog(null, k.getMessage());
-							}
-						
-						if(valid) {
-							
-							disciplina.setRgm(txtRgm_1.getText());
-							disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
-							disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
-
-							double nota1 = Double.parseDouble(txtNota_1.getText());
-							double nota2 = Double.parseDouble(txtNota_2.getText());
-							double mediaNotas = (nota1 + nota2) / 2;
-							disciplina.setMediaNotas(mediaNotas);
-
-							int faltas = Integer.parseInt(txtFaltas.getText());
-							disciplina.setFaltas(faltas);
-							disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
-							
-							try {
-								DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-								if (disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
-										disciplina.getSemestre())) {
-			
-									disciplinaDAO.atualizarDisciplina(disciplina);
-									JOptionPane.showMessageDialog(null, "Disciplina atualizada com sucesso!");
-								} else {
-									JOptionPane.showMessageDialog(null,
-											"Disciplina não encontrada para alteração. Você pode salvar uma nova disciplina usando o botão 'Salvar'.");
-								}
-							} catch (NumberFormatException ex) {
-								JOptionPane.showMessageDialog(null,
-										"Certifique-se de inserir valores válidos para as notas e faltas.");
-							} catch (Exception ex) {
-								JOptionPane.showMessageDialog(null, "Erro ao alterar disciplina: " + ex.getMessage());
-							}
-						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(null,
+								"Certifique-se de inserir valores válidos para as notas e faltas.");
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Erro ao salvar disciplina: " + ex.getMessage());
 					}
-				});
+				}
+			}
+		});
 
-				// Consultar
-				menuConsultar_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-							DisciplinaModel disciplina = disciplinaDAO.consultarDisciplina(txtRgm_1.getText());
-							CursoDAO cursoDAO = new CursoDAO();
-							CursoModel curso = cursoDAO.consultar(txtRgm_1.getText());
+		// Alterar
+		menuAlterar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DisciplinaModel disciplina = new DisciplinaModel();
+				boolean valid = false;
 
-							if (curso != null) {
+				try {
+					valid = getDadosNotas(true);
 
-								String nomeAluno = disciplinaDAO.consultarNomeAluno(txtRgm_1.getText());
-								lblConsultaNome.setText(nomeAluno);
+				} catch (Exception k) {
+					JOptionPane.showMessageDialog(null, k.getMessage());
+				}
 
-								String cursoAluno = disciplinaDAO.consultarCursoAluno(txtRgm_1.getText());
-								lblConsultaCurso.setText(cursoAluno);
+				if (valid) {
 
-							} else {
-								JOptionPane.showMessageDialog(null,
-										"Nenhuma disciplina encontrada para o aluno com RGM: " + txtRgm.getText());
-							}
-						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null, "Erro ao consultar disciplina: " + ex.getMessage());
+					disciplina.setRgm(txtRgm_1.getText());
+					disciplina.setNomeDisciplina((String) cmbDisciplina.getSelectedItem());
+					disciplina.setSemestre((String) cmbSemestre.getSelectedItem());
+
+					double nota1 = Double.parseDouble(txtNota_1.getText());
+					double nota2 = Double.parseDouble(txtNota_2.getText());
+					double mediaNotas = (nota1 + nota2) / 2;
+					disciplina.setMediaNotas(mediaNotas);
+
+					int faltas = Integer.parseInt(txtFaltas.getText());
+					disciplina.setFaltas(faltas);
+					disciplina.setEtapa((String) cmbEtapa.getSelectedItem());
+
+					try {
+						DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+						if (disciplinaDAO.existeDisciplina(disciplina.getRgm(), disciplina.getNomeDisciplina(),
+								disciplina.getSemestre())) {
+
+							disciplinaDAO.atualizarDisciplina(disciplina);
+							JOptionPane.showMessageDialog(null, "Disciplina atualizada com sucesso!");
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Disciplina não encontrada para alteração. Você pode salvar uma nova disciplina usando o botão 'Salvar'.");
 						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(null,
+								"Certifique-se de inserir valores válidos para as notas e faltas.");
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Erro ao alterar disciplina: " + ex.getMessage());
 					}
-				});
+				}
+			}
+		});
 
-				// Excluir
-				menuExcluir_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							String rgm = txtRgm_1.getText().trim();
-							String nome_disciplina = (String) cmbDisciplina.getSelectedItem();;
-							DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+		// Consultar
+		menuConsultar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+					DisciplinaModel disciplina = disciplinaDAO.consultarDisciplina(txtRgm_1.getText());
+					CursoDAO cursoDAO = new CursoDAO();
+					CursoModel curso = cursoDAO.consultar(txtRgm_1.getText());
 
-							if (!rgm.isEmpty()) {
-								disciplinaDAO.excluirDisciplina(rgm, nome_disciplina);
-								JOptionPane.showMessageDialog(null, "Disciplina excluída com sucesso!");
-							} else {
-								JOptionPane.showMessageDialog(null, "Por favor, insira um RGM válido.");
-							}
-						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null, "Erro ao excluir disciplina: " + ex.getMessage());
-						}
+					if (curso != null) {
+
+						String nomeAluno = disciplinaDAO.consultarNomeAluno(txtRgm_1.getText());
+						lblConsultaNome.setText(nomeAluno);
+
+						String cursoAluno = disciplinaDAO.consultarCursoAluno(txtRgm_1.getText());
+						lblConsultaCurso.setText(cursoAluno);
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Nenhuma disciplina encontrada para o aluno com RGM: " + txtRgm.getText());
 					}
-				});
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Erro ao consultar disciplina: " + ex.getMessage());
+				}
+			}
+		});
 
-				// Limpar Tela menu
-				menuLimpar_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						txtRgm_1.setText("");
-						lblConsultaNome.setText("");
-						lblConsultaCurso.setText("");
-						cmbSemestre.setSelectedIndex(-1);
-						cmbEtapa.setSelectedIndex(-1);
-						cmbDisciplina.setSelectedIndex(-1);
-						txtNota_1.setText("");
-						txtNota_2.setText("");
-						txtFaltas.setText("");
+		// Excluir
+		menuExcluir_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String rgm = txtRgm_1.getText().trim();
+					String nome_disciplina = (String) cmbDisciplina.getSelectedItem();
+					;
+					DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+
+					if (!rgm.isEmpty()) {
+						disciplinaDAO.excluirDisciplina(rgm, nome_disciplina);
+						JOptionPane.showMessageDialog(null, "Disciplina excluída com sucesso!");
+					} else {
+						JOptionPane.showMessageDialog(null, "Por favor, insira um RGM válido.");
 					}
-				});
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Erro ao excluir disciplina: " + ex.getMessage());
+				}
+			}
+		});
+
+		// Limpar Tela menu
+		menuLimpar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtRgm_1.setText("");
+				lblConsultaNome.setText("");
+				lblConsultaCurso.setText("");
+				cmbSemestre.setSelectedIndex(-1);
+				cmbEtapa.setSelectedIndex(-1);
+				cmbDisciplina.setSelectedIndex(-1);
+				txtNota_1.setText("");
+				txtNota_2.setText("");
+				txtFaltas.setText("");
+			}
+		});
 
 		// ------------------------------------------------------------
 
@@ -2023,29 +2031,30 @@ public class Telas extends JFrame {
 			throw new Exception();
 		}
 	}
-	
-	public boolean getDadosNotas(boolean att) throws Exception{
-		if(att) {
-			if(cmbSemestre.getSelectedItem().equals("Selecione")) {
+
+	public boolean getDadosNotas(boolean att) throws Exception {
+		if (att) {
+			if (cmbSemestre.getSelectedItem().equals("Selecione")) {
 				throw new Exception("Selecione um semestre válido");
-				
-			}if (cmbDisciplina.getSelectedItem().equals("Selecione uma disciplina")) {
+
+			}
+			if (cmbDisciplina.getSelectedItem().equals("Selecione uma disciplina")) {
 				throw new Exception("Selecione uma disciplina válida");
 			}
 			if (cmbEtapa.getSelectedItem().equals("\t-")) {
 				throw new Exception("Selecione um período");
 			}
-			if(txtNota_1.getText().isEmpty()) {
+			if (txtNota_1.getText().isEmpty()) {
 				throw new Exception("Digite uma nota válida");
-				
+
 			}
-			if(txtNota_2.getText().isEmpty()) {
+			if (txtNota_2.getText().isEmpty()) {
 				throw new Exception("Digite uma nota válida");
 			}
-			if(txtFaltas.getText().isEmpty()) {
+			if (txtFaltas.getText().isEmpty()) {
 				throw new Exception("Digite o número de faltas");
 			}
-			
+
 		}
 		return true;
 	}
@@ -2323,5 +2332,5 @@ public class Telas extends JFrame {
 			System.out.println(e2);
 		}
 	}
-	
+
 }
