@@ -71,6 +71,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -141,9 +142,12 @@ public class Telas extends JFrame {
 	private JMenuItem mntmLimparTela;
 	private JTextField txtRgmBoletim;
 	private JTextField txtNota_2;
+	
 	private DisciplinaDAO disciplinaDAO;
 	private JLabel lblLimpar_2;
-	
+	private JTable table;
+	private JLabel lblNomeBoletim;
+
 
 	/**
 	 * Launch the application.
@@ -1208,7 +1212,9 @@ public class Telas extends JFrame {
 		panel_3 = new JPanel();
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
 
-		JButton btnGerarBoletim = new JButton("Gerar boletim\r\n");
+		JButton btnGerarBoletim = new JButton("");
+		btnGerarBoletim.setIcon(new ImageIcon(Telas.class.getResource("/images/pdf_resized.png")));
+		btnGerarBoletim.setSelectedIcon(new ImageIcon(Telas.class.getResource("/images/pdf_resized.png")));
 		btnGerarBoletim.setToolTipText("Gerar boletim do aluno");
 		btnGerarBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
 		btnGerarBoletim.addActionListener(new ActionListener() {
@@ -1217,19 +1223,44 @@ public class Telas extends JFrame {
 			}
 		});
 		panel_3.setLayout(null);
-		btnGerarBoletim.setBounds(469, 108, 161, 31);
+		btnGerarBoletim.setBounds(621, 0, 121, 111);
 		panel_3.add(btnGerarBoletim);
 
 		JLabel lblRgmBoletim = new JLabel("RGM");
 		lblRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
-		lblRgmBoletim.setBounds(126, 109, 45, 30);
+		lblRgmBoletim.setBounds(36, 42, 53, 30);
 		panel_3.add(lblRgmBoletim);
 
 		txtRgmBoletim = new JFormattedTextField(new MaskFormatter("#########"));
+		txtRgmBoletim.setText("      ");
 		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
-		txtRgmBoletim.setBounds(187, 110, 220, 26);
+		txtRgmBoletim.setBounds(90, 33, 334, 39);
 		panel_3.add(txtRgmBoletim);
 		txtRgmBoletim.setColumns(10);
+		
+		JLabel lblConsultar_2_1 = new JLabel("Gerar PDF");
+		lblConsultar_2_1.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblConsultar_2_1.setBounds(641, 110, 97, 21);
+		panel_3.add(lblConsultar_2_1);
+		
+		JButton btnConsultarBoletim = new JButton("");
+		btnConsultarBoletim.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
+		btnConsultarBoletim.setBounds(472, 0, 121, 111);
+		panel_3.add(btnConsultarBoletim);
+		
+		JLabel lblConsultar_2_1_1 = new JLabel("Consultar");
+		lblConsultar_2_1_1.setFont(new Font("Poppins", Font.BOLD, 15));
+		lblConsultar_2_1_1.setBounds(494, 110, 97, 21);
+		panel_3.add(lblConsultar_2_1_1);
+		
+		table = new JTable();
+		table.setBounds(23, 150, 742, 231);
+		panel_3.add(table);
+		
+		lblNomeBoletim = new JLabel("Nome do aluno");
+		lblNomeBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNomeBoletim.setBounds(36, 101, 388, 30);
+		panel_3.add(lblNomeBoletim);
 
 		
 //CRUD da tela Notas e Faltas		
