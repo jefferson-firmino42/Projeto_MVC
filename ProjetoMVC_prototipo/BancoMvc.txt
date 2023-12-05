@@ -30,6 +30,7 @@ CREATE TABLE disciplina (
     semestre VARCHAR(20),
     notas DECIMAL(5,2),
     faltas INT,
+    etapa VARCHAR(10),
     FOREIGN KEY (rgm) REFERENCES aluno(rgm) ON DELETE CASCADE
 );
 
