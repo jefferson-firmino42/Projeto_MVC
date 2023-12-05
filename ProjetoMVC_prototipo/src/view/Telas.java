@@ -82,6 +82,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
@@ -195,29 +198,38 @@ public class Telas extends JFrame {
 		menuBar.add(mnAluno);
 
 		mntmSalvar = new JMenuItem("Salvar");
+		mntmSalvar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
 
 		mntmAlterar = new JMenuItem("Alterar");
+		mntmAlterar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 
 		mntmConsultar = new JMenuItem("Consultar");
+		mntmConsultar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
 
 		mntmExcluir = new JMenuItem("Excluir");
+		mntmExcluir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
 
 		mnNewMenu = new JMenu("Notas e Faltas");
 		menuBar.add(mnNewMenu);
 
 		menuSalvar_1 = new JMenuItem("Salvar");
+		menuSalvar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuSalvar_1);
 
 		menuAlterar_1 = new JMenuItem("Alterar");
+		menuAlterar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuAlterar_1);
 
 		menuConsultar_1 = new JMenuItem("Consultar");
+		menuConsultar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuConsultar_1);
 
 		menuExcluir_1 = new JMenuItem("Excluir");
+		menuExcluir_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuExcluir_1);
 		
 		menuLimpar_1 = new JMenuItem("Limpar Tela");
+		menuLimpar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(menuLimpar_1);
 
 		mnNewMenu_1 = new JMenu("Ajuda");
@@ -225,6 +237,7 @@ public class Telas extends JFrame {
 
 		// acessa a tela sobre
 		btnSobre = new JMenuItem("Sobre");
+		btnSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tela_Ajuda novaTela = new Tela_Ajuda();
@@ -1241,7 +1254,7 @@ public class Telas extends JFrame {
         txtFaltas.setBackground(Color.WHITE);
 		txtFaltas.setColumns(10);
 
-		JLabel lblEtapa = new JLabel("Período");
+		JLabel lblEtapa = new JLabel("Etapa");
 		lblEtapa.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblEtapa.setBounds(10, 194, 100, 24);
 		panel_2.add(lblEtapa);
@@ -1782,7 +1795,7 @@ public class Telas extends JFrame {
 					}
 				});
 
-				// Limpar Tela -- NÃO TA FUNCIONANDOOOO
+				// Limpar Tela menu
 				menuLimpar_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						txtRgm_1.setText("");
@@ -1967,6 +1980,7 @@ public class Telas extends JFrame {
 		mnAluno.add(mntmConsultar);
 
 		mntmLimparTela = new JMenuItem("Limpar tela");
+		mntmLimparTela.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
 		mntmLimparTela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtRgm.setText("");
