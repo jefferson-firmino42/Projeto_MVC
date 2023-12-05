@@ -3,8 +3,11 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.AlunoModel;
+import model.CursoModel;
 import utils.ConnectionFactory;
 
 import java.sql.Connection;
@@ -115,6 +118,33 @@ public class DAO {
 		}
 	}
 	
+	public AlunoModel verificarRegistro() throws Exception{
+		try {
+			String SQL = "SELECT * FROM aluno";
+			ps = conn.prepareStatement(SQL);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String rgm = rs.getString("rgm");
+				String nome = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String email = rs.getString("email");
+				String endereco = rs.getString("endereco");
+				String municipio = rs.getString("municipio");
+				String uf = rs.getString("uf");
+				String celular = rs.getString("celular");
+				String nascimento = rs.getString("nascimento");
+				String foto = rs.getString("foto");
+				
+				alunoModel = new AlunoModel(rgm, nome, cpf, email, endereco, municipio, uf, celular, nascimento, foto);;
+			}
+			return alunoModel;
+		}catch(SQLException sqle) {
+			throw new Exception(sqle);
+		}finally {
+			ConnectionFactory.closeConnection(conn, ps, rs);
+		}
+	}
+	
 	public void alterar(AlunoModel alunoModel) throws Exception {
 	    if (alunoModel == null) {
 	        throw new Exception("Os valores não podem ser nulos");
@@ -147,5 +177,35 @@ public class DAO {
 	        ConnectionFactory.closeConnection(conn);
 	    }
 	}
+	
+	public AlunoModel obterAlunoPorCurso(CursoModel curso) throws Exception {
+        AlunoModel aluno = null;
+
+        try {
+            String SQL = "SELECT * FROM aluno WHERE rgm = ?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString(1, curso.getRgm());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String rgm = rs.getString("rgm");
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                String email = rs.getString("email");
+                String endereco = rs.getString("endereco");
+                String municipio = rs.getString("municipio");
+                String uf = rs.getString("uf");
+                String celular = rs.getString("celular");
+                String nascimento = rs.getString("nascimento");
+                String foto = rs.getString("foto");
+
+                aluno = new AlunoModel(rgm, nome, cpf, email, endereco, municipio, uf, celular, nascimento, foto);
+            }
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } 
+
+        return aluno;
+    }
 
 }

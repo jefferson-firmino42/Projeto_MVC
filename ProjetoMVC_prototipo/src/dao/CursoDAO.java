@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -73,6 +75,56 @@ public class CursoDAO {
 		}
 	}
 	
+	public CursoModel verificarRegistro() throws Exception {
+	    CursoModel cursoModel = null;
+
+	    try {
+	        String SQL = "SELECT * FROM curso";
+	        ps = conn.prepareStatement(SQL);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            String rgm = rs.getString("rgm");
+	            int idCurso = rs.getInt("id_curso");
+	            String nomeCurso = rs.getString("nome_curso");
+	            String campus = rs.getString("campus");
+	            String periodo = rs.getString("periodo");
+
+	            cursoModel = new CursoModel(rgm, idCurso, nomeCurso, campus, periodo);
+	        }
+	    } catch (SQLException sqle) {
+	        throw new Exception(sqle);
+	    } finally {
+	        ConnectionFactory.closeConnection(conn, ps, rs);
+	    }
+
+	    return cursoModel;
+	}
+
+	public List<CursoModel> obterCursos() throws Exception {
+        List<CursoModel> cursos = new ArrayList<>();
+
+        try {
+            String SQL = "SELECT * FROM curso";
+            ps = conn.prepareStatement(SQL);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String rgm = rs.getString("rgm");
+                int idCurso = rs.getInt("id_curso");
+                String nomeCurso = rs.getString("nome_curso");
+                String campus = rs.getString("campus");
+                String periodo = rs.getString("periodo");
+
+                CursoModel cursoModel = new CursoModel(rgm, idCurso, nomeCurso, campus, periodo);
+                cursos.add(cursoModel);
+            }
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } 
+        return cursos;
+    }
+	
 	public void alterar(CursoModel cursoModel) throws Exception {
 	    if (cursoModel == null) {
 	        throw new Exception("Os valores não podem ser nulos");
@@ -96,10 +148,6 @@ public class CursoDAO {
 	        ConnectionFactory.closeConnection(conn);
 	    }
 	}
-
-
-
-
 	
 	public boolean rgmExiste(String rgm) throws SQLException {
 	    String SQL = "SELECT rgm FROM curso WHERE rgm=?";

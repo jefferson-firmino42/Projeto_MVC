@@ -20,6 +20,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.mysql.cj.xdevapi.Statement;
 
 import dao.CursoDAO;
 import dao.DAO;
@@ -69,8 +70,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -80,6 +83,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.KeyStroke;
@@ -165,6 +170,8 @@ public class Telas extends JFrame {
 	private DefaultTableModel tableModel;
 	private JLabel lblSair_1;
 	private JMenuItem menuLimpar_1;
+	private JScrollPane scrollPane_1;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -1390,7 +1397,94 @@ public class Telas extends JFrame {
 		lblLimpar_2.setFont(new Font("Poppins", Font.BOLD, 15));
 		lblLimpar_2.setBounds(675, 57, 100, 44);
 		panel_2.add(lblLimpar_2);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(176, 224, 230));
+		panel_4.setToolTipText("");
+		tabbedPane_1.addTab("Registro de alunos", null, panel_4, null);
+		panel_4.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Listagem de alunos cadastrados em cursos");
+		lblNewLabel_1.setFont(new Font("Poppins", Font.BOLD, 20));
+		lblNewLabel_1.setBounds(156, 10, 519, 44);
+		panel_4.add(lblNewLabel_1);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 131, 765, 248);
+		panel_4.add(scrollPane_1);
 
+		JTable table_1 = new JTable();
+		table_1.setBounds(0, 0, 1, 1);
+		scrollPane_1.setViewportView(table_1);
+
+		DefaultTableModel tableModel2 = new DefaultTableModel();
+		tableModel2.addColumn("RGM");
+		tableModel2.addColumn("Nome do Aluno");
+		tableModel2.addColumn("Nome do Curso");
+		tableModel2.addColumn("Período");
+		tableModel2.addColumn("Câmpus");
+		table_1.setModel(tableModel2);
+
+		JButton btnListarAlunos = new JButton("Listar alunos");
+		btnListarAlunos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnListarAlunos.setFont(new Font("Poppins", Font.PLAIN, 15));
+		btnListarAlunos.setBorder(new LineBorder(Color.BLACK, 2, true));
+		btnListarAlunos.setPreferredSize(new Dimension(220, 50));
+		btnListarAlunos.setBackground(Color.WHITE);
+		btnListarAlunos.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            CursoDAO cursoDAO = new CursoDAO();
+		            List<CursoModel> cursos = cursoDAO.obterCursos(); // Método fictício para obter todos os cursos
+		            DAO dao = new DAO();
+		            DefaultTableModel tableModel = (DefaultTableModel) table_1.getModel();
+
+		            // Limpa dados antigos do modelo original (tableModel2)
+		            tableModel2.setRowCount(0);
+
+		            for (CursoModel curso : cursos) {
+		                AlunoModel aluno = dao.obterAlunoPorCurso(curso); // Método fictício para obter aluno por curso
+
+		                if (aluno != null) {
+		                    // Adiciona uma nova linha com os dados do curso e do aluno no modelo original
+		                    Object[] rowData = {
+		                        curso.getRgm(),
+		                        aluno.getNome(),
+		                        curso.getNomeCurso(),
+		                        curso.getPeriodo(),
+		                        curso.getCampus()
+		                    };
+		                    tableModel2.addRow(rowData);
+		                }
+		            }
+
+		            if (tableModel2.getRowCount() == 0) {
+		                JOptionPane.showMessageDialog(null, "Nenhum curso ou aluno encontrado ou registro vazio.");
+		            }
+
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		            JOptionPane.showMessageDialog(null, "Erro ao listar alunos: " + ex.getMessage());
+		        }
+		    }
+		});
+		btnListarAlunos.setBounds(37, 64, 152, 50);
+		panel_4.add(btnListarAlunos);
+		
+		JButton btnLimparAlunos = new JButton("Limpar");
+		btnLimparAlunos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLimparAlunos.setFont(new Font("Poppins", Font.PLAIN, 15));
+		btnLimparAlunos.setBorder(new LineBorder(Color.BLACK, 2, true));
+		btnLimparAlunos.setPreferredSize(new Dimension(220, 50));
+		btnLimparAlunos.setBackground(Color.WHITE);
+		btnLimparAlunos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tableModel2.setRowCount(0);
+			}
+		});
+		btnLimparAlunos.setBounds(533, 64, 157, 50);
+		panel_4.add(btnLimparAlunos);
+		
 		panel_3 = new JPanel();
 		panel_3.setBackground(new Color(176, 224, 230));
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
@@ -1508,7 +1602,7 @@ public class Telas extends JFrame {
 		lblConsultar_2_1_1.setBounds(494, 110, 97, 21);
 		panel_3.add(lblConsultar_2_1_1);
 
-		lblNomeBoletim = new JLabel("Nome do aluno");
+		lblNomeBoletim = new JLabel("");
 		lblNomeBoletim.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblNomeBoletim.setBounds(36, 101, 388, 30);
 		panel_3.add(lblNomeBoletim);
@@ -2352,5 +2446,4 @@ public class Telas extends JFrame {
 			System.out.println(e2);
 		}
 	}
-
 }
