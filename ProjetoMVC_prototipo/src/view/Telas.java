@@ -149,6 +149,7 @@ public class Telas extends JFrame {
 				try {
 					Telas frame = new Telas();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -202,6 +203,7 @@ public class Telas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Tela_Ajuda novaTela = new Tela_Ajuda();
 				novaTela.setVisible(true);
+				novaTela.setResizable(false);
 			}
 		});
 
@@ -1202,7 +1204,7 @@ public class Telas extends JFrame {
 		lblRgmBoletim.setBounds(126, 109, 45, 30);
 		panel_3.add(lblRgmBoletim);
 
-		txtRgmBoletim = new JTextField();
+		txtRgmBoletim = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgmBoletim.setBounds(187, 110, 220, 26);
 		panel_3.add(txtRgmBoletim);
@@ -1434,7 +1436,7 @@ public class Telas extends JFrame {
 				throw new Exception("CPF inválido");
 			}
 
-			if (!txtRgm.getText().isEmpty()) {
+			if (!txtRgm.getText().trim().isEmpty()) {
 				throw new Exception("Digite um RGM.");
 			}
 
@@ -1490,7 +1492,7 @@ public class Telas extends JFrame {
 			throw new Exception("Insira um email valido");
 		}
 
-		if (txtRgm.getText().equals("") || txtRgm.getText().length() != 9) {
+		if (txtRgm.getText().trim().equals("") || txtRgm.getText().trim().length() == 0) {
 			throw new Exception("Digite um RGM válido.");
 		}
 

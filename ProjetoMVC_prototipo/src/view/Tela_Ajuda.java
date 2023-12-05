@@ -30,6 +30,7 @@ public class Tela_Ajuda extends JFrame {
 				try {
 					Tela_Ajuda frame = new Tela_Ajuda();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
