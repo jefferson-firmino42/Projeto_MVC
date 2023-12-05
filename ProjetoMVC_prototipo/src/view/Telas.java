@@ -1,11 +1,13 @@
 package view;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -78,11 +80,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Color;
+import java.awt.Cursor;
 
 public class Telas extends JFrame {
 	private AlunoModel aluno;
 	String path;
-
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMenuBar menuBar;
@@ -140,7 +144,6 @@ public class Telas extends JFrame {
 	private JLabel lblConsultar_1;
 	private JLabel lblLimpar;
 	private JLabel lblSalvar;
-	private JLabel lblSair_1;
 	private JLabel lblConsultar_2;
 	private JLabel lblConsultar_3;
 	private JLabel lblLimpar_1;
@@ -154,6 +157,7 @@ public class Telas extends JFrame {
 	private JTable table;
 	private JLabel lblNomeBoletim;
 	private DefaultTableModel tableModel;
+	private JLabel lblSair_1;
 
 	/**
 	 * Launch the application.
@@ -181,6 +185,7 @@ public class Telas extends JFrame {
 		setBounds(100, 100, 816, 490);
 
 		menuBar = new JMenuBar();
+		menuBar.setBorder(null);
 		setJMenuBar(menuBar);
 
 		mnAluno = new JMenu("Aluno");
@@ -234,51 +239,52 @@ public class Telas extends JFrame {
 		contentPane.add(tabbedPane_1);
 
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 224, 230));
 		tabbedPane_1.addTab("Dados pessoais", null, panel, null);
 		panel.setLayout(null);
 
 		lblRgm = new JLabel("RGM");
-		lblRgm.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblRgm.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblRgm.setBounds(22, 40, 46, 14);
 		panel.add(lblRgm);
 
 		lblDataDeNascimento = new JLabel("Data de Nascimento");
-		lblDataDeNascimento.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblDataDeNascimento.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblDataDeNascimento.setBounds(22, 93, 180, 14);
 		panel.add(lblDataDeNascimento);
 
 		lblEnail = new JLabel("Email");
-		lblEnail.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblEnail.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblEnail.setBounds(22, 170, 57, 14);
 		panel.add(lblEnail);
 
 		lblEnd = new JLabel("End.");
-		lblEnd.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblEnd.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblEnd.setBounds(22, 217, 46, 14);
 		panel.add(lblEnd);
 
 		lblMunicpio = new JLabel("Município");
-		lblMunicpio.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblMunicpio.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblMunicpio.setBounds(22, 296, 91, 20);
 		panel.add(lblMunicpio);
 
 		lblUf = new JLabel("UF");
-		lblUf.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblUf.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblUf.setBounds(299, 299, 39, 14);
 		panel.add(lblUf);
 
 		lblCelular = new JLabel("Celular");
-		lblCelular.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblCelular.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblCelular.setBounds(466, 296, 67, 20);
 		panel.add(lblCelular);
 
 		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblNome.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblNome.setBounds(239, 39, 67, 14);
 		panel.add(lblNome);
 
 		lblCpf = new JLabel("CPF");
-		lblCpf.setFont(new Font("Poppins", Font.PLAIN, 15));
+		lblCpf.setFont(new Font("Poppins Medium", Font.PLAIN, 16));
 		lblCpf.setBounds(484, 40, 49, 14);
 		panel.add(lblCpf);
 
@@ -286,16 +292,25 @@ public class Telas extends JFrame {
 		txtNascimento.setToolTipText("");
 		txtNascimento.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNascimento.setBounds(210, 85, 151, 32);
+		txtNascimento.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtNascimento.setPreferredSize(new Dimension(220, 50));
+        txtNascimento.setBackground(Color.WHITE);
 		panel.add(txtNascimento);
 
 		txtCelular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		txtCelular.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtCelular.setBounds(543, 294, 208, 25);
+		txtCelular.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtCelular.setPreferredSize(new Dimension(220, 50));
+        txtCelular.setBackground(Color.WHITE);
 		panel.add(txtCelular);
 
 		txtRgm = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRgm.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm.setBounds(65, 24, 151, 32);
+		txtRgm.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtRgm.setPreferredSize(new Dimension(220, 50));
+        txtRgm.setBackground(Color.WHITE);
 		panel.add(txtRgm);
 		txtRgm.setColumns(10);
 
@@ -303,27 +318,44 @@ public class Telas extends JFrame {
 		txtEmail.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(78, 155, 283, 32);
+		txtEmail.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtEmail.setPreferredSize(new Dimension(220, 50));
+        txtEmail.setBackground(Color.WHITE);
 		panel.add(txtEmail);
 
 		txtEndereco = new JTextField();
 		txtEndereco.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtEndereco.setColumns(10);
 		txtEndereco.setBounds(78, 202, 283, 32);
+		txtEndereco.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtEndereco.setPreferredSize(new Dimension(220, 50));
+        txtEndereco.setBackground(Color.WHITE);
 		panel.add(txtEndereco);
 
 		txtMunicipio = new JTextField();
 		txtMunicipio.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtMunicipio.setColumns(10);
 		txtMunicipio.setBounds(112, 291, 166, 32);
+		txtMunicipio.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtMunicipio.setPreferredSize(new Dimension(220, 50));
+        txtMunicipio.setBackground(Color.WHITE);
 		panel.add(txtMunicipio);
 
 		txtNome = new JTextField();
+		txtNome.setBorder(new LineBorder(new Color(171, 173, 179)));
 		txtNome.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNome.setColumns(10);
 		txtNome.setBounds(305, 24, 151, 32);
+		txtNome.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtNome.setPreferredSize(new Dimension(220, 50));
+        txtNome.setBackground(Color.WHITE);
 		panel.add(txtNome);
 
 		cbxUf = new JComboBox();
+		cbxUf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cbxUf.setBorder(new LineBorder(Color.BLACK, 2, true));
+        cbxUf.setPreferredSize(new Dimension(220, 50));
+        cbxUf.setBackground(Color.WHITE);
 		cbxUf.setModel(new DefaultComboBoxModel(
 				new String[] { " ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
@@ -340,7 +372,11 @@ public class Telas extends JFrame {
 		panel.add(lblFoto);
 
 		JButton btnFoto = new JButton("Selecionar foto");
+		btnFoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFoto.setFont(new Font("Poppins", Font.PLAIN, 15));
+		btnFoto.setBorder(new LineBorder(Color.BLACK, 2, true));
+        btnFoto.setPreferredSize(new Dimension(220, 50));
+        btnFoto.setBackground(Color.WHITE);
 		btnFoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jfc = new JFileChooser();
@@ -372,18 +408,23 @@ public class Telas extends JFrame {
 		txtCpf.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtCpf.setBounds(545, 25, 206, 30);
 		panel.add(txtCpf);
+		txtCpf.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtCpf.setPreferredSize(new Dimension(220, 50));
+        txtCpf.setBackground(Color.WHITE);
 		txtCpf.setColumns(10);
 
 		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(176, 224, 230));
 		tabbedPane_1.addTab("Curso", null, panel_1, null);
 		panel_1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Curso");
-		lblNewLabel.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNewLabel.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblNewLabel.setBounds(69, 80, 96, 49);
 		panel_1.add(lblNewLabel);
 
 		cmbCurso = new JComboBox<>();
+		cmbCurso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 		model.addElement("Selecione um curso");
 		model.addElement("Análise e Desenvolvimento de Sistemas");
@@ -391,16 +432,20 @@ public class Telas extends JFrame {
 		model.addElement("Comércio Exterior");
 		cmbCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCurso.setBounds(169, 80, 493, 50);
+		cmbCurso.setBorder(new LineBorder(Color.BLACK, 2, true));
+        cmbCurso.setPreferredSize(new Dimension(220, 50));
+        cmbCurso.setBackground(Color.WHITE);
 		panel_1.add(cmbCurso);
 		cmbCurso.setModel(model);
 		cmbCurso.setSelectedIndex(0);
 
 		JLabel lblCampus = new JLabel("Campus");
-		lblCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblCampus.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblCampus.setBounds(69, 139, 96, 49);
 		panel_1.add(lblCampus);
 
 		cmbCampus = new JComboBox<>();
+		cmbCampus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cmbCampus.setFont(new Font("Poppins", Font.PLAIN, 20));
 		cmbCampus.setBounds(169, 139, 493, 49);
 
@@ -411,28 +456,46 @@ public class Telas extends JFrame {
 		modelCampus.addElement("São Caetano");
 		panel_1.add(cmbCampus);
 		cmbCampus.setModel(modelCampus);
+		cmbCampus.setBorder(new LineBorder(Color.BLACK, 2, true));
+        cmbCampus.setPreferredSize(new Dimension(220, 50));
+        cmbCampus.setBackground(Color.WHITE);
 		cmbCampus.setSelectedIndex(0);
 
 		JLabel lblPerodo = new JLabel("Período:");
-		lblPerodo.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblPerodo.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblPerodo.setBounds(69, 209, 96, 49);
 		panel_1.add(lblPerodo);
 
 		// Restante do seu código para salvar no banco de dados...
 
 		Matutino = new JRadioButton("Matutino");
-		Matutino.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Matutino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Matutino.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Matutino.setBounds(184, 223, 132, 21);
+		Matutino.setBorderPainted(false); 
+        Matutino.setContentAreaFilled(false); 
+        Matutino.setFocusPainted(false); 
+        Matutino.setOpaque(false);
 		panel_1.add(Matutino);
 
 		Vespertino = new JRadioButton("Vespertino");
-		Vespertino.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Vespertino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Vespertino.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Vespertino.setBounds(338, 223, 166, 21);
+		Vespertino.setBorderPainted(false); 
+        Vespertino.setContentAreaFilled(false); 
+        Vespertino.setFocusPainted(false); 
+        Vespertino.setOpaque(false);
 		panel_1.add(Vespertino);
 
 		Noturno = new JRadioButton("Noturno");
-		Noturno.setFont(new Font("Poppins", Font.PLAIN, 20));
+		Noturno.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Noturno.setFont(new Font("Poppins Light", Font.PLAIN, 20));
 		Noturno.setBounds(522, 223, 166, 21);
+		Noturno.setBorderPainted(false); 
+        Noturno.setContentAreaFilled(false); 
+        Noturno.setFocusPainted(false); 
+        Noturno.setOpaque(false);
 		panel_1.add(Noturno);
 
 		bg.add(Matutino);
@@ -440,6 +503,7 @@ public class Telas extends JFrame {
 		bg.add(Noturno);
 
 		JButton btnSair = new JButton("");
+		btnSair.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -448,9 +512,14 @@ public class Telas extends JFrame {
 		btnSair.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
 		btnSair.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSair.setBounds(28, 268, 96, 79);
+		btnSair.setBorderPainted(false);
+		btnSair.setContentAreaFilled(false); 
+        btnSair.setFocusPainted(false); 
+        btnSair.setOpaque(false);
 		panel_1.add(btnSair);
 
 		JButton btnAlterar = new JButton("");
+		btnAlterar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CursoModel cursoModel = new CursoModel();
@@ -490,9 +559,14 @@ public class Telas extends JFrame {
 		btnAlterar.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar.setBounds(181, 268, 96, 79);
+		btnAlterar.setBorderPainted(false); 
+        btnAlterar.setContentAreaFilled(false); 
+        btnAlterar.setFocusPainted(false); 
+        btnAlterar.setOpaque(false);
 		panel_1.add(btnAlterar);
 
 		JButton btnConsultar = new JButton("");
+		btnConsultar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -524,9 +598,14 @@ public class Telas extends JFrame {
 		btnConsultar.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar.setBounds(338, 268, 86, 79);
+		btnConsultar.setBorderPainted(false); 
+        btnConsultar.setContentAreaFilled(false); 
+        btnConsultar.setFocusPainted(false); 
+        btnConsultar.setOpaque(false);
 		panel_1.add(btnConsultar);
 
 		JButton btnLimpar = new JButton("");
+		btnLimpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmbCampus.setSelectedIndex(0);
@@ -539,9 +618,14 @@ public class Telas extends JFrame {
 		btnLimpar.setIcon(new ImageIcon(Telas.class.getResource("/images/borracha.png")));
 		btnLimpar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar.setBounds(490, 268, 96, 79);
+		btnLimpar.setBorderPainted(false); 
+        btnLimpar.setContentAreaFilled(false); 
+        btnLimpar.setFocusPainted(false); 
+        btnLimpar.setOpaque(false);
 		panel_1.add(btnLimpar);
 
 		JButton btnSalvar = new JButton("");
+		btnSalvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -596,27 +680,34 @@ public class Telas extends JFrame {
 		btnSalvar.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar.setBounds(643, 268, 96, 79);
+		btnSalvar.setBorderPainted(false); 
+        btnSalvar.setContentAreaFilled(false); 
+        btnSalvar.setFocusPainted(false); 
+        btnSalvar.setOpaque(false);
 		panel_1.add(btnSalvar);
 
 		lblrgmcurso = new JLabel("RGM");
-		lblrgmcurso.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblrgmcurso.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblrgmcurso.setBounds(69, 21, 96, 49);
 		panel_1.add(lblrgmcurso);
 
 		txtRGMCurso = new JFormattedTextField(new MaskFormatter("#########"));
 		txtRGMCurso.setFont(new Font("Poppins", Font.PLAIN, 20));
 		txtRGMCurso.setBounds(169, 21, 493, 49);
+		txtRGMCurso.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtRGMCurso.setPreferredSize(new Dimension(220, 50));
+        txtRGMCurso.setBackground(Color.WHITE);
 		panel_1.add(txtRGMCurso);
 		txtRGMCurso.setColumns(10);
 
 		lblSair = new JLabel("Sair");
 		lblSair.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblSair.setBounds(57, 337, 61, 44);
+		lblSair.setBounds(58, 337, 61, 44);
 		panel_1.add(lblSair);
 
 		lblConsultar = new JLabel("Alterar");
 		lblConsultar.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblConsultar.setBounds(201, 337, 70, 44);
+		lblConsultar.setBounds(191, 337, 70, 44);
 		panel_1.add(lblConsultar);
 
 		lblConsultar_1 = new JLabel("Consultar");
@@ -631,7 +722,7 @@ public class Telas extends JFrame {
 
 		lblSalvar = new JLabel("Salvar");
 		lblSalvar.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblSalvar.setBounds(663, 337, 70, 44);
+		lblSalvar.setBounds(666, 337, 70, 44);
 		panel_1.add(lblSalvar);
 		DefaultComboBoxModel<String> disciplinaModel = new DefaultComboBoxModel<>();
 		DefaultComboBoxModel<String> semestreModel = new DefaultComboBoxModel<>();
@@ -644,18 +735,23 @@ public class Telas extends JFrame {
 		semestreModel.addElement("6º");
 
 		panel_2 = new JPanel();
+		panel_2.setBackground(new Color(176, 224, 230));
 		tabbedPane_1.addTab("Notas e Faltas", null, panel_2, null);
 		panel_2.setLayout(null);
 
 		JLabel lblRgm_1 = new JLabel("RGM");
-		lblRgm_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblRgm_1.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblRgm_1.setBounds(10, 32, 62, 24);
 		panel_2.add(lblRgm_1);
 
 		txtRgm_1 = new JFormattedTextField(new MaskFormatter("#########"));
+		txtRgm_1.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtRgm_1.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgm_1.setColumns(10);
 		txtRgm_1.setBounds(82, 18, 151, 39);
+		txtRgm_1.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtRgm_1.setPreferredSize(new Dimension(220, 50));
+        txtRgm_1.setBackground(Color.WHITE);
 		panel_2.add(txtRgm_1);
 
 		JLabel lblConsultaNome = new JLabel("Nome");
@@ -669,31 +765,39 @@ public class Telas extends JFrame {
 		panel_2.add(lblConsultaCurso);
 
 		JLabel lblDisciplina_1 = new JLabel("Disciplina");
-		lblDisciplina_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblDisciplina_1.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblDisciplina_1.setBounds(275, 139, 106, 24);
 		panel_2.add(lblDisciplina_1);
 
 		JLabel lblSemetre_1 = new JLabel("Semestre");
-		lblSemetre_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblSemetre_1.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblSemetre_1.setBounds(10, 139, 106, 24);
 		panel_2.add(lblSemetre_1);
 
 		JLabel lblNota_1 = new JLabel("Nota 1");
-		lblNota_1.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNota_1.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblNota_1.setBounds(250, 194, 70, 24);
 		panel_2.add(lblNota_1);
 
 		cmbDisciplina = new JComboBox<>();
+		cmbDisciplina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cmbDisciplina.setFont(new Font("Poppins", Font.PLAIN, 15));
 		cmbDisciplina.setBounds(382, 124, 370, 39);
 		cmbDisciplina.setModel(disciplinaModel);
+		cmbDisciplina.setBorder(new LineBorder(Color.BLACK, 2, true));
+        cmbDisciplina.setPreferredSize(new Dimension(220, 50));
+        cmbDisciplina.setBackground(Color.WHITE);
 		panel_2.add(cmbDisciplina);
 
 		JComboBox cmbSemestre = new JComboBox();
+		cmbSemestre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cmbSemestre
 				.setModel(new DefaultComboBoxModel(new String[] { "Selecione", "1º", "2º", "3º", "4º", "5º", "6º" }));
 		cmbSemestre.setFont(new Font("Poppins", Font.PLAIN, 15));
 		cmbSemestre.setBounds(126, 124, 125, 39);
+		cmbSemestre.setBorder(new LineBorder(Color.BLACK, 2, true));
+		cmbSemestre.setPreferredSize(new Dimension(220, 50));
+		cmbSemestre.setBackground(Color.WHITE);
 		panel_2.add(cmbSemestre);
 
 		// Seleção das Disciplinas
@@ -1106,35 +1210,51 @@ public class Telas extends JFrame {
 		});
 
 		JComboBox cmbEtapa = new JComboBox();
+		cmbEtapa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cmbEtapa.setModel(new DefaultComboBoxModel(new String[] { "\t-", "2020 - 1", "2020 - 2", "2021 - 1", "2021 - 2",
 				"2022 - 1", "2022 - 2", "2023 - 1", "2023 - 2" }));
 		cmbEtapa.setFont(new Font("Poppins", Font.PLAIN, 15));
 		cmbEtapa.setBounds(126, 194, 90, 31);
+		cmbEtapa.setBorder(new LineBorder(Color.BLACK, 2, true));
+        cmbEtapa.setPreferredSize(new Dimension(220, 50));
+        cmbEtapa.setBackground(Color.WHITE);
 		panel_2.add(cmbEtapa);
 
 		JLabel lblFaltas = new JLabel("Faltas");
-		lblFaltas.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblFaltas.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblFaltas.setBounds(550, 194, 70, 24);
 		panel_2.add(lblFaltas);
 
 		txtFaltas = new JTextField();
+		txtFaltas.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtFaltas.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtFaltas.setBounds(630, 194, 60, 31);
 		panel_2.add(txtFaltas);
+		txtFaltas.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtFaltas.setPreferredSize(new Dimension(220, 50));
+        txtFaltas.setBackground(Color.WHITE);
 		txtFaltas.setColumns(10);
 
 		JLabel lblEtapa = new JLabel("Período");
-		lblEtapa.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblEtapa.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblEtapa.setBounds(10, 194, 100, 24);
 		panel_2.add(lblEtapa);
 
 		txtNota_1 = new JTextField();
+		txtNota_1.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtNota_1.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNota_1.setColumns(10);
 		txtNota_1.setBounds(319, 194, 60, 31);
+		txtNota_1.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtNota_1.setPreferredSize(new Dimension(220, 50));
+        txtNota_1.setBackground(Color.WHITE);
 		panel_2.add(txtNota_1);
 
 		JButton btnSair_1 = new JButton("");
+		btnSair_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnSair_1.setContentAreaFilled(false);
+		btnSair_1.setFocusPainted(false);
+		btnSair_1.setBorderPainted(false);
 		btnSair_1.setIcon(new ImageIcon(Telas.class.getResource("/images/desligar_resized.png")));
 		btnSair_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSair_1.setBounds(52, 257, 100, 79);
@@ -1147,37 +1267,58 @@ public class Telas extends JFrame {
 		});
 
 		JButton btnAlterar_1 = new JButton("");
+		btnAlterar_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAlterar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/alterar_resized.png")));
 		btnAlterar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnAlterar_1.setBounds(196, 257, 102, 79);
+		btnAlterar_1.setBorderPainted(false); 
+        btnAlterar_1.setContentAreaFilled(false); 
+        btnAlterar_1.setFocusPainted(false); 
+        btnAlterar_1.setOpaque(false);
 		panel_2.add(btnAlterar_1);
 
 		JButton btnConsultar_1 = new JButton("");
+		btnConsultar_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConsultar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnConsultar_1.setBounds(330, 257, 100, 79);
+		btnConsultar_1.setBorderPainted(false); 
+        btnConsultar_1.setContentAreaFilled(false); 
+        btnConsultar_1.setFocusPainted(false); 
+        btnConsultar_1.setOpaque(false);
 		panel_2.add(btnConsultar_1);
 
 		JButton btnLimpar_1 = new JButton("");
+		btnLimpar_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimpar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/excluir_resized.png")));
 		btnLimpar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnLimpar_1.setBounds(476, 257, 106, 79);
+		btnLimpar_1.setBorderPainted(false); 
+        btnLimpar_1.setContentAreaFilled(false); 
+        btnLimpar_1.setFocusPainted(false); 
+        btnLimpar_1.setOpaque(false);
 		panel_2.add(btnLimpar_1);
 
 		JButton btnSalvar_1 = new JButton("");
+		btnSalvar_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSalvar_1.setIcon(new ImageIcon(Telas.class.getResource("/images/salvar_resized.png")));
 		btnSalvar_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnSalvar_1.setBounds(632, 257, 100, 79);
+		btnSalvar_1.setBorderPainted(false); 
+        btnSalvar_1.setContentAreaFilled(false); 
+        btnSalvar_1.setFocusPainted(false); 
+        btnSalvar_1.setOpaque(false);
 		panel_2.add(btnSalvar_1);
 
 		lblSair_1 = new JLabel("Sair");
+		lblSair_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSair_1.setFont(new Font("Poppins", Font.BOLD, 15));
 		lblSair_1.setBounds(82, 323, 61, 44);
 		panel_2.add(lblSair_1);
 
 		lblConsultar_2 = new JLabel("Alterar");
 		lblConsultar_2.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblConsultar_2.setBounds(217, 323, 70, 44);
+		lblConsultar_2.setBounds(216, 323, 70, 44);
 		panel_2.add(lblConsultar_2);
 
 		lblConsultar_3 = new JLabel("Consultar");
@@ -1187,30 +1328,39 @@ public class Telas extends JFrame {
 
 		lblLimpar_1 = new JLabel("Excluir");
 		lblLimpar_1.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblLimpar_1.setBounds(501, 323, 70, 44);
+		lblLimpar_1.setBounds(504, 323, 70, 44);
 		panel_2.add(lblLimpar_1);
 
 		lblSalvar_1 = new JLabel("Salvar");
 		lblSalvar_1.setFont(new Font("Poppins", Font.BOLD, 15));
-		lblSalvar_1.setBounds(652, 323, 70, 44);
+		lblSalvar_1.setBounds(661, 323, 70, 44);
 		panel_2.add(lblSalvar_1);
 
 		JLabel lblNota_2 = new JLabel("Nota 2");
-		lblNota_2.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNota_2.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblNota_2.setBounds(400, 194, 70, 24);
 		panel_2.add(lblNota_2);
 
 		txtNota_2 = new JTextField();
+		txtNota_2.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtNota_2.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtNota_2.setColumns(10);
 		txtNota_2.setBounds(470, 194, 60, 31);
+		txtNota_2.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtNota_2.setPreferredSize(new Dimension(220, 50));
+        txtNota_2.setBackground(Color.WHITE);
 		panel_2.add(txtNota_2);
 
 		JButton btnExcluir_1 = new JButton("");
+		btnExcluir_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnExcluir_1.setIcon(new ImageIcon(
 				Telas.class.getResource("/images/3672876_education_eraser_erasing_rubber_stationery_icon.png")));
 		btnExcluir_1.setFont(new Font("Poppins", Font.PLAIN, 10));
 		btnExcluir_1.setBounds(685, 0, 70, 70);
+		btnExcluir_1.setBorderPainted(false); 
+        btnExcluir_1.setContentAreaFilled(false); 
+        btnExcluir_1.setFocusPainted(false); 
+        btnExcluir_1.setOpaque(false);
 		panel_2.add(btnExcluir_1);
 
 		lblLimpar_2 = new JLabel("Limpar Tela");
@@ -1219,9 +1369,11 @@ public class Telas extends JFrame {
 		panel_2.add(lblLimpar_2);
 
 		panel_3 = new JPanel();
+		panel_3.setBackground(new Color(176, 224, 230));
 		tabbedPane_1.addTab("Boletim", null, panel_3, null);
 
 		JButton btnGerarBoletim = new JButton("");
+		btnGerarBoletim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGerarBoletim.setIcon(
 				new ImageIcon(Telas.class.getResource("/images/2133056_document_eps_file_format_pdf_icon (1).png")));
 		btnGerarBoletim.setToolTipText("Gerar boletim do aluno");
@@ -1233,10 +1385,14 @@ public class Telas extends JFrame {
 		});
 		panel_3.setLayout(null);
 		btnGerarBoletim.setBounds(621, 0, 121, 111);
+		btnGerarBoletim.setBorderPainted(false); 
+        btnGerarBoletim.setContentAreaFilled(false); 
+        btnGerarBoletim.setFocusPainted(false); 
+        btnGerarBoletim.setOpaque(false);
 		panel_3.add(btnGerarBoletim);
 
 		JLabel lblRgmBoletim = new JLabel("RGM");
-		lblRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblRgmBoletim.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblRgmBoletim.setBounds(36, 42, 53, 30);
 		panel_3.add(lblRgmBoletim);
 
@@ -1244,6 +1400,9 @@ public class Telas extends JFrame {
 		txtRgmBoletim.setText("      ");
 		txtRgmBoletim.setFont(new Font("Poppins", Font.PLAIN, 15));
 		txtRgmBoletim.setBounds(90, 33, 334, 39);
+		txtRgmBoletim.setBorder(new LineBorder(Color.BLACK, 2, true));
+        txtRgmBoletim.setPreferredSize(new Dimension(220, 50));
+        txtRgmBoletim.setBackground(Color.WHITE);
 		panel_3.add(txtRgmBoletim);
 		txtRgmBoletim.setColumns(10);
 
@@ -1272,6 +1431,7 @@ public class Telas extends JFrame {
 		panel_3.add(scrollPane);
 
 		JButton btnConsultarBoletim = new JButton("");
+		btnConsultarBoletim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConsultarBoletim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -1302,6 +1462,10 @@ public class Telas extends JFrame {
 		});
 		btnConsultarBoletim.setIcon(new ImageIcon(Telas.class.getResource("/images/consultar_resized.png")));
 		btnConsultarBoletim.setBounds(472, 0, 121, 111);
+		btnConsultarBoletim.setBorderPainted(false); 
+        btnConsultarBoletim.setContentAreaFilled(false); 
+        btnConsultarBoletim.setFocusPainted(false); 
+        btnConsultarBoletim.setOpaque(false);
 		panel_3.add(btnConsultarBoletim);
 
 		JLabel lblConsultar_2_1_1 = new JLabel("Consultar");
@@ -1310,7 +1474,7 @@ public class Telas extends JFrame {
 		panel_3.add(lblConsultar_2_1_1);
 
 		lblNomeBoletim = new JLabel("Nome do aluno");
-		lblNomeBoletim.setFont(new Font("Poppins", Font.PLAIN, 20));
+		lblNomeBoletim.setFont(new Font("Poppins Medium", Font.PLAIN, 20));
 		lblNomeBoletim.setBounds(36, 101, 388, 30);
 		panel_3.add(lblNomeBoletim);
 
@@ -1930,4 +2094,5 @@ public class Telas extends JFrame {
 			System.out.println(e2);
 		}
 	}
+	
 }
